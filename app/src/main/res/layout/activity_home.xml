@@ -8,69 +8,469 @@
         <variable
             name="lang"
             type="String" />
+
+        <variable
+            name="greeting"
+            type="String" />
+
+        <variable
+            name="model"
+            type="com.apps.dbrah_delivery.model.UserModel" />
     </data>
 
-    <LinearLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        tools:openDrawer="end">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:layout_height="match_parent"
+            android:background="@color/color1"
+            android:orientation="vertical">
 
-
-            >
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolBar"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@color/white"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_bottom_primary"
+
                 app:layout_scrollFlags="scroll|enterAlways|snap">
 
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/ic_search"
-                    android:visibility="gone"
 
-                    />
+                    >
 
-                <ImageView
-                    android:id="@+id/imgNotification"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="end"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:src="@drawable/ic_notification"
 
-                    />
+                    <LinearLayout
+                        android:id="@+id/llData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/image"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/hand" />
+
+                            <androidx.legacy.widget.Space
+                                android:layout_width="8dp"
+                                android:layout_height="0dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{greeting}"
+                                android:textColor="@color/white"
+                                android:textSize="13sp"
+
+                                />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:text="@{model.data.name}"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+
+                            />
+                    </LinearLayout>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/image"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/circle_avatar"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+
+                        />
+
+
+                    <androidx.legacy.widget.Space
+                        android:id="@+id/space"
+                        android:layout_width="12dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.AppBarLayout>
 
 
-        <fragment
-            android:id="@+id/navHostFragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_graph"
-
-            />
+            <fragment
+                android:id="@+id/navHostFragment"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/nav_graph"
 
 
-    </LinearLayout>
+                />
+        </LinearLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="176dp">
+
+                        <ImageView
+                            android:layout_width="105dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/logo" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/nav_bg"
+                            android:scaleType="fitXY"
+
+                            android:scaleX='@{lang.equals("ar")?1:-1}' />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+
+                            <androidx.legacy.widget.Space
+                                android:layout_width="0dp"
+                                android:layout_height="48dp" />
+
+                            <LinearLayout
+                                android:id="@+id/llEditProfile"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_edit"
+                                    app:tint="@color/black2" />
+
+                                <androidx.legacy.widget.Space
+                                    android:layout_width="12dp"
+                                    android:layout_height="0dp"
+
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/edit_profile"
+                                    android:textColor="@color/black2"
+                                    android:textSize="15sp" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="4dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/line" />
+
+                            <LinearLayout
+                                android:id="@+id/llPreviousOrder"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_order"
+                                    app:tint="@color/black2" />
+
+                                <androidx.legacy.widget.Space
+                                    android:layout_width="12dp"
+                                    android:layout_height="0dp"
+
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/last_orders"
+                                    android:textColor="@color/black2"
+                                    android:textSize="15sp" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="4dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/line" />
+
+                            <LinearLayout
+                                android:id="@+id/llChangeLanguage"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_lang"
+                                    app:tint="@color/black2" />
+
+                                <androidx.legacy.widget.Space
+                                    android:layout_width="12dp"
+                                    android:layout_height="0dp"
+
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/change_language"
+                                    android:textColor="@color/black2"
+                                    android:textSize="15sp" />
+
+                                <androidx.legacy.widget.Space
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text='@{lang.equals("ar")?"العربية":"English"}'
+                                    android:textColor="@color/black2"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="4dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/line" />
+
+                            <LinearLayout
+                                android:id="@+id/llTerms"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_terms_cond"
+                                    app:tint="@color/black2" />
+
+                                <androidx.legacy.widget.Space
+                                    android:layout_width="12dp"
+                                    android:layout_height="0dp"
+
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/terms_and_conditions"
+                                    android:textColor="@color/black2"
+                                    android:textSize="15sp" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="4dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/line" />
+
+                            <LinearLayout
+                                android:id="@+id/llPrivacy"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_privacy"
+                                    app:tint="@color/black2" />
+
+                                <androidx.legacy.widget.Space
+                                    android:layout_width="12dp"
+                                    android:layout_height="0dp"
+
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/privacy_policy"
+                                    android:textColor="@color/black2"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="4dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/line" />
+
+                            <LinearLayout
+                                android:id="@+id/llContactUs"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_contact"
+                                    app:tint="@color/black2" />
+
+                                <androidx.legacy.widget.Space
+                                    android:layout_width="12dp"
+                                    android:layout_height="0dp"
+
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/contact_us"
+                                    android:textColor="@color/black2"
+                                    android:textSize="15sp" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="4dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/line" />
+
+                            <LinearLayout
+                                android:id="@+id/llLogout"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_logout" />
+
+                                <androidx.legacy.widget.Space
+                                    android:layout_width="8dp"
+                                    android:layout_height="0dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/logout"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </FrameLayout>
+
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+
 </layout>
 

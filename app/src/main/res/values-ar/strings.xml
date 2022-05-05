@@ -69,5 +69,13 @@
     <string name="change">تغيير</string>
     <string name="cnt_book">عفوا لايمكن الحجز الان</string>
     <string name="choose_language">تغيير اللغة</string>
+    <string name="last_orders">اخر الطلبات</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="new_order">New</string>
+    <string name="no_new_order">There are no new orders</string>
+    <string name="welcome">Welcome</string>
+    <string name="no_current_order">There are no Current Orders</string>
+    <string name="order_time">Order Time :</string>
 
 </resources>

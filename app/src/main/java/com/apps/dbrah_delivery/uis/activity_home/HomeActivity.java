@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -12,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 
@@ -33,7 +37,8 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
     private ActivityHomeBinding binding;
     private NavController navController;
     private HomeActivityMvvm homeActivityMvvm;
-
+    private ActionBarDrawerToggle toggle;
+    private AppBarConfiguration appBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,26 +51,48 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
 
 
     private void initView() {
-
+        binding.setGreeting(getResources().getString(R.string.welcome));
         homeActivityMvvm = ViewModelProviders.of(this).get(HomeActivityMvvm.class);
+        if (getLang().equals("ar")) {
+            binding.toolBar.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+        } else {
+            binding.toolBar.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+
+        }
+        navController = Navigation.findNavController(this, R.id.navHostFragment);
+
+        appBarConfiguration =
+                new AppBarConfiguration.Builder(navController.getGraph()) //Pass the ids of fragments from nav_graph which you dont want to show back button in toolbar
+                        .setDrawerLayout(binding.drawerLayout)
+                        .build();
+
         setSupportActionBar(binding.toolBar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        navController = Navigation.findNavController(this, R.id.navHostFragment);
-//        NavigationUI.setupWithNavController(binding.bottomNav, navController);
-        NavigationUI.setupWithNavController(binding.toolBar, navController);
-        NavigationUI.setupActionBarWithNavController(this, navController);
 
+        NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout);
+        NavigationUI.setupWithNavController(binding.navigationView, navController);
+        NavigationUI.setupWithNavController(binding.toolBar, navController);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+        toggle = new ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolBar, R.string.open, R.string.close);
+        // toggle.setDrawerIndicatorEnabled(true);
+
+        toggle.setHomeAsUpIndicator(R.drawable.ic_menu);
+
+        toggle.syncState();
+
+        binding.toolBar.setNavigationIcon(R.drawable.ic_menu);
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (binding.toolBar.getNavigationIcon() != null) {
-                binding.toolBar.getNavigationIcon().setColorFilter(ContextCompat.getColor(HomeActivity.this, R.color.black), PorterDuff.Mode.SRC_ATOP);
+
+                binding.toolBar.setNavigationIcon(R.drawable.ic_menu);
+
 
             }
         });
-        binding.imgNotification.setOnClickListener(v -> {
 
 
-        });
         homeActivityMvvm.firebase.observe(this, token -> {
             if (getUserModel() != null) {
                 UserModel userModel = getUserModel();
@@ -74,15 +101,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
             }
         });
 
-        binding.imgNotification.setOnClickListener(v -> {
-            if (getUserModel() != null) {
-                Intent intent = new Intent(this, NotificationActivity.class);
-                startActivity(intent);
-            } else {
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
+
         if (getUserModel() != null) {
             homeActivityMvvm.updateFirebase(this, getUserModel());
         }
@@ -110,7 +129,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
         if (currentFragmentId == R.id.home) {
             finish();
 
-        }else {
+        } else {
             navController.popBackStack();
         }
 
