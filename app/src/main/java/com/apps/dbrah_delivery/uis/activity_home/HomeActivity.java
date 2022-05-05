@@ -51,7 +51,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
         setSupportActionBar(binding.toolBar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         navController = Navigation.findNavController(this, R.id.navHostFragment);
-        NavigationUI.setupWithNavController(binding.bottomNav, navController);
+//        NavigationUI.setupWithNavController(binding.bottomNav, navController);
         NavigationUI.setupWithNavController(binding.toolBar, navController);
         NavigationUI.setupActionBarWithNavController(this, navController);
 

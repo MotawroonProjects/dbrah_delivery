@@ -11,6 +11,6 @@
 
     <color name="black_trans">#55000000</color>
     <color name="transparent">#00000000</color>
-
-
+    
+    <color name="color1">#FCF1F1</color>
 </resources>
