@@ -12,7 +12,9 @@ import com.apps.dbrah_delivery.R;
 
 public class SignUpModel extends BaseObservable {
     private String first_name;
-    private String seconed_name;
+    private String second_name;
+    private String id;
+    private String provider_code;
 
 
 
@@ -25,7 +27,7 @@ public class SignUpModel extends BaseObservable {
     public boolean isDataValid(Context context) {
         if (!first_name.trim().isEmpty()
                 &&
-                !seconed_name.trim().isEmpty() //&&
+                !second_name.trim().isEmpty() //&&
 //               department_id != 0
 
 
@@ -43,7 +45,7 @@ public class SignUpModel extends BaseObservable {
                 error_first_name.set(null);
 
             }
-            if (seconed_name.trim().isEmpty()) {
+            if (second_name.trim().isEmpty()) {
                 error_seconed_name.set(context.getString(R.string.field_required));
 
             } else {
@@ -81,11 +83,11 @@ public class SignUpModel extends BaseObservable {
     }
     @Bindable
     public String getSeconed_name() {
-        return seconed_name;
+        return second_name;
     }
 
     public void setSeconed_name(String seconed_name) {
-        this.seconed_name = seconed_name;
+        this.second_name = seconed_name;
         notifyPropertyChanged(BR.seconed_name);
 
     }

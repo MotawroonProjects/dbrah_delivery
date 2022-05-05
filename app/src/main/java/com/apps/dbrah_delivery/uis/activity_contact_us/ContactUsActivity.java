@@ -4,6 +4,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.apps.dbrah_delivery.R;
@@ -33,7 +34,8 @@ public class ContactUsActivity extends BaseActivity {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         contactusActivityMvvm = ViewModelProviders.of(this).get(ContactusActivityMvvm.class);
-        setUpToolbar(binding.toolbar, getString(R.string.contact_us), R.color.white, R.color.black);
+        setUpToolbar(binding.toolbar, getString(R.string.contact_us), R.color.colorPrimary, R.color.white);
+        binding.toolbar.llBack.setOnClickListener(view -> finish());
 
         contactUsModel = new ContactUsModel();
         if (userModel != null) {

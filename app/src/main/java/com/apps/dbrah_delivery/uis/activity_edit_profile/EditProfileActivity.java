@@ -1,17 +1,14 @@
-package com.apps.dbrah_delivery.uis.activity_sign_up;
+package com.apps.dbrah_delivery.uis.activity_edit_profile;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -19,38 +16,20 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
 import com.apps.dbrah_delivery.R;
-import com.apps.dbrah_delivery.adapter.CountryAdapter;
-import com.apps.dbrah_delivery.databinding.ActivitySignUpBinding;
-import com.apps.dbrah_delivery.databinding.DialogCountriesBinding;
-import com.apps.dbrah_delivery.model.CountryModel;
-import com.apps.dbrah_delivery.model.SignUpModel;
-import com.apps.dbrah_delivery.mvvm.ActivitySignupMvvm;
-import com.apps.dbrah_delivery.preferences.Preferences;
+import com.apps.dbrah_delivery.databinding.ActivityEditProfileBinding;
 import com.apps.dbrah_delivery.share.Common;
 import com.apps.dbrah_delivery.uis.activity_base.BaseActivity;
-import com.apps.dbrah_delivery.uis.activity_home.HomeActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-public class SignUpActivity extends BaseActivity {
-    private ActivitySignUpBinding binding;
-    private SignUpModel model;
-    private Preferences preferences;
-    private ActivitySignupMvvm activitySignupMvvm;
-    private String phone_code, phone;
-    private AlertDialog dialog;
-    private List<CountryModel> countryModelList = new ArrayList<>();
-    private CountryAdapter countriesAdapter;
+public class EditProfileActivity extends BaseActivity {
+    private ActivityEditProfileBinding binding;
     private ActivityResultLauncher<Intent> launcher;
     private final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
     private final String write_permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -58,27 +37,17 @@ public class SignUpActivity extends BaseActivity {
     private final int READ_REQ = 1, CAMERA_REQ = 2;
     private int selectedReq = 0;
     private Uri uri = null;
-
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up);
-        getDataFromIntent();
+        binding= DataBindingUtil.setContentView(this,R.layout.activity_edit_profile);
         initView();
     }
 
-    private void getDataFromIntent() {
-        Intent intent = getIntent();
-        phone_code = intent.getStringExtra("phone_code");
-        phone = intent.getStringExtra("phone");
-    }
-
     private void initView() {
-        preferences = Preferences.getInstance();
-        activitySignupMvvm = ViewModelProviders.of(this).get(ActivitySignupMvvm.class);
-        model = new SignUpModel();
-        binding.setModel(model);
-
+        binding.setLang(getLang());
+        setUpToolbar(binding.toolbar, getString(R.string.edit_profile), R.color.colorPrimary, R.color.white);
+        binding.toolbar.llBack.setOnClickListener(view -> finish());
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                 if (selectedReq == READ_REQ) {
@@ -88,7 +57,7 @@ public class SignUpActivity extends BaseActivity {
                     File file = new File(Common.getImagePath(this, uri));
                     Picasso.get().load(file).fit().into(binding.image);
 //                    model.setImage(uri.toString());
-                    binding.setModel(model);
+//                    binding.setModel(model);
 
                 } else if (selectedReq == CAMERA_REQ) {
                     Bitmap bitmap = (Bitmap) result.getData().getExtras().get("data");
@@ -105,26 +74,12 @@ public class SignUpActivity extends BaseActivity {
 
                         }
 //                        model.setImage(uri.toString());
-                        binding.setModel(model);
+//                        binding.setModel(model);
                     }
                 }
             }
         });
 
-
-        activitySignupMvvm.userModelMutableLiveData.observe(this, userModel -> {
-            setUserModel(userModel);
-            setResult(RESULT_OK);
-            finish();
-        });
-
-        activitySignupMvvm.getCoListMutableLiveData().observe(this, countryModels -> {
-            if (countryModels != null && countryModels.size() > 0) {
-                countryModelList.clear();
-                countryModelList.addAll(countryModels);
-            }
-        });
-        activitySignupMvvm.setCountry();
         binding.flImage.setOnClickListener(view -> openSheet());
         binding.flGallery.setOnClickListener(view -> {
             closeSheet();
@@ -137,49 +92,8 @@ public class SignUpActivity extends BaseActivity {
         });
 
         binding.btnCancel.setOnClickListener(view -> closeSheet());
-        binding.llCountry.setOnClickListener(view -> dialog.show());
-
-        createCountriesDialog();
-        sortCountries();
-        binding.imFalg.setImageDrawable(getResources().getDrawable(R.drawable.flag_sa));
-        binding.txtCountry.setText("Saudi Arabia");
-        binding.btnSignup.setOnClickListener(view -> {
-//            if (model.isDataValid(this)) {
-//                if (model.isDataValid(this)) {
-//
-//                }
-//            }
-            navigateTOHomeActivity();
-        });
 
     }
-
-    private void navigateTOHomeActivity() {
-        Intent intent=new Intent(SignUpActivity.this, HomeActivity.class);
-        startActivity(intent);
-    }
-
-    private void createCountriesDialog() {
-
-        dialog = new AlertDialog.Builder(this)
-                .create();
-        countriesAdapter = new CountryAdapter(this);
-        countriesAdapter.updateList(countryModelList);
-        DialogCountriesBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_countries, null, false);
-        binding.recView.setLayoutManager(new LinearLayoutManager(this));
-        binding.recView.setAdapter(countriesAdapter);
-
-        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
-        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setView(binding.getRoot());
-    }
-    private void sortCountries() {
-        Collections.sort(countryModelList, (country1, country2) -> {
-            return country1.getName().trim().compareToIgnoreCase(country2.getName().trim());
-        });
-    }
-
 
     public void openSheet() {
         binding.expandLayout.setExpanded(true, true);
@@ -272,14 +186,5 @@ public class SignUpActivity extends BaseActivity {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         return Uri.parse(MediaStore.Images.Media.insertImage(this.getContentResolver(), bitmap, "", ""));
-    }
-
-    public void setItemData(CountryModel countryModel) {
-        dialog.dismiss();
-//        model.setPhone_code(countryModel.getDialCode());
-        binding.setModel(model);
-        binding.imFalg.setImageResource(countryModel.getFlag());
-        binding.txtCountry.setText(countryModel.getName());
-//        binding.phoneCode.setText(countryModel.getDialCode());
     }
 }

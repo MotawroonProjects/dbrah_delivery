@@ -19,6 +19,8 @@
     <string name="no_data_to_show">لا توجد عناصر لعرضها</string>
     <string name="phone">رقم الجوال</string>
     <string name="login">تسجيل دخول</string>
+    <string name="we_sent_an_code_to_verify_your_phone">لقد أرسلنا رمزًا للتحقق من هاتفك</string>
+    <string name="country_code">كود الدولة</string>
     <string name="terms_and_conditions">الشروط والاحكام</string>
     <string name="about_us">عن التطبيق</string>
     <string name="privacy_policy">السياسة والخصوصية</string>
@@ -57,6 +59,8 @@
     <string name="gallery">معرض الصور</string>
     <string name="camera">كاميرا</string>
     <string name="cancel">الغاء</string>
+    <string name="verify">تحقق</string>
+    <string name="let_s_start">لنبدأ</string>
     <string name="perm_image_denied">لا يمكنك الوصول للصور</string>
     <string name="user_found">مستخدم موجود</string>
     <string name="suc">تم بنجاح</string>
@@ -69,6 +73,18 @@
     <string name="change">تغيير</string>
     <string name="cnt_book">عفوا لايمكن الحجز الان</string>
     <string name="choose_language">تغيير اللغة</string>
+    <string name="welcome_back">مرحبًا بعودتك !</string>
+    <string name="enter_your_verification_code">أدخل رمز التحقق الخاص بك</string>
+    <string name="user_name">اسم المستخدم</string>
+    <string name="last_name">الإسم الأخير</string>
+    <string name="first_name">الإسم الأول</string>
+    <string name="nationality">الجنسية</string>
+    <string name="town">المدينة</string>
+    <string name="id_residence_number">رقم الهوية / الإقامة</string>
+    <string name="delivery_range">نطاق التسليم</string>
+    <string name="you_have_a_specific_provider">لديك مقدم خدمة محدد</string>
+    <string name="provider_code">كود المقدم</string>
+    <string name="register">تسجيل جديد</string>
     <string name="last_orders">اخر الطلبات</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
