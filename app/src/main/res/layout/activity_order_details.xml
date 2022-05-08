@@ -766,7 +766,7 @@
                         <FrameLayout
                             android:id="@+id/flStatus"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="bottom"
                             android:gravity="center"
                             app:layout_constraintBottom_toBottomOf="parent">

@@ -106,8 +106,8 @@
     <string name="delivery_details">تفاصيل التوصيل</string>
     <string name="status">Status</string>
     <string name="order_products">منتجات الطلب</string>
-    <string name="enter_the_code_that_was_sent_to_the_customer">Enter the code that was sent to the customer</string>
-    <string name="please_state_the_reason_for_cancellation">Please state the reason for cancellation</string>
-    <string name="write_here">write here ...</string>
+    <string name="enter_the_code_that_was_sent_to_the_customer">أدخل الرمز الذي تم إرساله إلى العميل</string>
+    <string name="please_state_the_reason_for_cancellation">من فضلك اذكر سبب الالغاء</string>
+    <string name="write_here">اكتب هنا...</string>
 
 </resources>
