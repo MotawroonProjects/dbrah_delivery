@@ -27,13 +27,7 @@
         tools:targetApi="q">
         <activity
             android:name=".uis.activity_order_details.OrderDetailsActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".uis.activity_edit_profile.EditProfileActivity"
             android:exported="false"
@@ -66,7 +60,11 @@
         <activity
             android:name=".uis.activity_splash.SplashActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <uses-library

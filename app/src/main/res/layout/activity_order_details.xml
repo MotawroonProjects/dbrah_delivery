@@ -350,7 +350,7 @@
                                         <androidx.legacy.widget.Space
                                             android:layout_width="0dp"
                                             android:layout_height="0dp"
-                                            android:layout_weight="1"/>
+                                            android:layout_weight="1" />
 
                                         <ImageView
                                             android:id="@+id/imCall"
@@ -368,8 +368,7 @@
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginEnd="5dp"
-                                            android:src="@drawable/ic_chat"
-                                            />
+                                            android:src="@drawable/ic_chat" />
 
 
                                     </LinearLayout>
@@ -455,17 +454,50 @@
                                     android:layout_gravity="center_vertical"
                                     android:src="@drawable/circle_avatar" />
 
-
-                                <TextView
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginStart="12dp"
                                     android:layout_marginEnd="12dp"
-                                    android:fontFamily="@font/almaraibold"
-                                    android:text="@string/name"
-                                    android:textColor="@color/black2"
-                                    android:textSize="18sp" />
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:fontFamily="@font/almaraibold"
+                                        android:text="@string/name"
+                                        android:textColor="@color/black2"
+                                        android:textSize="18sp" />
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="8dp"
+                                        android:orientation="horizontal"
+                                        android:visibility="gone">
+
+                                        <ImageView
+                                            android:id="@+id/imCalll"
+                                            android:layout_width="35dp"
+                                            android:layout_height="35dp"
+                                            android:layout_gravity="center"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginEnd="5dp"
+                                            android:src="@drawable/ic_call2" />
+
+                                        <ImageView
+                                            android:id="@+id/imChatt"
+                                            android:layout_width="35dp"
+                                            android:layout_height="35dp"
+                                            android:layout_gravity="center"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginEnd="5dp"
+                                            android:src="@drawable/ic_chat" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
 
                             </LinearLayout>
 
@@ -772,5 +804,167 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/flConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black_trans"
+            android:visibility="gone"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:contentPaddingBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="40dp"
+                        android:fontFamily="@font/almaraibold"
+                        android:gravity="center"
+                        android:text="@string/enter_the_code_that_was_sent_to_the_customer"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="20dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_code" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="@font/almira"
+                            android:text="Code"
+                            android:textColor="@color/black2"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="53dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/rounded_color_white_stroke_grey8"
+                        android:fontFamily="@font/almira"
+                        android:hint="#######"
+                        android:padding="16dp"
+                        android:textColor="@color/black2"
+                        android:textColorHint="@color/grey7" />
+
+                    <Button
+                        android:id="@id/btnConfirm"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="18dp"
+                        android:background="@drawable/small_rounded_primary"
+                        android:fontFamily="@font/almira"
+                        android:padding="12dp"
+                        android:text="@string/confirm"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/flCancellation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black_trans"
+            android:visibility="gone"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:contentPaddingBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="40dp"
+                        android:fontFamily="@font/almaraibold"
+                        android:gravity="center"
+                        android:text="@string/please_state_the_reason_for_cancellation"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/rounded_color_white_stroke_grey8"
+                        android:fontFamily="@font/almira"
+                        android:hint="@string/write_here"
+                        android:gravity="top"
+                        android:padding="16dp"
+                        android:textColor="@color/black2"
+                        android:textColorHint="@color/grey7" />
+
+                    <Button
+                        android:id="@+id/btnConfirm2"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="18dp"
+                        android:background="@drawable/small_rounded_primary"
+                        android:fontFamily="@font/almira"
+                        android:padding="16dp"
+                        android:text="@string/confirm"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </FrameLayout>
     </FrameLayout>
 </layout>

@@ -100,6 +100,9 @@
     <string name="order_time2">وقت الطلب :</string>
     <string name="order_number">رقم الطلب :</string>
     <string name="delivery_details">تفاصيل التوصيل</string>
-    <string name="order_products">order Products</string>
+    <string name="order_products">منتجات الطلب</string>
+    <string name="enter_the_code_that_was_sent_to_the_customer">Enter the code that was sent to the customer</string>
+    <string name="please_state_the_reason_for_cancellation">Please state the reason for cancellation</string>
+    <string name="write_here">write here ...</string>
 
 </resources>
