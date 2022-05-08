@@ -104,7 +104,7 @@
     <string name="order_time2">وقت الطلب :</string>
     <string name="order_number">رقم الطلب :</string>
     <string name="delivery_details">تفاصيل التوصيل</string>
-    <string name="status">Status</string>
+    <string name="status">الحاله</string>
     <string name="order_products">منتجات الطلب</string>
     <string name="enter_the_code_that_was_sent_to_the_customer">أدخل الرمز الذي تم إرساله إلى العميل</string>
     <string name="please_state_the_reason_for_cancellation">من فضلك اذكر سبب الالغاء</string>
