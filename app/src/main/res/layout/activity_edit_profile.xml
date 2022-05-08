@@ -321,6 +321,48 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginEnd="32dp"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1"
+                                android:textSize="14sp"
+                                android:textColor="@color/black2"
+                                android:fontFamily="@font/almaraibold"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/km"
+                                android:textSize="10sp"
+                                android:textColor="@color/black2"
+                                android:fontFamily="@font/almira"/>
+                            <androidx.legacy.widget.Space
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="50"
+                                android:textSize="14sp"
+                                android:textColor="@color/black2"
+                                android:fontFamily="@font/almaraibold"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/km"
+                                android:textSize="10sp"
+                                android:textColor="@color/black2"
+                                android:fontFamily="@font/almira"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginStart="32dp"
                             android:layout_marginTop="35dp"
                             android:layout_marginEnd="32dp"
