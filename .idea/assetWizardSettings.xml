@@ -14,6 +14,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_load" />
+                            <entry key="sourceFile" value="C:\Users\HP\Downloads\svgexport-7 (4) 1.svg" />
                             <entry key="outputName" value="ic_code" />
                             <entry key="sourceFile" value="C:\Users\tmt\Desktop\svgexport-10 2.svg" />
                           </map>

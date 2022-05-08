@@ -54,6 +54,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
 
     private void initView() {
         binding.setGreeting(getResources().getString(R.string.welcome));
+        binding.setLang(getLang());
         homeActivityMvvm = ViewModelProviders.of(this).get(HomeActivityMvvm.class);
         if (getLang().equals("ar")) {
             binding.toolBar.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
@@ -108,6 +109,13 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
             Intent intent = new Intent(this, PreviousOrderActivity.class);
             startActivity(intent);
 
+        });
+        binding.tvLang.setOnClickListener(view -> {
+            if (getLang().equals("en")) {
+               refreshActivity("ar");
+            } else {
+                refreshActivity("en");
+            }
         });
         if (getUserModel() != null) {
             homeActivityMvvm.updateFirebase(this, getUserModel());

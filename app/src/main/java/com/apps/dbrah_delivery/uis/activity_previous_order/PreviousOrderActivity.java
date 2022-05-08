@@ -30,6 +30,9 @@ public class PreviousOrderActivity extends BaseActivity {
 
 
     private void initView() {
+        setUpToolbar(binding.toolbar, getString(R.string.last_orders), R.color.colorPrimary, R.color.white);
+        binding.toolbar.llBack.setOnClickListener(view -> finish());
+        binding.setLang(getLang());
         binding.recView.setLayoutManager(new LinearLayoutManager(this));
         binding.recView.setAdapter(new OrderAdapter(this,getLang()));
         binding.flFilter.setOnClickListener(v -> {

@@ -193,6 +193,48 @@
                                 android:layout_height="48dp" />
 
                             <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:orientation="horizontal"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp">
+
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center"
+                                    android:clickable="false"
+                                    android:longClickable="false"
+                                    android:padding="3dp"
+                                    android:src="@drawable/ic_load"
+                                     />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:gravity="start"
+                                    android:text="@string/status"
+                                    android:fontFamily="@font/almira"
+                                    android:textAlignment="viewStart"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="14sp" />
+
+                                <androidx.legacy.widget.Space
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1" />
+
+                                <androidx.appcompat.widget.SwitchCompat
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                     />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/llEditProfile"
                                 android:layout_width="match_parent"
                                 android:layout_height="48dp"
@@ -216,9 +258,9 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:fontFamily="@font/almira"
                                     android:text="@string/edit_profile"
                                     android:textColor="@color/black2"
-                                    android:fontFamily="@font/almira"
 
                                     android:textSize="16sp" />
 
@@ -257,9 +299,9 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:fontFamily="@font/almira"
                                     android:text="@string/last_orders"
                                     android:textColor="@color/black2"
-                                    android:fontFamily="@font/almira"
                                     android:textSize="16sp" />
 
                             </LinearLayout>
@@ -297,9 +339,9 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:fontFamily="@font/almira"
                                     android:text="@string/change_language"
                                     android:textColor="@color/black2"
-                                    android:fontFamily="@font/almira"
                                     android:textSize="16sp" />
 
                                 <androidx.legacy.widget.Space
@@ -308,11 +350,12 @@
                                     android:layout_weight="1" />
 
                                 <TextView
+                                    android:id="@+id/tvLang"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text='@{lang.equals("ar")?"العربية":"English"}'
-                                    android:textColor="@color/black2"
                                     android:fontFamily="@font/almira"
+                                    android:text='@{lang.equals("en")?"العربية":"English"}'
+                                    android:textColor="@color/black2"
                                     android:textSize="12sp" />
                             </LinearLayout>
 
@@ -350,11 +393,10 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:fontFamily="@font/almira"
                                     android:text="@string/terms_and_conditions"
                                     android:textColor="@color/black2"
-                                    android:textSize="16sp"
-                                    android:fontFamily="@font/almira"
-                                    />
+                                    android:textSize="16sp" />
 
                             </LinearLayout>
 
@@ -392,9 +434,9 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:fontFamily="@font/almira"
                                     android:text="@string/privacy_policy"
                                     android:textColor="@color/black2"
-                                    android:fontFamily="@font/almira"
                                     android:textSize="16sp" />
                             </LinearLayout>
 
@@ -431,11 +473,10 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:fontFamily="@font/almira"
                                     android:text="@string/contact_us"
                                     android:textColor="@color/black2"
-                                    android:textSize="16sp"
-                                    android:fontFamily="@font/almira"
-                                    />
+                                    android:textSize="16sp" />
 
                             </LinearLayout>
 
@@ -469,8 +510,8 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/logout"
                                     android:fontFamily="@font/almira"
+                                    android:text="@string/logout"
 
                                     android:textColor="@color/colorPrimary"
                                     android:textSize="16sp" />
