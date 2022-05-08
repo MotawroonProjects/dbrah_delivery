@@ -66,6 +66,24 @@
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/fragment_my_reservations.xml" value="0.23958333333333334" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/fragment_order.xml" value="0.296" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/new_order_row.xml" value="0.33" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/drawable/ic_contact.xml" value="0.18611111111111112" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/drawable/ic_lang.xml" value="0.13229166666666667" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/drawable/ic_terms_cond.xml" value="0.13229166666666667" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/drawable/line.xml" value="0.17239583333333333" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/drawable/line_vert.xml" value="0.19074074074074074" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/drawable/rounded2_grey9_stroke_grey6.xml" value="0.13229166666666667" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/drawable/rounded_bottom_primary.xml" value="0.19166666666666668" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/drawable/rounded_grey9_stroke_grey6.xml" value="0.13229166666666667" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/drawable/rounded_stroke_color4.xml" value="0.13229166666666667" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/drawable/tab_indicator.xml" value="0.18611111111111112" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/layout/activity_home.xml" value="0.2796296296296296" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/layout/activity_previous_order.xml" value="0.2777777777777778" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/layout/fragment_home.xml" value="0.23958333333333334" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/layout/fragment_my_reservations.xml" value="0.23958333333333334" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/layout/fragment_order.xml" value="0.296" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/layout/fragment_previous_order.xml" value="0.17" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/layout/new_order_row.xml" value="0.2840909090909091" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/layout/order_row.xml" value="0.21" />
       </map>
     </option>
   </component>

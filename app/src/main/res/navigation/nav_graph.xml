@@ -12,6 +12,5 @@
         android:label=""
         tools:layout="@layout/fragment_home" />
 
-
     
 </navigation>

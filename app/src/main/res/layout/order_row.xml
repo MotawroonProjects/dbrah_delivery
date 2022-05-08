@@ -15,9 +15,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="16dp"
         android:background="@drawable/rounded_grey9_stroke_grey6"
-        android:padding="8dp">
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/pin1"
@@ -124,12 +124,12 @@
                 android:fontFamily="@font/almira"
                 android:text="@string/order_time"
                 android:textColor="@color/grey7"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:orientation="horizontal">
@@ -197,7 +197,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
@@ -227,8 +227,8 @@
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="8dp"
+            android:layout_height="4px"
+            android:layout_marginTop="16dp"
             android:background="@color/grey6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/llData" />
@@ -236,7 +236,9 @@
         <LinearLayout
             android:id="@+id/llDetails"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:layout_gravity="center_vertical"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"

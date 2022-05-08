@@ -93,6 +93,10 @@
     <string name="welcome">اهلا وسهلا</string>
     <string name="no_current_order">لايوجد طلبات حاليه</string>
     <string name="order_time">وقت الطلب : </string>
+    <string name="view_by">View By :</string>
+    <string name="last_week">Last Week</string>
+    <string name="last_month">Last Month</string>
+    <string name="last_year">Last Year</string>
     <string name="reject">رفض</string>
     <string name="accept">قبول</string>
     <string name="map">الخريطة</string>

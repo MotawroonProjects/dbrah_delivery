@@ -58,6 +58,10 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:name=".uis.activity_previous_order.PreviousOrderActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".uis.activity_splash.SplashActivity"
             android:exported="true">
             <intent-filter>
