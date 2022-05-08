@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.apps.dbrah_delivery.R;
 
+import com.apps.dbrah_delivery.adapter.OrderAdapter;
 import com.apps.dbrah_delivery.databinding.FragmentOrderBinding;
 import com.apps.dbrah_delivery.uis.activity_base.BaseFragment;
 import com.apps.dbrah_delivery.uis.activity_home.HomeActivity;
@@ -60,6 +61,8 @@ public class FragmentNewOrders extends BaseFragment {
     private void initView() {
         binding.setTitleno(getResources().getString(R.string.no_new_order));
         orderModelList = new ArrayList<>();
+        binding.recView.setLayoutManager(new LinearLayoutManager(activity));
+        binding.recView.setAdapter(new OrderAdapter(activity));
 //        mvvm = ViewModelProviders.of(this).get(FragmentOrdersMvvm.class);
 //
 //        mvvm.getIsLoading().observe(activity, aBoolean -> {
