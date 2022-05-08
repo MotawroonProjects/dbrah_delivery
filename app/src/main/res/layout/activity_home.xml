@@ -195,6 +195,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="48dp"
+                                android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:paddingStart="8dp"
                                 android:paddingEnd="8dp">
@@ -219,6 +220,7 @@
                                     android:textColor="@color/black2"
 
                                     android:textSize="16sp" />
+
                                 <androidx.legacy.widget.Space
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
@@ -227,8 +229,7 @@
                                 <androidx.appcompat.widget.SwitchCompat
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                     />
+                                    android:layout_gravity="center" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -270,7 +271,7 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginBottom="5dp"
-                                android:background="@drawable/line" />
+                                android:background="@drawable/line2" />
 
                             <LinearLayout
                                 android:id="@+id/llPreviousOrder"
@@ -310,7 +311,7 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginBottom="5dp"
-                                android:background="@drawable/line" />
+                                android:background="@drawable/line2" />
 
                             <LinearLayout
                                 android:id="@+id/llChangeLanguage"
@@ -363,7 +364,7 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginBottom="5dp"
-                                android:background="@drawable/line" />
+                                android:background="@drawable/line2" />
 
                             <LinearLayout
                                 android:id="@+id/llTerms"
@@ -404,7 +405,7 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginBottom="5dp"
-                                android:background="@drawable/line" />
+                                android:background="@drawable/line2" />
 
                             <LinearLayout
                                 android:id="@+id/llPrivacy"
@@ -444,7 +445,7 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginBottom="5dp"
-                                android:background="@drawable/line" />
+                                android:background="@drawable/line2" />
 
                             <LinearLayout
                                 android:id="@+id/llContactUs"
@@ -484,7 +485,7 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginBottom="5dp"
-                                android:background="@drawable/line" />
+                                android:background="@drawable/line2" />
 
                             <LinearLayout
                                 android:id="@+id/llLogout"
