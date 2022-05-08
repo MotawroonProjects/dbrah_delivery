@@ -93,5 +93,13 @@
     <string name="welcome">Welcome</string>
     <string name="no_current_order">There are no Current Orders</string>
     <string name="order_time">Order Time :</string>
+    <string name="reject">Reject</string>
+    <string name="accept">Accept</string>
+    <string name="map">Map</string>
+    <string name="expected_delivery_time">Expected delivery time :</string>
+    <string name="order_time2">Order time :</string>
+    <string name="order_number">Order number :</string>
+    <string name="delivery_details">Delivery details</string>
+    <string name="order_products">order Products</string>
 
 </resources>

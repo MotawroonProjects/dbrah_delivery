@@ -93,5 +93,13 @@
     <string name="welcome">اهلا وسهلا</string>
     <string name="no_current_order">لايوجد طلبات حاليه</string>
     <string name="order_time">وقت الطلب : </string>
+    <string name="reject">رفض</string>
+    <string name="accept">قبول</string>
+    <string name="map">الخريطة</string>
+    <string name="expected_delivery_time">وقت التسليم المتوقع:</string>
+    <string name="order_time2">وقت الطلب :</string>
+    <string name="order_number">رقم الطلب :</string>
+    <string name="delivery_details">تفاصيل التوصيل</string>
+    <string name="order_products">order Products</string>
 
 </resources>
