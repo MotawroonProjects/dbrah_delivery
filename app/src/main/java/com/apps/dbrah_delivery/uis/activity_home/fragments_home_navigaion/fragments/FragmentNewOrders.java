@@ -62,7 +62,7 @@ public class FragmentNewOrders extends BaseFragment {
         binding.setTitleno(getResources().getString(R.string.no_new_order));
         orderModelList = new ArrayList<>();
         binding.recView.setLayoutManager(new LinearLayoutManager(activity));
-        binding.recView.setAdapter(new OrderAdapter(activity));
+        binding.recView.setAdapter(new OrderAdapter(activity,getLang()));
 //        mvvm = ViewModelProviders.of(this).get(FragmentOrdersMvvm.class);
 //
 //        mvvm.getIsLoading().observe(activity, aBoolean -> {

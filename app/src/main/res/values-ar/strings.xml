@@ -86,12 +86,12 @@
     <string name="provider_code">كود المقدم</string>
     <string name="register">تسجيل جديد</string>
     <string name="last_orders">اخر الطلبات</string>
-    <string name="open">Open</string>
-    <string name="close">Close</string>
-    <string name="new_order">New</string>
-    <string name="no_new_order">There are no new orders</string>
-    <string name="welcome">Welcome</string>
-    <string name="no_current_order">There are no Current Orders</string>
-    <string name="order_time">Order Time :</string>
+    <string name="open">مفتوح</string>
+    <string name="close">مغلق</string>
+    <string name="new_order">جديد</string>
+    <string name="no_new_order">لا يوجد طلبات جديده</string>
+    <string name="welcome">اهلا وسهلا</string>
+    <string name="no_current_order">لايوجد طلبات حاليه</string>
+    <string name="order_time">وقت الطلب : </string>
 
 </resources>

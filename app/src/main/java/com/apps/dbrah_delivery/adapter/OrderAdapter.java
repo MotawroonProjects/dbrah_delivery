@@ -9,18 +9,19 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apps.dbrah_delivery.R;
-import com.apps.dbrah_delivery.databinding.NewOrderRowBinding;
-import com.apps.dbrah_delivery.databinding.NotificationRowBinding;
-import com.apps.dbrah_delivery.model.NotificationModel;
+import com.apps.dbrah_delivery.databinding.OrderRowBinding;
 
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private String lang;
     private List<Object> list;
     private Context context;
     private LayoutInflater inflater;
-    public OrderAdapter(Context context) {
+
+    public OrderAdapter(Context context, String lang) {
         this.context = context;
+        this.lang = lang;
         inflater = LayoutInflater.from(context);
     }
 
@@ -29,7 +30,7 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        NewOrderRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.new_order_row, parent, false);
+        OrderRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.order_row, parent, false);
         return new MyHolder(binding);
 
     }
@@ -37,7 +38,7 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder = (MyHolder) holder;
-
+        myHolder.binding.setLang(lang);
 
     }
 
@@ -48,9 +49,9 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder {
-        private NewOrderRowBinding binding;
+        private OrderRowBinding binding;
 
-        public MyHolder(NewOrderRowBinding binding) {
+        public MyHolder(OrderRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
@@ -59,8 +60,8 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     }
 
-    public void updateList(List<Object> list){
-        if (list!=null){
+    public void updateList(List<Object> list) {
+        if (list != null) {
             this.list = list;
         }
         notifyDataSetChanged();

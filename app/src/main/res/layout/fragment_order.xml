@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<variable
-    name="titleno"
-    type="String" />
+
+        <variable
+            name="titleno"
+            type="String" />
     </data>
 
     <LinearLayout
@@ -34,21 +35,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:visibility="gone"
                     android:orientation="vertical">
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="90dp"
-    android:layout_gravity="center"
-    android:src="@drawable/no_order"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/no_order" />
+
                     <TextView
                         android:id="@+id/tvNoData"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:fontFamily="@font/almaraibold"
                         android:text="@{titleno}"
                         android:textColor="@color/black"
-                        android:textSize="18sp"
-                         />
+                        android:textSize="18sp" />
 
 
                 </LinearLayout>

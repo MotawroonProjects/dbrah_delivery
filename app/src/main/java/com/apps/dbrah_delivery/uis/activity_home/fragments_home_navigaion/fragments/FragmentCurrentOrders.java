@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.apps.dbrah_delivery.R;
+import com.apps.dbrah_delivery.adapter.OrderAdapter;
 import com.apps.dbrah_delivery.databinding.FragmentOrderBinding;
 import com.apps.dbrah_delivery.uis.activity_base.BaseFragment;
 import com.apps.dbrah_delivery.uis.activity_home.HomeActivity;
@@ -62,7 +63,8 @@ public class FragmentCurrentOrders extends BaseFragment {
     private void initView() {
         Log.e("nothing", "aknscljkan");
         binding.setTitleno(getResources().getString(R.string.no_current_order));
-
+        binding.recView.setLayoutManager(new LinearLayoutManager(activity));
+        binding.recView.setAdapter(new OrderAdapter(activity,getLang()));
 //        orderModelList = new ArrayList<>();
 //        mvvm = ViewModelProviders.of(this).get(FragmentOrdersMvvm.class);
 //        mvvm.getIsLoading().observe(activity, aBoolean -> {

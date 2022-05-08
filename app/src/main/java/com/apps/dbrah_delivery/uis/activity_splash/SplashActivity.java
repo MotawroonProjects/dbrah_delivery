@@ -47,7 +47,7 @@ public class SplashActivity extends BaseActivity {
 
                     @Override
                     public void onNext(@NonNull Long aLong) {
-                        navigateToLoginActivity();
+                        navigateToHomeActivity();
                     }
 
                     @Override
@@ -71,6 +71,7 @@ public class SplashActivity extends BaseActivity {
         startActivity(intent);
         finish();
     }
+
     private void navigateToLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
