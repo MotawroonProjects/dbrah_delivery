@@ -73,7 +73,7 @@
                                 android:fontFamily="@font/almira"
                                 android:text="@{greeting}"
                                 android:textColor="@color/white"
-                                android:textSize="13sp"
+                                android:textSize="14sp"
 
                                 />
 
@@ -98,7 +98,7 @@
                             android:lines="1"
                             android:text="@{model.data.name}"
                             android:textColor="@color/white"
-                            android:textSize="15sp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -220,7 +220,7 @@
                                     android:textColor="@color/black2"
                                     android:fontFamily="@font/almira"
 
-                                    android:textSize="15sp" />
+                                    android:textSize="16sp" />
 
                             </LinearLayout>
 
@@ -260,7 +260,7 @@
                                     android:text="@string/last_orders"
                                     android:textColor="@color/black2"
                                     android:fontFamily="@font/almira"
-                                    android:textSize="15sp" />
+                                    android:textSize="16sp" />
 
                             </LinearLayout>
 
@@ -300,7 +300,7 @@
                                     android:text="@string/change_language"
                                     android:textColor="@color/black2"
                                     android:fontFamily="@font/almira"
-                                    android:textSize="15sp" />
+                                    android:textSize="16sp" />
 
                                 <androidx.legacy.widget.Space
                                     android:layout_width="0dp"
@@ -352,7 +352,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/terms_and_conditions"
                                     android:textColor="@color/black2"
-                                    android:textSize="15sp"
+                                    android:textSize="16sp"
                                     android:fontFamily="@font/almira"
                                     />
 
@@ -395,7 +395,7 @@
                                     android:text="@string/privacy_policy"
                                     android:textColor="@color/black2"
                                     android:fontFamily="@font/almira"
-                                    android:textSize="15sp" />
+                                    android:textSize="16sp" />
                             </LinearLayout>
 
                             <View
@@ -433,7 +433,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/contact_us"
                                     android:textColor="@color/black2"
-                                    android:textSize="15sp"
+                                    android:textSize="16sp"
                                     android:fontFamily="@font/almira"
                                     />
 
@@ -471,8 +471,9 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/logout"
                                     android:fontFamily="@font/almira"
+
                                     android:textColor="@color/colorPrimary"
-                                    android:textSize="15sp" />
+                                    android:textSize="16sp" />
                             </LinearLayout>
 
                         </LinearLayout>

@@ -9,6 +9,7 @@ import android.view.View;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -30,6 +31,7 @@ import com.apps.dbrah_delivery.databinding.ActivityHomeBinding;
 import com.apps.dbrah_delivery.language.Language;
 import com.apps.dbrah_delivery.uis.activity_login.LoginActivity;
 import com.apps.dbrah_delivery.uis.activity_notification.NotificationActivity;
+import com.apps.dbrah_delivery.uis.activity_previous_order.PreviousOrderActivity;
 
 import io.paperdb.Paper;
 
@@ -101,7 +103,12 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
             }
         });
 
+        binding.llPreviousOrder.setOnClickListener(v -> {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+            Intent intent = new Intent(this, PreviousOrderActivity.class);
+            startActivity(intent);
 
+        });
         if (getUserModel() != null) {
             homeActivityMvvm.updateFirebase(this, getUserModel());
         }
