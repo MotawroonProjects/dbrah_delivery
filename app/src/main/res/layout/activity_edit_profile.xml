@@ -279,8 +279,8 @@
                             android:orientation="horizontal">
 
                             <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
+                                android:layout_width="26dp"
+                                android:layout_height="match_parent"
                                 android:layout_gravity="center_vertical"
                                 android:src="@drawable/ic_range"
 
@@ -300,6 +300,24 @@
                                 android:textSize="16sp" />
 
                         </LinearLayout>
+                        <com.warkiz.widget.IndicatorSeekBar
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="35dp"
+                            android:layout_marginEnd="32dp"
+                            app:isb_progress="20"
+                            app:isb_min="1"
+                            app:isb_show_tick_texts="false"
+                            app:isb_track_progress_size="10dp"
+                            app:isb_thumb_size="20dp"
+                            app:isb_show_indicator="none"
+                            app:isb_track_background_size="10dp"
+                            app:isb_thumb_color="@color/black2"
+                            app:isb_indicator_color="@color/colorPrimary"
+                            app:isb_max="100"
+                            />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -351,6 +369,94 @@
                                 android:textColorHint="@color/grey7"
                                 android:textSize="14sp" />
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:orientation="vertical">
+
+                            <FrameLayout
+                                android:id="@+id/flGallery"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:background="@color/white"
+
+                                >
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:clickable="false"
+                                    android:longClickable="false"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:padding="12dp"
+                                        android:src="@drawable/ic_gallery"
+                                        app:tint="@color/colorPrimary" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:fontFamily="@font/almira"
+                                        android:text="@string/gallery"
+                                        android:textColor="@color/colorPrimary"
+                                        android:textSize="16sp" />
+                                </LinearLayout>
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:id="@+id/flCamera"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/white"
+
+                                >
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:clickable="false"
+                                    android:longClickable="false"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:padding="12dp"
+                                        android:src="@drawable/ic_camera"
+                                        app:tint="@color/colorPrimary" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:fontFamily="@font/almira"
+                                        android:text="@string/camera"
+                                        android:textColor="@color/colorPrimary"
+                                        android:textSize="16sp" />
+                                </LinearLayout>
+
+                            </FrameLayout>
+
+                            <Button
+                                android:id="@+id/btnCancel"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_marginTop="25dp"
+                                android:background="@color/colorPrimary"
+                                android:fontFamily="@font/almira"
+                                android:text="@string/cancel"
+                                android:textColor="@color/white"
+                                android:textSize="15sp" />
+                        </LinearLayout>
                     </LinearLayout>
                 </androidx.core.widget.NestedScrollView>
 
@@ -378,94 +484,6 @@
             app:el_duration="800"
             app:el_expanded="false"
             app:el_parallax=".5">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:orientation="vertical">
-
-                <FrameLayout
-                    android:id="@+id/flGallery"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@color/white"
-
-                    >
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:clickable="false"
-                        android:longClickable="false"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:padding="12dp"
-                            android:src="@drawable/ic_gallery"
-                            app:tint="@color/colorPrimary" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:fontFamily="@font/almira"
-                            android:text="@string/gallery"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-                </FrameLayout>
-
-                <FrameLayout
-                    android:id="@+id/flCamera"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/white"
-
-                    >
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:clickable="false"
-                        android:longClickable="false"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:padding="12dp"
-                            android:src="@drawable/ic_camera"
-                            app:tint="@color/colorPrimary" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:fontFamily="@font/almira"
-                            android:text="@string/camera"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-
-                </FrameLayout>
-
-                <Button
-                    android:id="@+id/btnCancel"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="25dp"
-                    android:background="@color/colorPrimary"
-                    android:fontFamily="@font/almira"
-                    android:text="@string/cancel"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-            </LinearLayout>
 
 
         </net.cachapa.expandablelayout.ExpandableLayout>
