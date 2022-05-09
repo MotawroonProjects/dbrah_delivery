@@ -180,7 +180,7 @@
                             android:background="@drawable/nav_bg"
                             android:scaleType="fitXY"
 
-                            android:scaleX='@{lang.equals("ar")?1:-1}' />
+                            android:scaleX='@{lang.equals("en")?1:-1}' />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -227,9 +227,12 @@
                                     android:layout_weight="1" />
 
                                 <androidx.appcompat.widget.SwitchCompat
+                                    android:id="@+id/swStatus"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center" />
+                                    android:layout_gravity="center"
+                                    android:checked='@{model.data.status.equals("1")?true:false}'
+                                    />
                             </LinearLayout>
 
                             <LinearLayout

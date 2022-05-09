@@ -1,5 +1,6 @@
 package com.apps.dbrah_delivery.uis.activity_home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -7,11 +8,13 @@ import android.os.Handler;
 import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
@@ -29,6 +32,7 @@ import com.apps.dbrah_delivery.R;
 
 import com.apps.dbrah_delivery.databinding.ActivityHomeBinding;
 import com.apps.dbrah_delivery.language.Language;
+import com.apps.dbrah_delivery.uis.activity_edit_profile.EditProfileActivity;
 import com.apps.dbrah_delivery.uis.activity_login.LoginActivity;
 import com.apps.dbrah_delivery.uis.activity_notification.NotificationActivity;
 import com.apps.dbrah_delivery.uis.activity_previous_order.PreviousOrderActivity;
@@ -41,6 +45,8 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
     private HomeActivityMvvm homeActivityMvvm;
     private ActionBarDrawerToggle toggle;
     private AppBarConfiguration appBarConfiguration;
+    private ActivityResultLauncher<Intent> launcher;
+    private int req=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +61,29 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
     private void initView() {
         binding.setGreeting(getResources().getString(R.string.welcome));
         binding.setLang(getLang());
+        binding.setModel(getUserModel());
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (req == 1 && result.getResultCode() == Activity.RESULT_OK) {
+                binding.setModel(getUserModel());
+            }
+        });
         homeActivityMvvm = ViewModelProviders.of(this).get(HomeActivityMvvm.class);
+        homeActivityMvvm.getUserData().observe(this, new Observer<UserModel>() {
+            @Override
+            public void onChanged(UserModel userModel) {
+                if (userModel != null) {
+                    setUserModel(userModel);
+                    binding.setModel(getUserModel());
+                   // navigateToHomeActivity();
+                }
+            }
+        });
+        binding.swStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                homeActivityMvvm.changeStatus(HomeActivity.this,getUserModel().getData().getId());
+            }
+        });
         if (getLang().equals("ar")) {
             binding.toolBar.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         } else {
@@ -108,6 +136,12 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
             binding.drawerLayout.closeDrawer(GravityCompat.START);
             Intent intent = new Intent(this, PreviousOrderActivity.class);
             startActivity(intent);
+
+        });
+        binding.llEditProfile.setOnClickListener(v -> {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+            Intent intent = new Intent(this, EditProfileActivity.class);
+            launcher.launch(intent);
 
         });
         binding.tvLang.setOnClickListener(view -> {

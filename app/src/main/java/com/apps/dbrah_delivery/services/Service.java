@@ -97,5 +97,8 @@ public interface Service {
                                                              @Query(value = "api_key") String api_key,
                                                              @Query(value = "user_id") String user_id
     );
-
+    @FormUrlEncoded
+    @POST("api/representative/changeStatus")
+    Single<Response<UserModel>> updateStatus(@Field("representative_id") String representative_id
+    );
 }
