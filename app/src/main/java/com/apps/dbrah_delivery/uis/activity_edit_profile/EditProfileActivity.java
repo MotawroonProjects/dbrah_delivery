@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.Manifest;
 import android.content.Intent;
@@ -16,20 +17,35 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
 import com.apps.dbrah_delivery.R;
 import com.apps.dbrah_delivery.databinding.ActivityEditProfileBinding;
+import com.apps.dbrah_delivery.model.EditProfileModel;
+import com.apps.dbrah_delivery.model.UserModel;
+import com.apps.dbrah_delivery.mvvm.ActivityEditProfileMvvm;
+import com.apps.dbrah_delivery.preferences.Preferences;
 import com.apps.dbrah_delivery.share.Common;
 import com.apps.dbrah_delivery.uis.activity_base.BaseActivity;
 import com.squareup.picasso.Picasso;
+import com.warkiz.widget.IndicatorSeekBar;
+import com.warkiz.widget.OnSeekChangeListener;
+import com.warkiz.widget.SeekParams;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 public class EditProfileActivity extends BaseActivity {
     private ActivityEditProfileBinding binding;
+    private String phone_code = "";
+    private String phone = "";
+    private EditProfileModel model;
+    private UserModel userModel;
+    private ActivityEditProfileMvvm mvvm;
+    private Preferences preferences;
     private ActivityResultLauncher<Intent> launcher;
     private final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
     private final String write_permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -45,9 +61,63 @@ public class EditProfileActivity extends BaseActivity {
     }
 
     private void initView() {
+        model=new EditProfileModel();
+        userModel=getUserModel();
         binding.setLang(getLang());
+        mvvm= ViewModelProviders.of(this).get(ActivityEditProfileMvvm.class);
+
+           binding.seekbar.setOnSeekChangeListener(new OnSeekChangeListener() {
+            @Override
+            public void onSeeking(SeekParams seekParams) {
+                model.setDelivery_range(seekParams.progress + "");
+                binding.setModel(model);
+            }
+
+            @Override
+            public void onStartTrackingTouch(IndicatorSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(IndicatorSeekBar seekBar) {
+
+            }
+        });
+
+            binding.checkbox.setOnCheckedChangeListener((compoundButton, checked) -> {
+            if (checked) {
+                binding.llProviderCode.setVisibility(View.VISIBLE);
+            } else {
+                binding.llProviderCode.setVisibility(View.GONE);
+            }
+            model.setChecked(checked);
+            binding.setModel(model);
+        });
         setUpToolbar(binding.toolbar, getString(R.string.edit_profile), R.color.colorPrimary, R.color.white);
         binding.toolbar.llBack.setOnClickListener(view -> finish());
+
+        phone_code = userModel.getData().getPhone_code();
+        phone = userModel.getData().getPhone();
+        model.setPhone_code(phone_code);
+        model.setPhone(phone);
+        model.setFirst_name(userModel.getData().getName().split(" ")[0]);
+        model.setSecond_name(userModel.getData().getName().split(" ")[1]);
+        model.setDelivery_range(userModel.getData().getDelivery_range());
+
+        if (userModel.getData().getImage() != null) {
+            String url = userModel.getData().getImage();
+            Picasso.get().load(Uri.parse(url)).into(binding.image);
+            binding.icon.setVisibility(View.GONE);
+        }
+
+        binding.setModel(model);
+
+        mvvm.userModelMutableLiveData.observe(this, userModel -> {
+            setUserModel(userModel);
+            setResult(RESULT_OK);
+            finish();
+        });
+
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                 if (selectedReq == READ_REQ) {
@@ -56,8 +126,6 @@ public class EditProfileActivity extends BaseActivity {
                     uri = result.getData().getData();
                     File file = new File(Common.getImagePath(this, uri));
                     Picasso.get().load(file).fit().into(binding.image);
-//                    model.setImage(uri.toString());
-//                    binding.setModel(model);
 
                 } else if (selectedReq == CAMERA_REQ) {
                     Bitmap bitmap = (Bitmap) result.getData().getExtras().get("data");
@@ -73,12 +141,32 @@ public class EditProfileActivity extends BaseActivity {
                             Picasso.get().load(uri).fit().into(binding.image);
 
                         }
-//                        model.setImage(uri.toString());
-//                        binding.setModel(model);
+
                     }
                 }
             }
         });
+
+        binding.edtPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().startsWith("0")) {
+                    binding.edtPhone.setText("");
+                }
+            }
+        });
+        binding.imFalg.setImageDrawable(getResources().getDrawable(R.drawable.flag_eg));
+        model.setPhone_code("+20");
 
         binding.flImage.setOnClickListener(view -> openSheet());
         binding.flGallery.setOnClickListener(view -> {
@@ -93,6 +181,11 @@ public class EditProfileActivity extends BaseActivity {
 
         binding.btnCancel.setOnClickListener(view -> closeSheet());
 
+        binding.btnConfirm.setOnClickListener(view -> {
+            if (model.isDataValid(this)) {
+                mvvm.update(model,this,userModel);
+            }
+        });
     }
 
     public void openSheet() {

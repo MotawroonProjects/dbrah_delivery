@@ -40,6 +40,7 @@ public interface Service {
 
     @GET("api/representative/nationalities")
     Single<Response<NationalitiesModel>> getNationalities();
+
     @Multipart
     @POST("api/representative/register")
     Single<Response<UserModel>> signUp(@Part("phone") RequestBody phone,
@@ -51,6 +52,17 @@ public interface Service {
                                            @Part("residence_number") RequestBody residence_number,
                                            @Part("delivery_range") RequestBody delivery_range,
                                            @Part MultipartBody.Part image);
+
+    @Multipart
+    @POST("api/representative/update_profile")
+    Single<Response<UserModel>> update(@Part("representative_id") RequestBody representative_id,
+                                       @Part("phone") RequestBody phone,
+                                       @Part("phone_code") RequestBody phone_code,
+                                       @Part("name") RequestBody name,
+                                       @Part("delivery_range") RequestBody delivery_range,
+                                       @Part("provider_code") RequestBody provider_code,
+                                       @Part MultipartBody.Part image);
+
 
     @FormUrlEncoded
     @POST("api/logout")

@@ -7,6 +7,9 @@
         <variable
             name="lang"
             type="String" />
+        <variable
+            name="model"
+            type="com.apps.dbrah_delivery.model.EditProfileModel" />
     </data>
 
     <FrameLayout
@@ -139,27 +142,83 @@
                             android:layout_marginStart="32dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="32dp"
-                            android:background="@drawable/rounded_grey9_stroke_grey6"
                             android:gravity="center_horizontal"
                             android:orientation="horizontal">
 
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_margin="16dp"
-                                android:background="@color/transparent"
-                                android:fontFamily="@font/almira"
-                                android:hint="@string/name"
-                                android:textColor="@color/black2"
-                                android:textColorHint="@color/grey7"
-                                android:textSize="14sp" />
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="53dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/rounded_grey9_stroke_grey6">
+
+                                <EditText
+                                    error="@{model.error_first_name}"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="16dp"
+                                    android:background="@color/transparent"
+                                    android:fontFamily="@font/almira"
+                                    android:hint="@string/first_name"
+                                    android:text="@={model.first_name}"
+                                    android:textColor="@color/black2"
+                                    android:textColorHint="@color/grey7"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
+                            <androidx.legacy.widget.Space
+                                android:layout_width="8dp"
+                                android:layout_height="wrap_content" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="53dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/rounded_grey9_stroke_grey6">
+
+                                <EditText
+                                    error="@{model.error_second_name}"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="16dp"
+                                    android:background="@color/transparent"
+                                    android:fontFamily="@font/almira"
+                                    android:hint="@string/last_name"
+                                    android:text="@={model.second_name}"
+                                    android:textColor="@color/black2"
+                                    android:textColorHint="@color/grey7"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
                         </LinearLayout>
+
+                        <!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center_horizontal"-->
+<!--                            android:layout_marginStart="32dp"-->
+<!--                            android:layout_marginTop="16dp"-->
+<!--                            android:layout_marginEnd="32dp"-->
+<!--                            android:background="@drawable/rounded_grey9_stroke_grey6"-->
+<!--                            android:gravity="center_horizontal"-->
+<!--                            android:orientation="horizontal">-->
+
+<!--                            <EditText-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_margin="16dp"-->
+<!--                                android:background="@color/transparent"-->
+<!--                                android:fontFamily="@font/almira"-->
+<!--                                android:hint="@string/name"-->
+<!--                                android:textColor="@color/black2"-->
+<!--                                android:textColorHint="@color/grey7"-->
+<!--                                android:textSize="14sp" />-->
+<!--                        </LinearLayout>-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="32dp"
-                            android:layout_marginTop="35dp"
+                            android:layout_marginTop="24dp"
                             android:layout_marginEnd="32dp"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
@@ -192,7 +251,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="32dp"
-                            android:layout_marginTop="24dp"
+                            android:layout_marginTop="16dp"
                             android:layout_marginEnd="32dp">
 
                             <FrameLayout
@@ -252,6 +311,7 @@
                                     android:src="@drawable/ic_phone" />
 
                                 <EditText
+                                    error="@{model.error_phone}"
                                     android:id="@+id/edtPhone"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
@@ -260,6 +320,7 @@
                                     android:background="@color/transparent"
                                     android:fontFamily="@font/almira"
                                     android:hint="@string/phone"
+                                    android:text="@={model.phone}"
                                     android:inputType="number"
                                     android:singleLine="true"
                                     android:textColor="@color/black2"
@@ -273,7 +334,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="32dp"
-                            android:layout_marginTop="35dp"
+                            android:layout_marginTop="24dp"
                             android:layout_marginEnd="32dp"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
@@ -301,10 +362,11 @@
 
                         </LinearLayout>
                         <com.warkiz.widget.IndicatorSeekBar
+                            android:id="@+id/seekbar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="32dp"
-                            android:layout_marginTop="35dp"
+                            android:layout_marginTop="24dp"
                             android:layout_marginEnd="32dp"
                             app:isb_progress="20"
                             app:isb_min="1"
@@ -327,6 +389,7 @@
                             android:layout_marginEnd="32dp"
                             >
                             <TextView
+                                android:id="@+id/first"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="1"
@@ -346,9 +409,10 @@
                                 android:layout_weight="1"
                                 />
                             <TextView
+                                android:id="@+id/last"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="50"
+                                android:text="100"
                                 android:textSize="14sp"
                                 android:textColor="@color/black2"
                                 android:fontFamily="@font/almaraibold"/>
@@ -364,7 +428,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="32dp"
-                            android:layout_marginTop="35dp"
+                            android:layout_marginTop="24dp"
                             android:layout_marginEnd="32dp"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
@@ -391,22 +455,26 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/llProviderCode"
                             android:layout_width="match_parent"
                             android:layout_height="53dp"
                             android:layout_marginStart="32dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="24dp"
                             android:layout_marginEnd="32dp"
                             android:layout_marginBottom="50dp"
+                            android:visibility="gone"
                             android:background="@drawable/rounded_grey9_stroke_grey6"
                             android:orientation="horizontal"
                             android:padding="16dp">
 
                             <EditText
+                                error="@{model.error_provider_code}"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@color/transparent"
                                 android:fontFamily="@font/almira"
                                 android:hint="@string/provider_code"
+                                android:text="@={model.provider_code}"
                                 android:textColor="@color/black2"
                                 android:textColorHint="@color/grey7"
                                 android:textSize="14sp" />
