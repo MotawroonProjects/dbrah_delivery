@@ -37,32 +37,32 @@ public class ContactusActivityMvvm extends AndroidViewModel {
     }
 
     public void contactus(Context context, ContactUsModel contactUsModel) {
-       /* ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
+        ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
-        Api.getService(Tags.base_url).contactUs(Tags.api_key, contactUsModel.getName(), contactUsModel.getEmail(), contactUsModel.getSubject(), contactUsModel.getMessage()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        Api.getService(Tags.base_url).contactUs(contactUsModel.getName(), contactUsModel.getEmail(), contactUsModel.getSubject(), contactUsModel.getMessage()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new SingleObserver<Response<StatusResponse>>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-                disposable.add(d);
-            }
-
-            @Override
-            public void onSuccess(@NonNull Response<StatusResponse> statusResponseResponse) {
-                dialog.dismiss();
-                if (statusResponseResponse.isSuccessful()) {
-                    if (statusResponseResponse.body().getStatus() == 200) {
-                        send.postValue(true);
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
                     }
-                }
-            }
 
-            @Override
-            public void onError(@NonNull Throwable throwable) {
-                dialog.dismiss();
-            }
-        });*/
+                    @Override
+                    public void onSuccess(@NonNull Response<StatusResponse> statusResponseResponse) {
+                        dialog.dismiss();
+                        if (statusResponseResponse.isSuccessful()) {
+                            if (statusResponseResponse.body().getStatus() == 200) {
+                                send.postValue(true);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable throwable) {
+                        dialog.dismiss();
+                    }
+                });
 
 
     }

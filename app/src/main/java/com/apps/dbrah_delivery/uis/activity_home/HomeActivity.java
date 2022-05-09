@@ -26,12 +26,15 @@ import androidx.navigation.ui.NavigationUI;
 import com.apps.dbrah_delivery.interfaces.Listeners;
 import com.apps.dbrah_delivery.model.UserModel;
 import com.apps.dbrah_delivery.mvvm.HomeActivityMvvm;
+import com.apps.dbrah_delivery.tags.Tags;
+import com.apps.dbrah_delivery.uis.activity_app.AppActivity;
 import com.apps.dbrah_delivery.uis.activity_base.BaseActivity;
 
 import com.apps.dbrah_delivery.R;
 
 import com.apps.dbrah_delivery.databinding.ActivityHomeBinding;
 import com.apps.dbrah_delivery.language.Language;
+import com.apps.dbrah_delivery.uis.activity_contact_us.ContactUsActivity;
 import com.apps.dbrah_delivery.uis.activity_edit_profile.EditProfileActivity;
 import com.apps.dbrah_delivery.uis.activity_login.LoginActivity;
 import com.apps.dbrah_delivery.uis.activity_notification.NotificationActivity;
@@ -144,6 +147,16 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
             launcher.launch(intent);
 
         });
+        binding.llContactUs.setOnClickListener(view -> {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+            Intent intent = new Intent(this, ContactUsActivity.class);
+            launcher.launch(intent);
+        });
+
+        binding.llTerms.setOnClickListener(view -> navigateToAppActivity("terms", Tags.base_url+"webView?type=terms"));
+
+        binding.llPrivacy.setOnClickListener(view -> navigateToAppActivity("privacy", Tags.base_url+"webView?type=privacy"));
+
         binding.tvLang.setOnClickListener(view -> {
             if (getLang().equals("en")) {
                refreshActivity("ar");
@@ -157,6 +170,12 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
     }
 
 
+    private void navigateToAppActivity(String type, String url) {
+        Intent intent=new Intent(this, AppActivity.class);
+        intent.putExtra("data", type);
+        intent.putExtra("url",url);
+        startActivity(intent);
+    }
     public void refreshActivity(String lang) {
         Paper.book().write("lang", lang);
         Language.setNewLocale(this, lang);

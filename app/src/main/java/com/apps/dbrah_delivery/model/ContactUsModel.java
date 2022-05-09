@@ -31,8 +31,6 @@ public class ContactUsModel extends BaseObservable {
                 !message.isEmpty()
 
         ) {
-
-
             error_name.set(null);
             error_email.set(null);
             error_subject.set(null);
@@ -42,15 +40,12 @@ public class ContactUsModel extends BaseObservable {
             return true;
 
         } else {
-
             if (name.isEmpty()){
                 error_name.set(context.getString(R.string.field_required));
             }else {
                 error_name.set(null);
 
             }
-
-
             if (email.isEmpty()){
                 error_email.set(context.getString(R.string.field_required));
             }if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
@@ -82,9 +77,13 @@ public class ContactUsModel extends BaseObservable {
 
     public ContactUsModel() {
         name = "";
+        notifyPropertyChanged(BR.name);
         email = "";
+        notifyPropertyChanged(BR.email);
         subject ="";
+        notifyPropertyChanged(BR.subject);
         message="";
+        notifyPropertyChanged(BR.message);
     }
 
     @Bindable

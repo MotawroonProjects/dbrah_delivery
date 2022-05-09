@@ -64,6 +64,14 @@ public interface Service {
                                        @Part MultipartBody.Part image);
 
 
+
+
+    @FormUrlEncoded
+    @POST("api/contact_us")
+    Single<Response<StatusResponse>> contactUs(@Field("name") String name,
+                                               @Field("email") String email,
+                                               @Field("subject") String phone,
+                                               @Field("message") String message);
     @FormUrlEncoded
     @POST("api/logout")
     Single<Response<StatusResponse>> logout(@Header("AUTHORIZATION") String token,
