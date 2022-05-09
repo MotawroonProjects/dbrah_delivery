@@ -7,7 +7,9 @@
         <variable
             name="lang"
             type="String" />
-
+<variable
+    name="model"
+    type="com.apps.dbrah_delivery.model.OrdersModel.Data" />
         <import type="android.view.View" />
     </data>
 
@@ -38,7 +40,7 @@
             android:fontFamily="@font/almira"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:text="Riyadh - League of Arab States Street"
+            android:text="@{model.order.address.title}"
             android:textAlignment="viewStart"
             android:textColor="@color/black2"
             android:textSize="14sp"
@@ -98,7 +100,7 @@
             android:fontFamily="@font/almira"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:text="Riyadh - Al Wahda Street"
+            android:text='@{lang.equals("ar")?(model.order.provider.nationality.title_ar+"-"+model.order.provider.town.title_ar):(model.order.provider.nationality.title_en+"-"+model.order.provider.town.title_en)}'
             android:textAlignment="viewEnd"
             android:textColor="@color/black2"
             android:textSize="14sp"
@@ -154,7 +156,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/almira"
-                        android:text='02/02/2022'
+                        android:text='@{model.order.day}'
                         android:textColor="@color/black2"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -178,7 +180,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="4dp"
                         android:fontFamily="@font/almira"
-                        android:text='03:23 '
+                        android:text='@{model.order.time.split(" ")[0]}'
                         android:textColor="@color/black2"
                         android:textSize="14sp" />
 
@@ -187,7 +189,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="@font/almira"
-                        android:text='pm'
+                        android:text='@{model.order.time.split(" ")[1]}'
                         android:textColor="@color/grey7"
                         android:textSize="12sp" />
 
@@ -199,6 +201,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
+                android:visibility='@{model.status.equals("new")?View.GONE:View.VISIBLE,default=gone}'
                 android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
 
@@ -228,6 +231,8 @@
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="4px"
+            android:visibility='@{model.status.equals("new")?View.VISIBLE:View.GONE,default=gone}'
+
             android:layout_marginTop="16dp"
             android:background="@color/grey6"
             app:layout_constraintStart_toStartOf="parent"
@@ -238,6 +243,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:visibility='@{model.status.equals("new")?View.VISIBLE:View.GONE,default=gone}'
+
             android:layout_marginBottom="16dp"
             android:layout_gravity="center_vertical"
             android:orientation="horizontal"

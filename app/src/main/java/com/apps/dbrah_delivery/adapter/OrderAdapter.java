@@ -10,12 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.apps.dbrah_delivery.R;
 import com.apps.dbrah_delivery.databinding.OrderRowBinding;
+import com.apps.dbrah_delivery.model.OrdersModel;
 
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private String lang;
-    private List<Object> list;
+    private List<OrdersModel.Data> list;
     private Context context;
     private LayoutInflater inflater;
 
@@ -44,8 +45,7 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return 8;
-        //return list!=null?list.size():0;
+        return list!=null?list.size():0;
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder {
@@ -60,7 +60,7 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     }
 
-    public void updateList(List<Object> list) {
+    public void updateList(List<OrdersModel.Data> list) {
         if (list != null) {
             this.list = list;
         }

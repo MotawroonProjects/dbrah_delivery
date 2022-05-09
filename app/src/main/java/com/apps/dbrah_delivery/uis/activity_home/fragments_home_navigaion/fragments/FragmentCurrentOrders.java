@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.apps.dbrah_delivery.R;
 import com.apps.dbrah_delivery.adapter.OrderAdapter;
 import com.apps.dbrah_delivery.databinding.FragmentOrderBinding;
+import com.apps.dbrah_delivery.model.OrderModel;
+import com.apps.dbrah_delivery.mvvm.FragmentCurrentOrderMvvm;
 import com.apps.dbrah_delivery.uis.activity_base.BaseFragment;
 import com.apps.dbrah_delivery.uis.activity_home.HomeActivity;
 
@@ -27,9 +29,9 @@ import java.util.List;
 public class FragmentCurrentOrders extends BaseFragment {
     private FragmentOrderBinding binding;
     private HomeActivity activity;
-//    private FragmentOrdersMvvm mvvm;
-//    private OrderAdapter orderAdapter;
-//    private List<OrderModel> orderModelList;
+    private FragmentCurrentOrderMvvm mvvm;
+    private OrderAdapter orderAdapter;
+    private List<OrderModel> orderModelList;
 
     public static FragmentCurrentOrders newInstance() {
         FragmentCurrentOrders fragment = new FragmentCurrentOrders();
@@ -63,33 +65,32 @@ public class FragmentCurrentOrders extends BaseFragment {
     private void initView() {
         Log.e("nothing", "aknscljkan");
         binding.setTitleno(getResources().getString(R.string.no_current_order));
+
+        orderModelList = new ArrayList<>();
+        mvvm = ViewModelProviders.of(this).get(FragmentCurrentOrderMvvm.class);
+        mvvm.getIsLoading().observe(activity, aBoolean -> {
+           if (aBoolean) {
+                binding.llNoData.setVisibility(View.GONE);
+            }
+            binding.swipeRefresh.setRefreshing(aBoolean);
+        });
+        mvvm.getOnDataSuccess().observe(activity, orderModels -> {
+            orderAdapter.updateList(new ArrayList<>());
+            if (orderModels!=null && orderModels.size()>0){
+                orderAdapter.updateList(orderModels);
+                binding.llNoData.setVisibility(View.GONE);
+            }else {
+                binding.llNoData.setVisibility(View.VISIBLE);
+            }
+        });
+
+        orderAdapter = new OrderAdapter( activity, getLang());
         binding.recView.setLayoutManager(new LinearLayoutManager(activity));
-        binding.recView.setAdapter(new OrderAdapter(activity,getLang()));
-//        orderModelList = new ArrayList<>();
-//        mvvm = ViewModelProviders.of(this).get(FragmentOrdersMvvm.class);
-//        mvvm.getIsLoading().observe(activity, aBoolean -> {
-//            if (aBoolean) {
-//                binding.tvNoSearchData.setVisibility(View.GONE);
-//            }
-//            binding.swipeRefresh.setRefreshing(aBoolean);
-//        });
-//        mvvm.getMutableLiveData().observe(activity, orderModels -> {
-//            orderAdapter.updateList(new ArrayList<>());
-//            if (orderModels!=null && orderModels.size()>0){
-//                orderAdapter.updateList(orderModels);
-//                binding.tvNoSearchData.setVisibility(View.GONE);
-//            }else {
-//                binding.tvNoSearchData.setVisibility(View.VISIBLE);
-//            }
-//        });
-//
-//        orderAdapter = new OrderAdapter(orderModelList, activity, this,getLang());
-//        binding.recView.setLayoutManager(new LinearLayoutManager(activity));
-//        binding.recView.setAdapter(orderAdapter);
-//
-//        mvvm.getCurrentOrders(getUserModel(), getLang());
-//        binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getCurrentOrders(getUserModel(), getLang()));
-//        binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
+        binding.recView.setAdapter(orderAdapter);
+
+        mvvm.getOrders(getUserModel());
+        binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getOrders(getUserModel()));
+        binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
 
 
     }

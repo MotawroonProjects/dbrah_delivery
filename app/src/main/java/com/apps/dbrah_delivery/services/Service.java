@@ -3,6 +3,7 @@ package com.apps.dbrah_delivery.services;
 
 import com.apps.dbrah_delivery.model.NationalitiesModel;
 import com.apps.dbrah_delivery.model.NotificationDataModel;
+import com.apps.dbrah_delivery.model.OrdersModel;
 import com.apps.dbrah_delivery.model.PlaceGeocodeData;
 import com.apps.dbrah_delivery.model.StatusResponse;
 import com.apps.dbrah_delivery.model.UserModel;
@@ -113,4 +114,8 @@ public interface Service {
     @POST("api/representative/changeStatus")
     Single<Response<UserModel>> updateStatus(@Field("representative_id") String representative_id
     );
+    @GET("api/representative/current_orders")
+    Single<Response<OrdersModel>> getcurrentOrders(@Query(value = "representative_id") String representative_id);
+    @GET("api/representative/new_orders")
+    Single<Response<OrdersModel>> getnewOrders(@Query(value = "representative_id") String representative_id);
 }

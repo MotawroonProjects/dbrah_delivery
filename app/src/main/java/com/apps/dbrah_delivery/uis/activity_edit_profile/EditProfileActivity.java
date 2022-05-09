@@ -53,20 +53,21 @@ public class EditProfileActivity extends BaseActivity {
     private final int READ_REQ = 1, CAMERA_REQ = 2;
     private int selectedReq = 0;
     private Uri uri = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(this,R.layout.activity_edit_profile);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_profile);
         initView();
     }
 
     private void initView() {
-        model=new EditProfileModel();
-        userModel=getUserModel();
+        model = new EditProfileModel();
+        userModel = getUserModel();
         binding.setLang(getLang());
-        mvvm= ViewModelProviders.of(this).get(ActivityEditProfileMvvm.class);
+        mvvm = ViewModelProviders.of(this).get(ActivityEditProfileMvvm.class);
 
-           binding.seekbar.setOnSeekChangeListener(new OnSeekChangeListener() {
+        binding.seekbar.setOnSeekChangeListener(new OnSeekChangeListener() {
             @Override
             public void onSeeking(SeekParams seekParams) {
                 model.setDelivery_range(seekParams.progress + "");
@@ -84,7 +85,7 @@ public class EditProfileActivity extends BaseActivity {
             }
         });
 
-            binding.checkbox.setOnCheckedChangeListener((compoundButton, checked) -> {
+        binding.checkbox.setOnCheckedChangeListener((compoundButton, checked) -> {
             if (checked) {
                 binding.llProviderCode.setVisibility(View.VISIBLE);
             } else {
@@ -103,7 +104,7 @@ public class EditProfileActivity extends BaseActivity {
         model.setFirst_name(userModel.getData().getName().split(" ")[0]);
         model.setSecond_name(userModel.getData().getName().split(" ")[1]);
         model.setDelivery_range(userModel.getData().getDelivery_range());
-
+        binding.seekbar.setProgress(Float.parseFloat(userModel.getData().getDelivery_range()));
         if (userModel.getData().getImage() != null) {
             String url = userModel.getData().getImage();
             Picasso.get().load(Uri.parse(url)).into(binding.image);
@@ -183,7 +184,7 @@ public class EditProfileActivity extends BaseActivity {
 
         binding.btnConfirm.setOnClickListener(view -> {
             if (model.isDataValid(this)) {
-                mvvm.update(model,this,userModel);
+                mvvm.update(model, this, userModel);
             }
         });
     }
