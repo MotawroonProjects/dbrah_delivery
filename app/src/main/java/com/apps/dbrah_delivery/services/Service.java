@@ -1,6 +1,7 @@
 package com.apps.dbrah_delivery.services;
 
 
+import com.apps.dbrah_delivery.model.NationalitiesModel;
 import com.apps.dbrah_delivery.model.NotificationDataModel;
 import com.apps.dbrah_delivery.model.PlaceGeocodeData;
 import com.apps.dbrah_delivery.model.StatusResponse;
@@ -35,30 +36,21 @@ public interface Service {
     Single<Response<UserModel>> login(@Field("phone_code") String phone_code,
                                       @Field("phone") String phone);
 
-    @FormUrlEncoded
-    @POST("api/client-register")
-    Single<Response<UserModel>> signUp(@Field("api_key") String api_key,
-                                       @Field("name") String name,
-                                       @Field("phone_code") String phone_code,
-                                       @Field("phone") String phone,
-                                       @Field("software_type") String software_type
 
 
-    );
-
-
+    @GET("api/representative/nationalities")
+    Single<Response<NationalitiesModel>> getNationalities();
     @Multipart
-    @POST("api/client-register")
-    Observable<Response<UserModel>> signUpwithImage(@Part("api_key") RequestBody api_key,
-                                                    @Part("name") RequestBody name,
-                                                    @Part("phone_code") RequestBody phone_code,
-                                                    @Part("phone") RequestBody phone,
-                                                    @Part("software_type") RequestBody software_type,
-                                                    @Part MultipartBody.Part logo
-
-
-    );
-
+    @POST("api/representative/register")
+    Single<Response<UserModel>> signUp(@Part("phone") RequestBody phone,
+                                           @Part("phone_code") RequestBody phone_code,
+                                           @Part("name") RequestBody name,
+                                           @Part("provider_code") RequestBody provider_code,
+                                           @Part("nationality_id") RequestBody nationality_id,
+                                           @Part("town_id") RequestBody town_id,
+                                           @Part("residence_number") RequestBody residence_number,
+                                           @Part("delivery_range") RequestBody delivery_range,
+                                           @Part MultipartBody.Part image);
 
     @FormUrlEncoded
     @POST("api/logout")
