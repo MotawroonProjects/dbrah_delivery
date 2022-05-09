@@ -73,6 +73,8 @@
     <string name="change">تغيير</string>
     <string name="cnt_book">عفوا لايمكن الحجز الان</string>
     <string name="choose_language">تغيير اللغة</string>
+    <string name="choose_nationality">اختر الجنسية</string>
+    <string name="choose_town">اختر المدينة</string>
     <string name="welcome_back">مرحبًا بعودتك !</string>
     <string name="enter_your_verification_code">أدخل رمز التحقق الخاص بك</string>
     <string name="user_name">اسم المستخدم</string>

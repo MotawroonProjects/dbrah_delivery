@@ -19,15 +19,21 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.apps.dbrah_delivery.R;
 import com.apps.dbrah_delivery.adapter.CountryAdapter;
+import com.apps.dbrah_delivery.adapter.SpinnerNationalityAdapter;
+import com.apps.dbrah_delivery.adapter.SpinnerTownAdapter;
 import com.apps.dbrah_delivery.databinding.ActivitySignUpBinding;
 import com.apps.dbrah_delivery.databinding.DialogCountriesBinding;
 import com.apps.dbrah_delivery.model.CountryModel;
+import com.apps.dbrah_delivery.model.NationalitiesModel;
 import com.apps.dbrah_delivery.model.SignUpModel;
 import com.apps.dbrah_delivery.mvvm.ActivitySignupMvvm;
 import com.apps.dbrah_delivery.preferences.Preferences;
@@ -35,6 +41,9 @@ import com.apps.dbrah_delivery.share.Common;
 import com.apps.dbrah_delivery.uis.activity_base.BaseActivity;
 import com.apps.dbrah_delivery.uis.activity_home.HomeActivity;
 import com.squareup.picasso.Picasso;
+import com.warkiz.widget.IndicatorSeekBar;
+import com.warkiz.widget.OnSeekChangeListener;
+import com.warkiz.widget.SeekParams;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -48,9 +57,12 @@ public class SignUpActivity extends BaseActivity {
     private Preferences preferences;
     private ActivitySignupMvvm activitySignupMvvm;
     private String phone_code, phone;
-    private AlertDialog dialog;
-    private List<CountryModel> countryModelList = new ArrayList<>();
-    private CountryAdapter countriesAdapter;
+    //    private AlertDialog dialog;
+//    private List<CountryModel> countryModelList = new ArrayList<>();
+//    private CountryAdapter countriesAdapter;
+    private SpinnerNationalityAdapter spinnerNationalityAdapter;
+    private SpinnerTownAdapter spinnerTownAdapter;
+    private List<NationalitiesModel.Data.Town> townModelList;
     private ActivityResultLauncher<Intent> launcher;
     private final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
     private final String write_permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -74,11 +86,30 @@ public class SignUpActivity extends BaseActivity {
     }
 
     private void initView() {
+        townModelList = new ArrayList<>();
         preferences = Preferences.getInstance();
         activitySignupMvvm = ViewModelProviders.of(this).get(ActivitySignupMvvm.class);
-        model = new SignUpModel();
+        model = new SignUpModel(phone_code, phone);
+        model.setDelivery_range(binding.seekbar.getProgress()+"");
         binding.setModel(model);
+        binding.seekbar.setOnSeekChangeListener(new OnSeekChangeListener() {
+            @Override
+            public void onSeeking(SeekParams seekParams) {
+                Log.e("dkdkk", seekParams.progress + "");
+                model.setDelivery_range(seekParams.progress + "");
+                binding.setModel(model);
+            }
 
+            @Override
+            public void onStartTrackingTouch(IndicatorSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(IndicatorSeekBar seekBar) {
+
+            }
+        });
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                 if (selectedReq == READ_REQ) {
@@ -87,7 +118,7 @@ public class SignUpActivity extends BaseActivity {
                     uri = result.getData().getData();
                     File file = new File(Common.getImagePath(this, uri));
                     Picasso.get().load(file).fit().into(binding.image);
-//                    model.setImage(uri.toString());
+                    model.setImage(uri.toString());
                     binding.setModel(model);
 
                 } else if (selectedReq == CAMERA_REQ) {
@@ -104,7 +135,7 @@ public class SignUpActivity extends BaseActivity {
                             Picasso.get().load(uri).fit().into(binding.image);
 
                         }
-//                        model.setImage(uri.toString());
+                        model.setImage(uri.toString());
                         binding.setModel(model);
                     }
                 }
@@ -114,17 +145,82 @@ public class SignUpActivity extends BaseActivity {
 
         activitySignupMvvm.userModelMutableLiveData.observe(this, userModel -> {
             setUserModel(userModel);
-            setResult(RESULT_OK);
-            finish();
+            navigateTOHomeActivity();
         });
 
-        activitySignupMvvm.getCoListMutableLiveData().observe(this, countryModels -> {
-            if (countryModels != null && countryModels.size() > 0) {
-                countryModelList.clear();
-                countryModelList.addAll(countryModels);
+//        activitySignupMvvm.getCoListMutableLiveData().observe(this, countryModels -> {
+//            if (countryModels != null && countryModels.size() > 0) {
+//                countryModelList.clear();
+//                countryModelList.addAll(countryModels);
+//            }
+//        });
+//        activitySignupMvvm.setCountry();
+
+        activitySignupMvvm.getOnNationalitiesSuccess().observe(this, nationalities -> {
+            if (spinnerNationalityAdapter != null) {
+                nationalities.add(0,new NationalitiesModel.Data("اختر الجنسية", "Choose nationality"));
+                spinnerNationalityAdapter.updateList(nationalities);
+                townModelList.add(new NationalitiesModel.Data.Town("اختر المدينة", "Choose town"));
+                spinnerTownAdapter.updateList(townModelList);
+
+            }
+
+        });
+        activitySignupMvvm.getNationalities();
+
+        spinnerNationalityAdapter = new SpinnerNationalityAdapter(this, getLang());
+        binding.spinnerNationality.setAdapter(spinnerNationalityAdapter);
+        binding.spinnerNationality.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    townModelList.clear();
+                    townModelList.add(new NationalitiesModel.Data.Town("اختر المدينة", "Choose town"));
+                    model.setNationality_id(0);
+                    spinnerTownAdapter.updateList(townModelList);
+
+                } else {
+                    model.setNationality_id(Integer.parseInt(activitySignupMvvm.getOnNationalitiesSuccess().getValue().get(i).getId()));
+                    townModelList.clear();
+                    townModelList.add(new NationalitiesModel.Data.Town("اختر المدينة", "Choose town"));
+                    townModelList.addAll(activitySignupMvvm.getOnNationalitiesSuccess().getValue().get(i).getTowns());
+                    spinnerTownAdapter.updateList(townModelList);
+                }
+                binding.setModel(model);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
-        activitySignupMvvm.setCountry();
+        spinnerTownAdapter = new SpinnerTownAdapter(this, getLang());
+        binding.spinnerTown.setAdapter(spinnerTownAdapter);
+        binding.spinnerTown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    model.setTown_id(0);
+                } else {
+                    model.setTown_id(Integer.parseInt(townModelList.get(i).getId()));
+                }
+                binding.setModel(model);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        binding.checkbox.setOnCheckedChangeListener((compoundButton, checked) -> {
+            if (checked) {
+                binding.llProviderCode.setVisibility(View.VISIBLE);
+            } else {
+                binding.llProviderCode.setVisibility(View.GONE);
+            }
+            model.setChecked(checked);
+            binding.setModel(model);
+        });
         binding.flImage.setOnClickListener(view -> openSheet());
         binding.flGallery.setOnClickListener(view -> {
             closeSheet();
@@ -137,25 +233,26 @@ public class SignUpActivity extends BaseActivity {
         });
 
         binding.btnCancel.setOnClickListener(view -> closeSheet());
-        binding.llCountry.setOnClickListener(view -> dialog.show());
+//        binding.llCountry.setOnClickListener(view -> dialog.show());
 
         //createCountriesDialog();
-        sortCountries();
-        binding.imFalg.setImageDrawable(getResources().getDrawable(R.drawable.flag_sa));
-        binding.txtCountry.setText("Saudi Arabia");
+//        sortCountries();
+//        binding.imFalg.setImageDrawable(getResources().getDrawable(R.drawable.flag_sa));
+//        binding.txtCountry.setText("Saudi Arabia");
         binding.btnSignup.setOnClickListener(view -> {
-//            if (model.isDataValid(this)) {
-//                if (model.isDataValid(this)) {
-//
-//                }
-//            }
-            navigateTOHomeActivity();
+            if (model.isDataValid(this)) {
+                if (model.isDataValid(this)) {
+                    activitySignupMvvm.signUp(model, this);
+                }
+            }
+
         });
 
     }
 
+
     private void navigateTOHomeActivity() {
-        Intent intent=new Intent(SignUpActivity.this, HomeActivity.class);
+        Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
         startActivity(intent);
     }
 
@@ -174,11 +271,11 @@ public class SignUpActivity extends BaseActivity {
 //        dialog.setCanceledOnTouchOutside(false);
 //        dialog.setView(binding.getRoot());
 //    }
-    private void sortCountries() {
-        Collections.sort(countryModelList, (country1, country2) -> {
-            return country1.getName().trim().compareToIgnoreCase(country2.getName().trim());
-        });
-    }
+//    private void sortCountries() {
+//        Collections.sort(countryModelList, (country1, country2) -> {
+//            return country1.getName().trim().compareToIgnoreCase(country2.getName().trim());
+//        });
+//    }
 
 
     public void openSheet() {
@@ -274,12 +371,12 @@ public class SignUpActivity extends BaseActivity {
         return Uri.parse(MediaStore.Images.Media.insertImage(this.getContentResolver(), bitmap, "", ""));
     }
 
-    public void setItemData(CountryModel countryModel) {
-        dialog.dismiss();
-//        model.setPhone_code(countryModel.getDialCode());
-        binding.setModel(model);
-        binding.imFalg.setImageResource(countryModel.getFlag());
-        binding.txtCountry.setText(countryModel.getName());
-//        binding.phoneCode.setText(countryModel.getDialCode());
-    }
+//    public void setItemData(CountryModel countryModel) {
+//        dialog.dismiss();
+////        model.setPhone_code(countryModel.getDialCode());
+//        binding.setModel(model);
+////        binding.imFalg.setImageResource(countryModel.getFlag());
+////        binding.txtCountry.setText(countryModel.getName());
+////        binding.phoneCode.setText(countryModel.getDialCode());
+//    }
 }

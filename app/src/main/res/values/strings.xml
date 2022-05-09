@@ -73,6 +73,8 @@
     <string name="change">Change</string>
     <string name="cnt_book">You cannot book now</string>
     <string name="choose_language">Change language</string>
+    <string name="choose_nationality">Choose nationality</string>
+    <string name="choose_town">Choose town</string>
     <string name="welcome_back">welcome Back !</string>
     <string name="enter_your_verification_code">Enter your verification code</string>
     <string name="user_name">User name</string>
