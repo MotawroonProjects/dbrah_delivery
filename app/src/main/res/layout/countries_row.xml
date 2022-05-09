@@ -9,57 +9,36 @@
             type="com.apps.dbrah_delivery.model.CountryModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
         <ImageView
-            android:id="@+id/imageFlag"
-            imageResource="@{model.flag}"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/image"
+            android:layout_width="36dp"
+            android:layout_height="24dp"
 
             />
 
+        <androidx.legacy.widget.Space
+            android:layout_width="16dp"
+            android:layout_height="0dp" />
+
         <TextView
-            android:id="@+id/tvName"
             android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:lines="1"
+            android:ellipsize="end"
             android:fontFamily="@font/almira"
-            android:text="@{model.name}"
-            android:textColor="@color/black2"
-            android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tvCode"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toEndOf="@id/imageFlag"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_default="wrap"
-
-            />
-
-        <TextView
-            android:id="@+id/tvCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:fontFamily="@font/almira"
-            android:text="@{model.dialCode}"
-            android:textColor="@color/grey7"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-            />
+            android:text="@{model.name}" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

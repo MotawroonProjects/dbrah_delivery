@@ -3,6 +3,7 @@ package com.apps.dbrah_delivery.uis.activity_login;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -20,8 +21,10 @@ import com.apps.dbrah_delivery.databinding.DailogVerificationCodeBinding;
 import com.apps.dbrah_delivery.databinding.DialogCountriesBinding;
 import com.apps.dbrah_delivery.model.CountryModel;
 import com.apps.dbrah_delivery.model.LoginModel;
+import com.apps.dbrah_delivery.model.UserModel;
 import com.apps.dbrah_delivery.mvvm.ActivityLoginMvvm;
 import com.apps.dbrah_delivery.uis.activity_base.BaseActivity;
+import com.apps.dbrah_delivery.uis.activity_home.HomeActivity;
 import com.apps.dbrah_delivery.uis.activity_sign_up.SignUpActivity;
 import com.apps.dbrah_delivery.uis.activity_verification_code.VerificationCodeActivity;
 
@@ -50,24 +53,22 @@ public class LoginActivity extends BaseActivity {
 
 
     private void initView() {
+        countryModelList=new ArrayList<>();
         model = new LoginModel();
         binding.setModel(model);
         mvvm = ViewModelProviders.of(this).get(ActivityLoginMvvm.class);
-
+        countriesAdapter = new CountryAdapter(this);
+        binding.spinner.setAdapter(countriesAdapter);
         mvvm.getCoListMutableLiveData().observe(this, countryModels -> {
             if (countryModels != null && countryModels.size() > 0) {
                 countryModelList.clear();
                 countryModelList.addAll(countryModels);
+                countriesAdapter.updateList(countryModelList);
             }
         });
 
         mvvm.setCountry();
-        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (result.getResultCode() == RESULT_OK) {
-                setResult(RESULT_OK);
-                finish();
-            }
-        });
+
 
         binding.edtPhone.addTextChangedListener(new TextWatcher() {
             @Override
@@ -82,20 +83,15 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().startsWith("0")){
+                if (s.toString().startsWith("0")) {
                     binding.edtPhone.setText("");
                 }
             }
         });
-        binding.imFalg.setImageDrawable(getResources().getDrawable(R.drawable.flag_sa));
         model.setPhone_code("+966");
-        binding.txtCountry.setText("Saudi Arabia");
-        binding.phoneCode.setText("+966");
-        binding.llCountry.setOnClickListener(view -> dialog.show());
         sortCountries();
-        createCountriesDialog();
         binding.btnLogin.setOnClickListener(v -> {
-                createVerificationCodeDialog();
+            createVerificationCodeDialog();
         });
 
         mvvm.getTime().observe(this, time -> {
@@ -115,22 +111,30 @@ public class LoginActivity extends BaseActivity {
             }
 
         });
+        binding.btnLogin.setOnClickListener(v -> {
+            mvvm.login(this, model.getPhone_code(), model.getPhone());
+        });
+        mvvm.getUserData().observe(this, new Observer<UserModel>() {
+            @Override
+            public void onChanged(UserModel userModel) {
+                if (userModel != null) {
+                    setUserModel(userModel);
+                    navigateToHomeActivity();
+                } else {
+                    createVerificationCodeDialog();
+                }
+            }
+        });
     }
-    private void createCountriesDialog() {
 
-        dialog = new AlertDialog.Builder(this)
-                .create();
-        countriesAdapter = new CountryAdapter(this);
-        countriesAdapter.updateList(countryModelList);
-        DialogCountriesBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_countries, null, false);
-        binding.recView.setLayoutManager(new LinearLayoutManager(this));
-        binding.recView.setAdapter(countriesAdapter);
+    private void navigateToHomeActivity() {
+        Intent intent = new Intent(this, HomeActivity.class);
 
-        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
-        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setView(binding.getRoot());
+        startActivity(intent);
+        finish();
     }
+
+
     private void sortCountries() {
         Collections.sort(countryModelList, (country1, country2) -> {
             return country1.getName().trim().compareToIgnoreCase(country2.getName().trim());
@@ -177,7 +181,8 @@ public class LoginActivity extends BaseActivity {
         Intent intent = new Intent(this, SignUpActivity.class);
         intent.putExtra("phone_code", model.getPhone_code());
         intent.putExtra("phone", model.getPhone());
-        launcher.launch(intent);
+        startActivity(intent);
+        finish();
     }
 
 
@@ -192,8 +197,6 @@ public class LoginActivity extends BaseActivity {
         dialog.dismiss();
         model.setPhone_code(countryModel.getDialCode());
         binding.setModel(model);
-        binding.imFalg.setImageResource(countryModel.getFlag());
-        binding.txtCountry.setText(countryModel.getName());
-        binding.phoneCode.setText(countryModel.getDialCode());
+
     }
 }

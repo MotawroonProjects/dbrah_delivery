@@ -13,11 +13,15 @@
         <entry key="..\:/DbrahDelivery/app/src/main/res/drawable/rounded_bottom_primary.xml" value="0.19166666666666668" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/drawable/rounded_grey9_stroke_grey6.xml" value="0.13229166666666667" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/drawable/rounded_stroke_color4.xml" value="0.13229166666666667" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/drawable/spinner_arrow.xml" value="0.10078125" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/drawable/tab_indicator.xml" value="0.18611111111111112" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/activity_edit_profile.xml" value="0.33" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/activity_home.xml" value="0.2796296296296296" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/activity_previous_order.xml" value="0.2777777777777778" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/activity_sign_up.xml" value="0.16" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/layout/countries_row.xml" value="0.1" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/layout/country_spinner_row.xml" value="0.1" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/fragment_home.xml" value="0.23958333333333334" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/fragment_my_reservations.xml" value="0.23958333333333334" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/fragment_order.xml" value="0.296" />

@@ -1,8 +1,11 @@
 package com.apps.dbrah_delivery.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -17,7 +20,7 @@ import com.apps.dbrah_delivery.uis.activity_sign_up.SignUpActivity;
 
 import java.util.List;
 
-public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class CountryAdapter extends BaseAdapter {
     private List<CountryModel> list;
     private Context context;
     private LayoutInflater inflater;
@@ -27,54 +30,35 @@ public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         inflater = LayoutInflater.from(context);
     }
 
-
-    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        CountriesRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.countries_row, parent, false);
-        return new MyHolder(binding);
-
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
-        MyHolder myHolder = (MyHolder) holder;
-        myHolder.binding.setModel(list.get(position));
-        myHolder.itemView.setOnClickListener(view -> {
-            if (context instanceof LoginActivity) {
-                LoginActivity activity = (LoginActivity) context;
-                activity.setItemData(list.get(holder.getLayoutPosition()));
-            }else if (context instanceof SignUpActivity){
-                SignUpActivity signUpActivity=(SignUpActivity) context;
-                signUpActivity.setItemData(list.get(holder.getLayoutPosition()));
-            }
-        });
-
-    }
-
-    @Override
-    public int getItemCount() {
+    public int getCount() {
         return list != null ? list.size() : 0;
     }
 
-    public static class MyHolder extends RecyclerView.ViewHolder {
-        private CountriesRowBinding binding;
+    @Override
+    public Object getItem(int position) {
+        return list != null ? list.get(position) : null;
+    }
 
-        public MyHolder(CountriesRowBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-
-        }
-
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        @SuppressLint("ViewHolder") CountriesRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.countries_row, parent, false);
+        binding.setModel(list.get(position));
+        return binding.getRoot();
     }
 
     public void updateList(List<CountryModel> list) {
         if (list != null) {
             this.list = list;
+
+        } else {
+            this.list.clear();
         }
         notifyDataSetChanged();
     }
-
 }

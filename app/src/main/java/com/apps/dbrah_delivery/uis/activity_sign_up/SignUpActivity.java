@@ -139,7 +139,7 @@ public class SignUpActivity extends BaseActivity {
         binding.btnCancel.setOnClickListener(view -> closeSheet());
         binding.llCountry.setOnClickListener(view -> dialog.show());
 
-        createCountriesDialog();
+        //createCountriesDialog();
         sortCountries();
         binding.imFalg.setImageDrawable(getResources().getDrawable(R.drawable.flag_sa));
         binding.txtCountry.setText("Saudi Arabia");
@@ -159,21 +159,21 @@ public class SignUpActivity extends BaseActivity {
         startActivity(intent);
     }
 
-    private void createCountriesDialog() {
-
-        dialog = new AlertDialog.Builder(this)
-                .create();
-        countriesAdapter = new CountryAdapter(this);
-        countriesAdapter.updateList(countryModelList);
-        DialogCountriesBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_countries, null, false);
-        binding.recView.setLayoutManager(new LinearLayoutManager(this));
-        binding.recView.setAdapter(countriesAdapter);
-
-        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
-        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setView(binding.getRoot());
-    }
+//    private void createCountriesDialog() {
+//
+//        dialog = new AlertDialog.Builder(this)
+//                .create();
+//        countriesAdapter = new CountryAdapter(this);
+//        countriesAdapter.updateList(countryModelList);
+//        DialogCountriesBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_countries, null, false);
+//        binding.recView.setLayoutManager(new LinearLayoutManager(this));
+//        binding.recView.setAdapter(countriesAdapter);
+//
+//        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
+//        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
+//        dialog.setCanceledOnTouchOutside(false);
+//        dialog.setView(binding.getRoot());
+//    }
     private void sortCountries() {
         Collections.sort(countryModelList, (country1, country2) -> {
             return country1.getName().trim().compareToIgnoreCase(country2.getName().trim());

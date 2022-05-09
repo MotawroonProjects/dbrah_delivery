@@ -12,6 +12,7 @@ import com.apps.dbrah_delivery.uis.activity_base.BaseActivity;
 import com.apps.dbrah_delivery.uis.activity_home.HomeActivity;
 import com.apps.dbrah_delivery.databinding.ActivitySplashBinding;
 import com.apps.dbrah_delivery.uis.activity_login.LoginActivity;
+import com.apps.dbrah_delivery.uis.activity_sign_up.SignUpActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -47,7 +48,11 @@ public class SplashActivity extends BaseActivity {
 
                     @Override
                     public void onNext(@NonNull Long aLong) {
-                        navigateToHomeActivity();
+                        if (getUserModel() != null) {
+                            navigateToHomeActivity();
+                        } else {
+                            navigateToLoginActivity();
+                        }
                     }
 
                     @Override

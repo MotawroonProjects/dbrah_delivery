@@ -30,14 +30,9 @@ public interface Service {
                                                   @Query(value = "key") String key);
 
 
-
-
-
-
     @FormUrlEncoded
-    @POST("api/login")
-    Single<Response<UserModel>> login(@Field("api_key") String api_key,
-                                      @Field("phone_code") String phone_code,
+    @POST("api/representative/login")
+    Single<Response<UserModel>> login(@Field("phone_code") String phone_code,
                                       @Field("phone") String phone);
 
     @FormUrlEncoded
@@ -63,7 +58,6 @@ public interface Service {
 
 
     );
-
 
 
     @FormUrlEncoded
