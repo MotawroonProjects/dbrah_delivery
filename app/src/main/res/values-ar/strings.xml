@@ -109,7 +109,8 @@
     <string name="enter_the_code_that_was_sent_to_the_customer">أدخل الرمز الذي تم إرساله إلى العميل</string>
     <string name="please_state_the_reason_for_cancellation">من فضلك اذكر سبب الالغاء</string>
     <string name="write_here">اكتب هنا...</string>
-    <string name="km">km</string>
-    <string name="egypt">Egypt</string>
+    <string name="km">كم</string>
+    <string name="egypt">مصر</string>
+    <string name="saudia">السعوديه</string>
 
 </resources>

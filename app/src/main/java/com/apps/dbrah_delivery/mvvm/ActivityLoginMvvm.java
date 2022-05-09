@@ -144,7 +144,7 @@ public class ActivityLoginMvvm extends AndroidViewModel {
 
     public void setCountry() {
         CountryModel[] countries = new CountryModel[]{
-                new CountryModel("EG", context.getResources().getString(R.string.egypt), "+20", R.drawable.flag_eg, "EGP"), new CountryModel("SA", "Saudi Arabia", "+966", R.drawable.flag_sa, "SAR")};
+                new CountryModel("EG", context.getResources().getString(R.string.egypt), "+20", R.drawable.flag_eg, "EGP"), new CountryModel("SA", context.getResources().getString(R.string.saudia), "+966", R.drawable.flag_sa, "SAR")};
         coListMutableLiveData.postValue(new ArrayList<>(Arrays.asList(countries)));
     }
 

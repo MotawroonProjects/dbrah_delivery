@@ -10,29 +10,27 @@ public class UserModel extends StatusResponse {
     }
 
     public static class Data implements Serializable {
-        private int id;
-        private String user_type;
-        private String logo;
+        private String id;
+        private String image;
         private String name;
         private String phone_code;
         private String phone;
-        private String gender;
-        private double latitude;
-        private double longitude;
-        private String address;
-        private String token;
+        private String nationality_id;
+        private String town_id;
+        private String residence_number;
+        private String delivery_range;
+        private String provider_id;
+        private String status;
+        private String created_at;
+        private String updated_at;
         private static String firebase_token;
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
-        public String getUser_type() {
-            return user_type;
-        }
-
-        public String getLogo() {
-            return logo;
+        public String getImage() {
+            return image;
         }
 
         public String getName() {
@@ -47,24 +45,36 @@ public class UserModel extends StatusResponse {
             return phone;
         }
 
-        public String getGender() {
-            return gender;
+        public String getNationality_id() {
+            return nationality_id;
         }
 
-        public double getLatitude() {
-            return latitude;
+        public String getTown_id() {
+            return town_id;
         }
 
-        public double getLongitude() {
-            return longitude;
+        public String getResidence_number() {
+            return residence_number;
         }
 
-        public String getAddress() {
-            return address;
+        public String getDelivery_range() {
+            return delivery_range;
         }
 
-        public String getToken() {
-            return token;
+        public String getProvider_id() {
+            return provider_id;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public String getCreated_at() {
+            return created_at;
+        }
+
+        public String getUpdated_at() {
+            return updated_at;
         }
 
         public String getFirebase_token() {

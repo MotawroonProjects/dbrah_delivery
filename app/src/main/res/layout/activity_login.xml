@@ -123,6 +123,7 @@
                                 android:background="@color/transparent"
                                 android:hint="@string/phone"
                                 android:textSize="15sp"
+                                android:inputType="phone"
                                 android:text="@={model.phone}"
                                 android:fontFamily="@font/almira"
                                 android:textColor="@color/black2"

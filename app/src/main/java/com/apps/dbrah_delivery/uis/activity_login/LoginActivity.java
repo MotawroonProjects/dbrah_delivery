@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.apps.dbrah_delivery.R;
 import com.apps.dbrah_delivery.adapter.CountryAdapter;
@@ -121,8 +123,22 @@ public class LoginActivity extends BaseActivity {
                     setUserModel(userModel);
                     navigateToHomeActivity();
                 } else {
-                    createVerificationCodeDialog();
+                    navigateToSignUpActivity();
+                    //createVerificationCodeDialog();
                 }
+            }
+        });
+        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                CountryModel model = (CountryModel) parent.getAdapter().getItem(position);
+                LoginActivity.this.model.setPhone_code(model.getDialCode());
+                binding.setModel(LoginActivity.this.model);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
