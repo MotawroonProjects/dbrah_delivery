@@ -84,7 +84,7 @@ public class FragmentCurrentOrders extends BaseFragment {
             }
         });
 
-        orderAdapter = new OrderAdapter( activity, getLang());
+        orderAdapter = new OrderAdapter( activity, getLang(),this);
         binding.recView.setLayoutManager(new LinearLayoutManager(activity));
         binding.recView.setAdapter(orderAdapter);
 

@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.apps.dbrah_delivery.R;
 import com.apps.dbrah_delivery.databinding.ProductRowBinding;
+import com.apps.dbrah_delivery.model.OrderModel;
 
 import java.util.List;
 
 public class ProductAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-    private List<Object> list;
+    private List<OrderModel.Offers.OfferDetail> list;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
@@ -36,6 +37,7 @@ public class ProductAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder=(MyHolder) holder;
         myHolder.binding.setLang(lang);
+        myHolder.binding.setModel(list.get(position));
     }
 
     @Override
@@ -43,7 +45,7 @@ public class ProductAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (list != null) {
             return list.size();
         } else {
-            return 5;
+            return 0;
         }
     }
 
@@ -57,7 +59,7 @@ public class ProductAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    public void updateList(List<Object> list) {
+    public void updateList(List<OrderModel.Offers.OfferDetail> list) {
         this.list = list;
         notifyDataSetChanged();
     }

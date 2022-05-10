@@ -26,6 +26,8 @@
         <entry key="..\:/DbrahDelivery/app/src/main/res/drawable/tab_indicator.xml" value="0.18611111111111112" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/activity_edit_profile.xml" value="0.25" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/activity_home.xml" value="0.2796296296296296" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/layout/activity_order_details.xml" value="0.28804347826086957" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/activity_previous_order.xml" value="0.2777777777777778" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/activity_sign_up.xml" value="0.16" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/fragment_home.xml" value="0.23958333333333334" />
@@ -34,6 +36,8 @@
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/fragment_previous_order.xml" value="0.17" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/new_order_row.xml" value="0.2840909090909091" />
         <entry key="..\:/DbrahDelivery/app/src/main/res/layout/order_row.xml" value="0.21" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/layout/product_row.xml" value="0.13984375" />
+        <entry key="..\:/DbrahDelivery/app/src/main/res/layout/toolbar.xml" value="0.1" />
       </map>
     </option>
   </component>

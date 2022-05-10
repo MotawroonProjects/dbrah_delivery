@@ -1,12 +1,16 @@
 package com.apps.dbrah_delivery.uis.activity_home.fragments_home_navigaion.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -18,11 +22,13 @@ import com.apps.dbrah_delivery.R;
 
 import com.apps.dbrah_delivery.adapter.OrderAdapter;
 import com.apps.dbrah_delivery.databinding.FragmentOrderBinding;
+import com.apps.dbrah_delivery.model.OrderModel;
 import com.apps.dbrah_delivery.model.OrdersModel;
 import com.apps.dbrah_delivery.mvvm.FragmentNewOrderMvvm;
 import com.apps.dbrah_delivery.mvvm.FragmentNewOrderMvvm;
 import com.apps.dbrah_delivery.uis.activity_base.BaseFragment;
 import com.apps.dbrah_delivery.uis.activity_home.HomeActivity;
+import com.apps.dbrah_delivery.uis.activity_order_details.OrderDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +40,7 @@ public class FragmentNewOrders extends BaseFragment {
     private OrderAdapter orderAdapter;
     private List<OrdersModel.Data> orderModelList;
     private FragmentNewOrderMvvm mvvm;
+    private ActivityResultLauncher<Intent> launcher;
 
     public static FragmentNewOrders newInstance() {
         FragmentNewOrders fragment = new FragmentNewOrders();
@@ -47,6 +54,13 @@ public class FragmentNewOrders extends BaseFragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         activity = (HomeActivity) context;
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == Activity.RESULT_OK) {
+
+                mvvm.getOrders(getUserModel());
+
+            }
+        });
     }
 
     @Override
@@ -65,8 +79,7 @@ public class FragmentNewOrders extends BaseFragment {
     private void initView() {
         binding.setTitleno(getResources().getString(R.string.no_new_order));
         orderModelList = new ArrayList<>();
-        binding.recView.setLayoutManager(new LinearLayoutManager(activity));
-        binding.recView.setAdapter(new OrderAdapter(activity,getLang()));
+
         mvvm = ViewModelProviders.of(this).get(FragmentNewOrderMvvm.class);
 
         mvvm.getIsLoading().observe(activity, aBoolean -> {
@@ -88,7 +101,7 @@ public class FragmentNewOrders extends BaseFragment {
             }
         });
 
-        orderAdapter = new OrderAdapter( activity,getLang());
+        orderAdapter = new OrderAdapter( activity,getLang(),this);
         binding.recView.setLayoutManager(new LinearLayoutManager(activity));
         binding.recView.setAdapter(orderAdapter);
 
@@ -97,6 +110,11 @@ public class FragmentNewOrders extends BaseFragment {
         binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
 
     }
-
+    public void navigateToDetails(OrdersModel.Data orderModel) {
+        Log.e("dkdkkd", orderModel.getOrder_id() + "");
+        Intent intent = new Intent(activity, OrderDetailsActivity.class);
+        intent.putExtra("order_id", orderModel.getOrder_id());
+        launcher.launch(intent);
+    }
 
 }

@@ -8,6 +8,9 @@
         <variable
             name="lang"
             type="String" />
+        <variable
+            name="model"
+            type="com.apps.dbrah_delivery.model.OrderModel" />
     </data>
 
     <FrameLayout
@@ -16,9 +19,12 @@
         android:background="@color/grey3">
 
         <LinearLayout
+            android:id="@+id/llData"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+
+            >
 
             <include
                 android:id="@+id/toolbar"
@@ -103,7 +109,7 @@
                             android:background="@drawable/rounded_grey9_stroke_grey6"
                             android:orientation="vertical"
                             android:padding="16dp"
-                            android:visibility="gone">
+                            >
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -133,7 +139,7 @@
                                     android:layout_marginStart="8dp"
                                     android:layout_marginEnd="8dp"
                                     android:fontFamily="@font/almira"
-                                    android:text="#21324623"
+                                    android:text='@{"#"+model.id}'
                                     android:textColor="@color/black2"
                                     android:textSize="14sp" />
 
@@ -173,7 +179,7 @@
                                         android:layout_marginStart="8dp"
                                         android:layout_marginEnd="8dp"
                                         android:fontFamily="@font/almira"
-                                        android:text="02/06/2022"
+                                        android:text="@{model.day}"
                                         android:textColor="@color/black2"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -197,7 +203,7 @@
                                         android:layout_marginStart="8dp"
                                         android:layout_marginEnd="4dp"
                                         android:fontFamily="@font/almira"
-                                        android:text="03:30"
+                                        android:text='@{model.time.split(" ")[0]}'
                                         android:textColor="@color/black2"
                                         android:textSize="14sp" />
                                     <!--                                android:text='@{model.time.split(" ")[0]}'-->
@@ -207,7 +213,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:fontFamily="@font/almira"
-                                        android:text="pm"
+                                        android:text='@{model.time.split(" ")[1]}'
                                         android:textColor="@color/grey7"
                                         android:textSize="12sp" />
                                     <!--                                android:text='@{model.time.split(" ")[1]}'-->
@@ -249,7 +255,7 @@
                                         android:layout_marginStart="8dp"
                                         android:layout_marginEnd="8dp"
                                         android:fontFamily="@font/almira"
-                                        android:text="02/06/2022"
+                                        offerDate="@{model.expected_delivery_time}"
                                         android:textColor="@color/black2"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -273,7 +279,7 @@
                                         android:layout_marginStart="8dp"
                                         android:layout_marginEnd="4dp"
                                         android:fontFamily="@font/almira"
-                                        android:text="03:30"
+                                        offertime="@{model.expected_delivery_time}"
                                         android:textColor="@color/black2"
                                         android:textSize="14sp" />
                                     <!--                                android:text='@{model.time.split(" ")[0]}'-->
@@ -283,7 +289,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:fontFamily="@font/almira"
-                                        android:text="pm"
+                                        offertypetime="@{model.expected_delivery_time}"
                                         android:textColor="@color/grey7"
                                         android:textSize="12sp" />
                                     <!--                                android:text='@{model.time.split(" ")[1]}'-->
@@ -310,6 +316,7 @@
                                     android:layout_width="64dp"
                                     android:layout_height="64dp"
                                     android:layout_gravity="top"
+                                    user_image="@{model.provider.image}"
                                     android:src="@drawable/circle_avatar" />
 
                                 <LinearLayout
@@ -323,7 +330,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/almaraibold"
-                                        android:text="@string/name"
+                                        android:text="@{model.provider.name}"
                                         android:textColor="@color/black2"
                                         android:textSize="16sp" />
 
@@ -343,7 +350,7 @@
                                                 android:layout_height="match_parent"
                                                 android:layout_gravity="center"
                                                 android:numStars="5"
-                                                android:rating="3.5"
+                                                android:rating='@{model!=null?Float.parseFloat(model.provider.rate):0}'
                                                 android:theme="@style/RatingBar" />
                                         </FrameLayout>
 
@@ -395,7 +402,7 @@
                                     android:layout_marginEnd="8dp"
                                     android:layout_weight="1"
                                     android:fontFamily="@font/almira"
-                                    android:text="location"
+                                    android:text='@{lang.equals("ar")?(model.provider.nationality.title_ar+"-"+model.provider.town.title_ar):(model.provider.nationality.title_en+"-"+model.provider.town.title_en)}'
                                     android:textColor="@color/black2"
                                     android:textSize="14sp" />
 
@@ -441,7 +448,7 @@
                             android:background="@drawable/rounded_white_stroke_color10"
                             android:orientation="vertical"
                             android:padding="16dp"
-                            android:visibility="gone">
+                            >
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -452,6 +459,7 @@
                                     android:layout_width="64dp"
                                     android:layout_height="64dp"
                                     android:layout_gravity="center_vertical"
+                                    user_image="@{model.user.image}"
                                     android:src="@drawable/circle_avatar" />
 
                                 <LinearLayout
@@ -467,7 +475,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:fontFamily="@font/almaraibold"
-                                        android:text="@string/name"
+                                        android:text="@{model.User.name}"
                                         android:textColor="@color/black2"
                                         android:textSize="18sp" />
 
@@ -522,7 +530,7 @@
                                     android:layout_marginEnd="8dp"
                                     android:layout_weight="1"
                                     android:fontFamily="@font/almira"
-                                    android:text="location"
+                                    android:text="@{model.address.title}"
                                     android:textColor="@color/black2"
                                     android:textSize="14sp" />
 
@@ -626,7 +634,7 @@
                                 android:layout_marginStart="8dp"
                                 android:layout_marginEnd="4dp"
                                 android:fontFamily="@font/almaraibold"
-                                android:text="350"
+                                android:text="@{model.total_price}"
                                 android:textColor="@color/black2"
                                 android:textSize="18sp" />
 
@@ -966,5 +974,10 @@
             </androidx.cardview.widget.CardView>
 
         </FrameLayout>
+        <ProgressBar
+            android:id="@+id/progBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
     </FrameLayout>
 </layout>

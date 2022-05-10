@@ -6,6 +6,9 @@
         <variable
             name="lang"
             type="String" />
+        <variable
+            name="model"
+            type="com.apps.dbrah_delivery.model.OrderModel.Offers.OfferDetail" />
     </data>
 
     <LinearLayout
@@ -21,6 +24,7 @@
             android:layout_height="56dp"
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_date"
+            image="@{model.other_product==null?model.product.main_image:model.other_product.main_image}"
             app:riv_corner_radius="8dp" />
         <TextView
             android:layout_width="0dp"
@@ -31,12 +35,12 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="title"
+            android:text='@{lang.equals("ar")?(model.other_product==null?model.product.title_ar:model.other_product.title_ar):(model.other_product==null?model.product.title_en:model.other_product.title_en)}'
             android:textSize="14sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2 X"
+            android:text='@{model.available_qty+"X"}'
             android:fontFamily="@font/almaraibold"
             android:textSize="18sp"
             android:textColor="@color/black2"

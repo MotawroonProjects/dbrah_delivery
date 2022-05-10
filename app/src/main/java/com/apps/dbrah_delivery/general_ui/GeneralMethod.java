@@ -18,6 +18,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class GeneralMethod {
@@ -223,7 +227,33 @@ public class GeneralMethod {
 
     }
 
+    @BindingAdapter({"offerDate"})
+    public static void displayOfferDate(TextView textView, String offerDate) {
+        if (offerDate != null) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+            String m_date = dateFormat.format(new Date(Long.parseLong(offerDate)));
+            textView.setText(m_date);
+        }
+    }
 
+    @BindingAdapter({"offertime"})
+    public static void displayOffertime(TextView textView, String offerDate) {
+        if (offerDate != null) {
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm", Locale.ENGLISH);
+            String m_date = dateFormat.format(new Date(Long.parseLong(offerDate)));
+            textView.setText(m_date);
+        }
+    }
+    @BindingAdapter({"offertypetime"})
+    public static void displayOfferTypetime(TextView textView, String offerDate) {
+        if (offerDate != null) {
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("aa", Locale.ENGLISH);
+            String m_date = dateFormat.format(new Date(Long.parseLong(offerDate)));
+            textView.setText(m_date);
+        }
+    }
 }
 
 

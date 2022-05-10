@@ -5,6 +5,7 @@ import com.apps.dbrah_delivery.model.NationalitiesModel;
 import com.apps.dbrah_delivery.model.NotificationDataModel;
 import com.apps.dbrah_delivery.model.OrdersModel;
 import com.apps.dbrah_delivery.model.PlaceGeocodeData;
+import com.apps.dbrah_delivery.model.SingleOrderDataModel;
 import com.apps.dbrah_delivery.model.StatusResponse;
 import com.apps.dbrah_delivery.model.UserModel;
 
@@ -124,5 +125,8 @@ public interface Service {
     Single<Response<OrdersModel>> getPreviousOrders(@Query(value = "representative_id") String representative_id,
                                                     @Query(value = "time") String time);
 
+
+    @GET("api/representative/order_details")
+    Single<Response<SingleOrderDataModel>> getOrderDetails(@Query("order_id") String order_id);
 
 }

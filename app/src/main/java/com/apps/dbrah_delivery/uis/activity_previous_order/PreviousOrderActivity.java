@@ -52,7 +52,7 @@ public class PreviousOrderActivity extends BaseActivity {
         });
 
         mvvm.setFilterBy(null);
-        orderAdapter=new OrderAdapter(this,getLang());
+        orderAdapter=new OrderAdapter(this,getLang(),null);
         binding.recView.setLayoutManager(new LinearLayoutManager(this));
         binding.recView.setAdapter(orderAdapter);
 
