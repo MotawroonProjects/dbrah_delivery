@@ -38,21 +38,20 @@ public interface Service {
                                       @Field("phone") String phone);
 
 
-
     @GET("api/representative/nationalities")
     Single<Response<NationalitiesModel>> getNationalities();
 
     @Multipart
     @POST("api/representative/register")
     Single<Response<UserModel>> signUp(@Part("phone") RequestBody phone,
-                                           @Part("phone_code") RequestBody phone_code,
-                                           @Part("name") RequestBody name,
-                                           @Part("provider_code") RequestBody provider_code,
-                                           @Part("nationality_id") RequestBody nationality_id,
-                                           @Part("town_id") RequestBody town_id,
-                                           @Part("residence_number") RequestBody residence_number,
-                                           @Part("delivery_range") RequestBody delivery_range,
-                                           @Part MultipartBody.Part image);
+                                       @Part("phone_code") RequestBody phone_code,
+                                       @Part("name") RequestBody name,
+                                       @Part("provider_code") RequestBody provider_code,
+                                       @Part("nationality_id") RequestBody nationality_id,
+                                       @Part("town_id") RequestBody town_id,
+                                       @Part("residence_number") RequestBody residence_number,
+                                       @Part("delivery_range") RequestBody delivery_range,
+                                       @Part MultipartBody.Part image);
 
     @Multipart
     @POST("api/representative/update_profile")
@@ -65,14 +64,13 @@ public interface Service {
                                        @Part MultipartBody.Part image);
 
 
-
-
     @FormUrlEncoded
     @POST("api/contact_us")
     Single<Response<StatusResponse>> contactUs(@Field("name") String name,
                                                @Field("email") String email,
                                                @Field("subject") String phone,
                                                @Field("message") String message);
+
     @FormUrlEncoded
     @POST("api/logout")
     Single<Response<StatusResponse>> logout(@Header("AUTHORIZATION") String token,
@@ -110,12 +108,21 @@ public interface Service {
                                                              @Query(value = "api_key") String api_key,
                                                              @Query(value = "user_id") String user_id
     );
+
     @FormUrlEncoded
     @POST("api/representative/changeStatus")
     Single<Response<UserModel>> updateStatus(@Field("representative_id") String representative_id
     );
+
     @GET("api/representative/current_orders")
     Single<Response<OrdersModel>> getcurrentOrders(@Query(value = "representative_id") String representative_id);
+
     @GET("api/representative/new_orders")
     Single<Response<OrdersModel>> getnewOrders(@Query(value = "representative_id") String representative_id);
+
+    @GET("api/representative/last_orders")
+    Single<Response<OrdersModel>> getPreviousOrders(@Query(value = "representative_id") String representative_id,
+                                                    @Query(value = "time") String time);
+
+
 }
