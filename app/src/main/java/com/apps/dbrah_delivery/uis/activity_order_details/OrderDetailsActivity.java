@@ -30,10 +30,11 @@ public class OrderDetailsActivity extends BaseActivity {
     private OrderModel orderModel;
     private ActivityResultLauncher<Intent> launcher;
     private boolean isDatachanged;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(this,R.layout.activity_order_details);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_order_details);
         getDataFromIntent();
         initView();
     }
@@ -42,6 +43,7 @@ public class OrderDetailsActivity extends BaseActivity {
         Intent intent = getIntent();
         order_id = intent.getStringExtra("order_id");
     }
+
     private void initView() {
         setUpToolbar(binding.toolbar, getString(R.string.delivery_details), R.color.colorPrimary, R.color.white);
         binding.toolbar.llBack.setOnClickListener(view -> finish());
@@ -68,8 +70,8 @@ public class OrderDetailsActivity extends BaseActivity {
         activityOrderDetailsMvvm.getOnOrderStatusSuccess().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
-                    isDatachanged = true;
-                    activityOrderDetailsMvvm.getOrderDetails(order_id, getUserModel().getData().getId());
+                isDatachanged = true;
+                activityOrderDetailsMvvm.getOrderDetails(order_id, getUserModel().getData().getId());
 
             }
         });
@@ -80,7 +82,7 @@ public class OrderDetailsActivity extends BaseActivity {
                     OrderDetailsActivity.this.orderModel = orderModel;
                     binding.setModel(orderModel);
                     productAdapter.updateList(orderModel.getOffer().getOffer_details());
-
+                    updateui(orderModel.getStatus());
                 }
             }
         });
@@ -90,6 +92,31 @@ public class OrderDetailsActivity extends BaseActivity {
         binding.recViewProducts.setAdapter(productAdapter);
 
     }
+
+    private void updateui(String status) {
+        if (status.equals("new")) {
+
+            binding.imageStep1.setBackgroundResource(R.drawable.circle_accent);
+            binding.imageStep1.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary));
+        } else if (status.equals("accepted")) {
+
+            binding.imageStep2.setBackgroundResource(R.drawable.circle_accent);
+            binding.imageStep2.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary));
+            binding.viewStep1.setBackgroundResource(R.color.colorPrimary);
+
+
+        } else {
+
+            binding.imageStep2.setBackgroundResource(R.drawable.circle_accent);
+            binding.imageStep2.setColorFilter(ContextCompat.getColor(this, R.color.color4));
+            binding.viewStep2.setBackgroundResource(R.color.colorPrimary);
+            binding.imageStep3.setBackgroundResource(R.drawable.circle_accent);
+            binding.imageStep3.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary));
+            binding.viewStep1.setBackgroundResource(R.color.colorPrimary);
+
+        }
+    }
+
     @Override
     public void onBackPressed() {
         if (isDatachanged) {
