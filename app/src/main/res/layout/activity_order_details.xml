@@ -366,12 +366,13 @@
                                             android:layout_weight="1" />
 
                                         <ImageView
-                                            android:id="@+id/imCall"
+                                            android:id="@+id/imCallProvider"
                                             android:layout_width="35dp"
                                             android:layout_height="35dp"
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginEnd="5dp"
+                                            android:visibility='@{model.status.equals("new")?View.GONE:View.VISIBLE,default=gone}'
                                             android:src="@drawable/ic_call2" />
 
                                         <ImageView
@@ -381,6 +382,7 @@
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginEnd="5dp"
+                                            android:visibility='@{model.status.equals("new")?View.GONE:View.VISIBLE,default=gone}'
                                             android:src="@drawable/ic_chat" />
 
 
@@ -413,6 +415,7 @@
                                     android:textSize="14sp" />
 
                                 <LinearLayout
+                                    android:id="@+id/llMapProvider"
                                     android:layout_width="wrap_content"
                                     android:layout_height="40dp"
                                     android:layout_gravity="end|center_vertical"
@@ -480,7 +483,6 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
                                         android:fontFamily="@font/almaraibold"
                                         android:text="@{model.User.name}"
                                         android:textColor="@color/black2"
@@ -490,25 +492,29 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="8dp"
+                                        android:layout_gravity="end"
                                         android:orientation="horizontal"
-                                        android:visibility="gone">
+                                      >
 
                                         <ImageView
-                                            android:id="@+id/imCalll"
+                                            android:id="@+id/imCallUser"
                                             android:layout_width="35dp"
                                             android:layout_height="35dp"
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginEnd="5dp"
+                                            android:visibility='@{model.status.equals("new")?View.GONE:View.VISIBLE,default=gone}'
                                             android:src="@drawable/ic_call2" />
 
                                         <ImageView
-                                            android:id="@+id/imChatt"
+                                            android:id="@+id/imChatUser"
                                             android:layout_width="35dp"
                                             android:layout_height="35dp"
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginEnd="5dp"
+                                            android:visibility='@{model.status.equals("new")?View.GONE:View.VISIBLE,default=gone}'
+
                                             android:src="@drawable/ic_chat" />
                                     </LinearLayout>
                                 </LinearLayout>
@@ -537,11 +543,12 @@
                                     android:layout_marginEnd="8dp"
                                     android:layout_weight="1"
                                     android:fontFamily="@font/almira"
-                                    android:text="@{model.address.title}"
+                                    android:text="@{model.address.address}"
                                     android:textColor="@color/black2"
                                     android:textSize="14sp" />
 
                                 <LinearLayout
+                                    android:id="@+id/llMapUser"
                                     android:layout_width="wrap_content"
                                     android:layout_height="40dp"
                                     android:layout_gravity="end|center_vertical"
@@ -611,7 +618,7 @@
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="8dp"
-                            android:visibility='@{model.status.equals("accepted")||model.status.equals("ended")?View.VISIBLE:View.GONE,default=gone}'/>
+                            android:visibility='@{model.status.equals("accepted")||model.status.equals("ended")?View.VISIBLE:View.GONE,default=gone}' />
 
 
                         <LinearLayout
@@ -790,7 +797,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_gravity="bottom"
-
+                            android:clickable='@{model.status.equals("ended")?false:true}'
                             android:gravity="center"
                             android:visibility='@{model.status.equals("new")?View.GONE:View.VISIBLE,default=gone}'
                             app:layout_constraintBottom_toBottomOf="parent">
@@ -798,6 +805,7 @@
                             <ProgressBar
                                 android:id="@+id/seekbar"
                                 style="?android:attr/progressBarStyleHorizontal"
+                                orderStatus="@{model.status}"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:progressDrawable="@drawable/top_rounded_primary" />
@@ -806,6 +814,7 @@
                             <TextView
                                 android:id="@+id/status"
 
+                                orderStatus="@{model.status}"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"

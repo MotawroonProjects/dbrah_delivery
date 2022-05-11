@@ -40,7 +40,7 @@
             android:fontFamily="@font/almira"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:text="@{model.order.address.title}"
+            android:text="@{model.order.address.address}"
             android:textAlignment="viewStart"
             android:textColor="@color/black2"
             android:textSize="14sp"
@@ -201,7 +201,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:visibility='@{model.status.equals("new")?View.GONE:View.VISIBLE,default=gone}'
+                android:visibility='@{model.status.equals("new")||model.status.equals("ended")?View.GONE:View.VISIBLE,default=gone}'
                 android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
 
@@ -212,6 +212,7 @@
                     android:layout_height="10dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
+                    orderRowStatus="@{model.status}"
            />
 
                 <TextView
@@ -222,6 +223,7 @@
                     android:fontFamily="@font/almaraibold"
                     android:textColor="@color/black2"
                     android:textSize="14sp"
+                    orderRowStatus="@{model.status}"
                     android:textStyle="bold" />
             </LinearLayout>
 

@@ -78,6 +78,10 @@ public class BaseActivity extends AppCompatActivity {
         binding.toolbar.setBackgroundResource(background);
         binding.llBack.setOnClickListener(v -> finish());
     }
+    protected void clearUserModel(Context context) {
+        Preferences preferences = Preferences.getInstance();
+        preferences.clearUserData(context);
 
+    }
 
 }

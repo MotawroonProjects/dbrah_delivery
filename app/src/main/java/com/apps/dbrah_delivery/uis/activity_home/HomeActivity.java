@@ -49,7 +49,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
     private ActionBarDrawerToggle toggle;
     private AppBarConfiguration appBarConfiguration;
     private ActivityResultLauncher<Intent> launcher;
-    private int req=1;
+    private int req = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,14 +77,14 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
                 if (userModel != null) {
                     setUserModel(userModel);
                     binding.setModel(getUserModel());
-                   // navigateToHomeActivity();
+                    // navigateToHomeActivity();
                 }
             }
         });
         binding.swStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                homeActivityMvvm.changeStatus(HomeActivity.this,getUserModel().getData().getId());
+                homeActivityMvvm.changeStatus(HomeActivity.this, getUserModel().getData().getId());
             }
         });
         if (getLang().equals("ar")) {
@@ -153,13 +153,13 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
             launcher.launch(intent);
         });
 
-        binding.llTerms.setOnClickListener(view -> navigateToAppActivity("terms", Tags.base_url+"webView?type=terms"));
+        binding.llTerms.setOnClickListener(view -> navigateToAppActivity("terms", Tags.base_url + "webView?type=terms"));
 
-        binding.llPrivacy.setOnClickListener(view -> navigateToAppActivity("privacy", Tags.base_url+"webView?type=privacy"));
+        binding.llPrivacy.setOnClickListener(view -> navigateToAppActivity("privacy", Tags.base_url + "webView?type=privacy"));
 
         binding.tvLang.setOnClickListener(view -> {
             if (getLang().equals("en")) {
-               refreshActivity("ar");
+                refreshActivity("ar");
             } else {
                 refreshActivity("en");
             }
@@ -167,15 +167,44 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
         if (getUserModel() != null) {
             homeActivityMvvm.updateFirebase(this, getUserModel());
         }
+        binding.llLogout.setOnClickListener(view -> {
+            if (getUserModel() == null) {
+                logout();
+            } else {
+                homeActivityMvvm.logout(this, getUserModel());
+
+            }
+        });
+
+        homeActivityMvvm.logout.observe(this, aBoolean -> {
+            if (aBoolean) {
+                logout();
+            }
+        });
     }
 
+    private void logout() {
+        clearUserModel(this);
+        binding.setModel(null);
+        navigateToLoginActivity();
+    }
+
+    private void navigateToLoginActivity() {
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+
+
+    }
 
     private void navigateToAppActivity(String type, String url) {
-        Intent intent=new Intent(this, AppActivity.class);
+        Intent intent = new Intent(this, AppActivity.class);
         intent.putExtra("data", type);
-        intent.putExtra("url",url);
+        intent.putExtra("url", url);
         startActivity(intent);
     }
+
     public void refreshActivity(String lang) {
         Paper.book().write("lang", lang);
         Language.setNewLocale(this, lang);

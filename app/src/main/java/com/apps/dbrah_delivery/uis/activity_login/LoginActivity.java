@@ -58,6 +58,7 @@ public class LoginActivity extends BaseActivity {
         countryModelList=new ArrayList<>();
         model = new LoginModel();
         binding.setModel(model);
+        binding.setLang(getLang());
         mvvm = ViewModelProviders.of(this).get(ActivityLoginMvvm.class);
         countriesAdapter = new CountryAdapter(this);
         binding.spinner.setAdapter(countriesAdapter);

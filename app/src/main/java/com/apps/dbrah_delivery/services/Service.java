@@ -73,23 +73,16 @@ public interface Service {
                                                @Field("message") String message);
 
     @FormUrlEncoded
-    @POST("api/logout")
-    Single<Response<StatusResponse>> logout(@Header("AUTHORIZATION") String token,
-                                            @Field("api_key") String api_key,
-                                            @Field("phone_token") String phone_token
-
-
+    @POST("api/provider/logout")
+    Single<Response<StatusResponse>> logout(@Field("provider_id") String provider_id,
+                                            @Field("token") String token
     );
 
     @FormUrlEncoded
-    @POST("api/firebase-tokens")
-    Single<Response<StatusResponse>> updateFirebasetoken(@Header("AUTHORIZATION") String token,
-                                                         @Field("api_key") String api_key,
-                                                         @Field("phone_token") String phone_token,
-                                                         @Field("user_id") String user_id,
-                                                         @Field("software_type") String software_type
-
-
+    @POST("api/storeToken")
+    Single<Response<StatusResponse>> updateFirebasetoken(@Field("provider_id") String provider_id,
+                                                         @Field("token") String token,
+                                                         @Field("type") String type
     );
 
     @FormUrlEncoded
@@ -127,6 +120,13 @@ public interface Service {
 
 
     @GET("api/representative/order_details")
-    Single<Response<SingleOrderDataModel>> getOrderDetails(@Query("order_id") String order_id);
+    Single<Response<SingleOrderDataModel>> getOrderDetails(@Query("order_id") String order_id,
+                                                           @Query("representative_id") String representative_id);
+
+    @FormUrlEncoded
+    @POST("api/representative/updateOrderStatus")
+    Single<Response<SingleOrderDataModel>> changeOrderStatus(@Field("order_id") String order_id,
+                                                             @Field("representative_id") String representative_id,
+                                                             @Field("status") String status);
 
 }

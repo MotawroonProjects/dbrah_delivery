@@ -116,6 +116,10 @@ public class OrderModel implements Serializable {
         return user;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public class Provider implements Serializable {
         private String id;
         private String name;

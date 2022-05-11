@@ -1,10 +1,12 @@
 package com.apps.dbrah_delivery.general_ui;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
@@ -245,6 +247,7 @@ public class GeneralMethod {
             textView.setText(m_date);
         }
     }
+
     @BindingAdapter({"offertypetime"})
     public static void displayOfferTypetime(TextView textView, String offerDate) {
         if (offerDate != null) {
@@ -254,6 +257,70 @@ public class GeneralMethod {
             textView.setText(m_date);
         }
     }
+
+    @BindingAdapter("orderStatus")
+    public static void orderStatus(ProgressBar progressBar, String status) {
+        if (status != null) {
+            if (status.equals("accepted")) {
+                progressBar.setProgress(20);
+            } else if (status.equals("picked_up")) {
+                progressBar.setProgress(50);
+            } else if (status.equals("on_the_way")) {
+                progressBar.setProgress(80);
+            } else if (status.equals("ended")) {
+                progressBar.setProgress(100);
+            }
+        }
+    }
+
+    @BindingAdapter("orderStatus")
+    public static void orderStatus(TextView btnStatus, String status) {
+        if (status != null) {
+            if (status.equals("accepted")) {
+                btnStatus.setText(R.string.pick_up);
+            } else if (status.equals("picked_up")) {
+                btnStatus.setText(R.string.on_way);
+            } else if (status.equals("on_the_way")) {
+                btnStatus.setText(R.string.end);
+
+            } else if (status.equals("ended")) {
+                btnStatus.setText(R.string.finish_delivery);
+            }
+        }
+    }
+    @BindingAdapter("orderRowStatus")
+    public static void orderRowStatus(TextView btnStatus, String status) {
+        if (status != null) {
+            if (status.equals("accepted")) {
+                btnStatus.setText(R.string.accepted);
+            } else if (status.equals("picked_up")) {
+                btnStatus.setText(R.string.pick_up);
+            } else if (status.equals("on_the_way")) {
+                btnStatus.setText(R.string.on_way);
+
+            } else if (status.equals("ended")) {
+                btnStatus.setText(R.string.finish_delivery);
+            }
+        }
+    }
+    @BindingAdapter("orderRowStatus")
+    public static void orderRowStatus(ProgressBar progressBar, String status) {
+        if (status != null) {
+            if (status.equals("accepted")) {
+                progressBar.setProgress(20);
+                progressBar.setProgressDrawable(progressBar.getContext().getResources().getDrawable(R.drawable.progress1_shape));
+            } else if (status.equals("picked_up")) {
+                progressBar.setProgress(50);
+                progressBar.setProgressDrawable(progressBar.getContext().getResources().getDrawable(R.drawable.progress2_shape));
+
+            } else if (status.equals("on_the_way")) {
+                progressBar.setProgress(80);
+                progressBar.setProgressDrawable(progressBar.getContext().getResources().getDrawable(R.drawable.progress3_shape));
+
+            }
+        }
+    }
+
 }
 
 

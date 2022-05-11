@@ -6,14 +6,18 @@
     <data>
 
         <variable
+            name="lang"
+            type="String" />
+
+        <variable
             name="model"
             type="com.apps.dbrah_delivery.model.LoginModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -31,7 +35,7 @@
 
                 >
 
-                <FrameLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/frame"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -40,18 +44,34 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:layout_width="245dp"
+                        android:id="@+id/imBackground"
+                        android:layout_width="260dp"
                         android:layout_height="285dp"
-                        android:layout_gravity="right"
-                        android:background="@drawable/rounded_color1" />
+                        android:background="@drawable/rounded_color1"
+                        android:scaleType="fitXY"
 
-                    <ImageView
-                        android:id="@+id/logo"
-                        android:layout_width="200dp"
-                        android:layout_height="160dp"
-                        android:layout_gravity="center_horizontal|bottom"
-                        android:src="@drawable/login" />
-                </FrameLayout>
+                        android:scaleX='@{lang.equals("ar")?-1:1}'
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleX='@{lang.equals("ar")?-1:1}'
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imBackground"
+                        app:layout_constraintStart_toStartOf="@+id/imBackground">
+
+                        <ImageView
+                            android:id="@+id/logo"
+                            android:layout_width="200dp"
+                            android:layout_height="160dp"
+                            android:layout_gravity="center_horizontal|bottom"
+
+                            android:src="@drawable/login" />
+                    </FrameLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:id="@+id/welcome"
@@ -70,64 +90,69 @@
                     android:id="@+id/frame2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/welcome"
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="48dp"
                     android:layout_marginEnd="18dp"
                     android:background="@drawable/rounded_grey1_stroke_grey6"
-                    >
+                    app:layout_constraintTop_toBottomOf="@+id/welcome">
+
                     <LinearLayout
                         android:id="@+id/linear"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        >
+                        android:padding="8dp">
+
                         <Spinner
                             android:id="@+id/spinner"
                             android:layout_width="match_parent"
                             android:layout_height="56dp"
                             android:background="@drawable/spinner_arrow" />
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/grey6"
                             android:layout_marginStart="18dp"
                             android:layout_marginEnd="18dp"
+                            android:background="@color/grey6"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/tvPhone" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="55dp"
-                            android:padding="16dp"
                             android:orientation="horizontal"
-                            >
+                            android:padding="16dp">
+
                             <TextView
                                 android:id="@+id/phoneCode"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:textSize="15sp"
+                                android:fontFamily="@font/almira"
                                 android:text="@{model.phone_code}"
                                 android:textColor="@color/black2"
-                                android:fontFamily="@font/almira"/>
+                                android:textSize="15sp" />
+
                             <View
                                 android:layout_width="1dp"
                                 android:layout_height="match_parent"
-                                android:background="@color/black2"
                                 android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"/>
+                                android:layout_marginEnd="8dp"
+                                android:background="@color/black2" />
+
                             <EditText
                                 android:id="@+id/edtPhone"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@color/transparent"
+                                android:fontFamily="@font/almira"
                                 android:hint="@string/phone"
-                                android:textSize="15sp"
                                 android:inputType="phone"
                                 android:text="@={model.phone}"
-                                android:fontFamily="@font/almira"
                                 android:textColor="@color/black2"
-                                android:textColorHint="@color/grey7"/>
+                                android:textColorHint="@color/grey7"
+                                android:textSize="15sp" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -139,184 +164,184 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="35dp"
                     android:background="@drawable/btn_enabled"
+                    android:enabled="@{model.valid,default=false}"
                     android:fontFamily="@font/almira"
                     android:gravity="center"
-                    android:enabled="@{model.valid,default=false}"
                     android:minWidth="200dp"
                     android:text="@string/login"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="18sp"
-                    android:layout_marginTop="35dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/frame2"/>
+                    app:layout_constraintTop_toBottomOf="@id/frame2" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
-<!--        <FrameLayout-->
-<!--            android:id="@+id/flVerification"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:background="@color/black_trans"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:clickable="true"-->
-<!--            android:focusable="true"-->
+        <!--        <FrameLayout-->
+        <!--            android:id="@+id/flVerification"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:background="@color/black_trans"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:clickable="true"-->
+        <!--            android:focusable="true"-->
 
-<!--            android:longClickable="true"-->
-<!--            android:visibility="visible">-->
+        <!--            android:longClickable="true"-->
+        <!--            android:visibility="visible">-->
 
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginStart="20dp"-->
-<!--                android:layout_marginEnd="20dp"-->
-<!--                app:cardBackgroundColor="@color/white"-->
-<!--                app:cardCornerRadius="30dp"-->
-<!--                app:cardElevation="2dp">-->
+        <!--            <androidx.cardview.widget.CardView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:layout_marginStart="20dp"-->
+        <!--                android:layout_marginEnd="20dp"-->
+        <!--                app:cardBackgroundColor="@color/white"-->
+        <!--                app:cardCornerRadius="30dp"-->
+        <!--                app:cardElevation="2dp">-->
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="vertical"-->
-<!--                    android:padding="10dp">-->
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:orientation="vertical"-->
+        <!--                    android:padding="10dp">-->
 
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="center_horizontal"-->
-<!--                        android:layout_marginTop="30dp"-->
-<!--                        android:layout_marginStart="20dp"-->
-<!--                        android:layout_marginEnd="20dp"-->
-<!--                        android:fontFamily="@font/almira"-->
-<!--                        android:text="@string/we_sent_an_code_to_verify_your_phone"-->
-<!--                        android:textColor="@color/black2"-->
-<!--                        android:textSize="18sp" />-->
+        <!--                    <TextView-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:layout_gravity="center_horizontal"-->
+        <!--                        android:layout_marginTop="30dp"-->
+        <!--                        android:layout_marginStart="20dp"-->
+        <!--                        android:layout_marginEnd="20dp"-->
+        <!--                        android:fontFamily="@font/almira"-->
+        <!--                        android:text="@string/we_sent_an_code_to_verify_your_phone"-->
+        <!--                        android:textColor="@color/black2"-->
+        <!--                        android:textSize="18sp" />-->
 
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="center_horizontal"-->
-<!--                        android:layout_marginTop="5dp"-->
-<!--                        android:orientation="horizontal">-->
+        <!--                    <LinearLayout-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:layout_gravity="center_horizontal"-->
+        <!--                        android:layout_marginTop="5dp"-->
+        <!--                        android:orientation="horizontal">-->
 
-<!--                        <TextView-->
-<!--                            android:layout_width="0dp"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_gravity="center_vertical"-->
-<!--                            android:layout_marginStart="5dp"-->
-<!--                            android:layout_marginEnd="5dp"-->
-<!--                            android:layout_weight="1"-->
-<!--                            android:fontFamily="@font/almira"-->
-<!--                            android:text="@{model.phone_code}"-->
-<!--                            android:textColor="@color/black2"-->
-<!--                            android:textSize="16sp" />-->
+        <!--                        <TextView-->
+        <!--                            android:layout_width="0dp"-->
+        <!--                            android:layout_height="wrap_content"-->
+        <!--                            android:layout_gravity="center_vertical"-->
+        <!--                            android:layout_marginStart="5dp"-->
+        <!--                            android:layout_marginEnd="5dp"-->
+        <!--                            android:layout_weight="1"-->
+        <!--                            android:fontFamily="@font/almira"-->
+        <!--                            android:text="@{model.phone_code}"-->
+        <!--                            android:textColor="@color/black2"-->
+        <!--                            android:textSize="16sp" />-->
 
-<!--                        <TextView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_gravity="center_vertical"-->
-<!--                            android:text="@{model.phone}"-->
-<!--                            android:fontFamily="@font/almira"-->
-<!--                            android:textColor="@color/color13"-->
-<!--                            android:textSize="16sp" />-->
-<!--                    </LinearLayout>-->
+        <!--                        <TextView-->
+        <!--                            android:layout_width="wrap_content"-->
+        <!--                            android:layout_height="wrap_content"-->
+        <!--                            android:layout_gravity="center_vertical"-->
+        <!--                            android:text="@{model.phone}"-->
+        <!--                            android:fontFamily="@font/almira"-->
+        <!--                            android:textColor="@color/color13"-->
+        <!--                            android:textSize="16sp" />-->
+        <!--                    </LinearLayout>-->
 
-<!--                    <ImageView-->
-<!--                        android:layout_width="150dp"-->
-<!--                        android:layout_height="150dp"-->
-<!--                        android:layout_gravity="center_horizontal"-->
-<!--                        android:layout_marginTop="5dp"-->
-<!--                        android:src="@drawable/logo_ver" />-->
+        <!--                    <ImageView-->
+        <!--                        android:layout_width="150dp"-->
+        <!--                        android:layout_height="150dp"-->
+        <!--                        android:layout_gravity="center_horizontal"-->
+        <!--                        android:layout_marginTop="5dp"-->
+        <!--                        android:src="@drawable/logo_ver" />-->
 
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="@string/enter_your_verification_code"-->
-<!--                        android:textColor="@color/black2"-->
-<!--                        android:fontFamily="@font/almaraibold"-->
-<!--                        android:textSize="18sp"-->
-<!--                        android:layout_gravity="center_horizontal"-->
-<!--                        android:layout_marginTop="20dp"-->
-<!--                        android:layout_marginStart="20dp"-->
-<!--                        android:layout_marginEnd="20dp"/>-->
+        <!--                    <TextView-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:text="@string/enter_your_verification_code"-->
+        <!--                        android:textColor="@color/black2"-->
+        <!--                        android:fontFamily="@font/almaraibold"-->
+        <!--                        android:textSize="18sp"-->
+        <!--                        android:layout_gravity="center_horizontal"-->
+        <!--                        android:layout_marginTop="20dp"-->
+        <!--                        android:layout_marginStart="20dp"-->
+        <!--                        android:layout_marginEnd="20dp"/>-->
 
-<!--                    <com.chaos.view.PinView-->
-<!--                        android:id="@+id/edtCode"-->
-<!--                        style="@style/PinWidget.PinView"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="center_horizontal"-->
-<!--                        android:layout_marginTop="12dp"-->
-<!--                        android:cursorVisible="true"-->
-<!--                        android:fontFamily="@font/almaraibold"-->
-<!--                        android:inputType="number"-->
-<!--                        android:textColor="@color/colorAccent"-->
-<!--                        android:textSize="15sp"-->
-<!--                        app:cursorColor="@color/colorPrimaryDark"-->
-<!--                        app:cursorWidth="2dp"-->
-<!--                        app:itemCount="6"-->
-<!--                        app:itemHeight="30dp"-->
-<!--                        app:itemSpacing="15dp"-->
-<!--                        app:itemWidth="30dp"-->
-<!--                        app:lineColor="@color/grey11"-->
-<!--                        app:lineWidth="2dp"-->
-<!--                        app:viewType="line" />-->
+        <!--                    <com.chaos.view.PinView-->
+        <!--                        android:id="@+id/edtCode"-->
+        <!--                        style="@style/PinWidget.PinView"-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:layout_gravity="center_horizontal"-->
+        <!--                        android:layout_marginTop="12dp"-->
+        <!--                        android:cursorVisible="true"-->
+        <!--                        android:fontFamily="@font/almaraibold"-->
+        <!--                        android:inputType="number"-->
+        <!--                        android:textColor="@color/colorAccent"-->
+        <!--                        android:textSize="15sp"-->
+        <!--                        app:cursorColor="@color/colorPrimaryDark"-->
+        <!--                        app:cursorWidth="2dp"-->
+        <!--                        app:itemCount="6"-->
+        <!--                        app:itemHeight="30dp"-->
+        <!--                        app:itemSpacing="15dp"-->
+        <!--                        app:itemWidth="30dp"-->
+        <!--                        app:lineColor="@color/grey11"-->
+        <!--                        app:lineWidth="2dp"-->
+        <!--                        app:viewType="line" />-->
 
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="20dp"-->
-<!--                        android:layout_marginTop="10dp"-->
-<!--                        android:layout_marginEnd="20dp">-->
+        <!--                    <LinearLayout-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:layout_marginStart="20dp"-->
+        <!--                        android:layout_marginTop="10dp"-->
+        <!--                        android:layout_marginEnd="20dp">-->
 
-<!--                        <TextView-->
-<!--                            android:id="@+id/tvResend"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="@string/resend"-->
-<!--                            android:textColor="@color/black"-->
-<!--                            android:textSize="15sp"-->
-<!--                            android:visibility="gone" />-->
+        <!--                        <TextView-->
+        <!--                            android:id="@+id/tvResend"-->
+        <!--                            android:layout_width="wrap_content"-->
+        <!--                            android:layout_height="wrap_content"-->
+        <!--                            android:text="@string/resend"-->
+        <!--                            android:textColor="@color/black"-->
+        <!--                            android:textSize="15sp"-->
+        <!--                            android:visibility="gone" />-->
 
-<!--                        <Space-->
-<!--                            android:layout_width="0dp"-->
-<!--                            android:layout_height="0dp"-->
-<!--                            android:layout_weight="1" />-->
+        <!--                        <Space-->
+        <!--                            android:layout_width="0dp"-->
+        <!--                            android:layout_height="0dp"-->
+        <!--                            android:layout_weight="1" />-->
 
-<!--                        <TextView-->
-<!--                            android:id="@+id/tvCounter"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="00:00"-->
-<!--                            android:textColor="@color/colorAccent"-->
-<!--                            android:textSize="15sp" />-->
-<!--                    </LinearLayout>-->
+        <!--                        <TextView-->
+        <!--                            android:id="@+id/tvCounter"-->
+        <!--                            android:layout_width="wrap_content"-->
+        <!--                            android:layout_height="wrap_content"-->
+        <!--                            android:text="00:00"-->
+        <!--                            android:textColor="@color/colorAccent"-->
+        <!--                            android:textSize="15sp" />-->
+        <!--                    </LinearLayout>-->
 
-<!--                    <Button-->
-<!--                        android:id="@+id/btnConfirm"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="center_horizontal"-->
-<!--                        android:layout_marginTop="50dp"-->
-<!--                        android:background="@drawable/rounded_primary"-->
-<!--                        android:minWidth="120dp"-->
-<!--                        android:paddingLeft="20dp"-->
-<!--                        android:paddingRight="20dp"-->
-<!--                        android:text="@string/confirm"-->
-<!--                        android:textColor="@color/white"-->
-<!--                        android:textSize="15sp"-->
+        <!--                    <Button-->
+        <!--                        android:id="@+id/btnConfirm"-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:layout_gravity="center_horizontal"-->
+        <!--                        android:layout_marginTop="50dp"-->
+        <!--                        android:background="@drawable/rounded_primary"-->
+        <!--                        android:minWidth="120dp"-->
+        <!--                        android:paddingLeft="20dp"-->
+        <!--                        android:paddingRight="20dp"-->
+        <!--                        android:text="@string/confirm"-->
+        <!--                        android:textColor="@color/white"-->
+        <!--                        android:textSize="15sp"-->
 
-<!--                        />-->
+        <!--                        />-->
 
-<!--                </LinearLayout>-->
+        <!--                </LinearLayout>-->
 
-<!--            </androidx.cardview.widget.CardView>-->
+        <!--            </androidx.cardview.widget.CardView>-->
 
 
-<!--        </FrameLayout>-->
+        <!--        </FrameLayout>-->
 
     </FrameLayout>
 </layout>

@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.apps.dbrah_delivery.R;
 import com.apps.dbrah_delivery.databinding.OrderRowBinding;
 import com.apps.dbrah_delivery.model.OrdersModel;
+import com.apps.dbrah_delivery.uis.activity_home.fragments_home_navigaion.fragments.FragmentCurrentOrders;
 import com.apps.dbrah_delivery.uis.activity_home.fragments_home_navigaion.fragments.FragmentNewOrders;
+import com.apps.dbrah_delivery.uis.activity_previous_order.PreviousOrderActivity;
 
 import java.util.List;
 
@@ -50,6 +52,17 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             if (fragment instanceof FragmentNewOrders) {
                 FragmentNewOrders fragmentNew = (FragmentNewOrders) fragment;
                 fragmentNew.navigateToDetails(list.get(holder.getAdapterPosition()));
+            }
+        });
+        myHolder.itemView.setOnClickListener(view -> {
+            if (fragment instanceof FragmentCurrentOrders) {
+                FragmentCurrentOrders fragmentNew = (FragmentCurrentOrders) fragment;
+                fragmentNew.navigateToDetails(list.get(holder.getAdapterPosition()));
+            }
+            else if(context instanceof PreviousOrderActivity){
+                PreviousOrderActivity activity=(PreviousOrderActivity) context;
+
+                activity.navigateToDetails(list.get(holder.getAdapterPosition()));
             }
         });
     }

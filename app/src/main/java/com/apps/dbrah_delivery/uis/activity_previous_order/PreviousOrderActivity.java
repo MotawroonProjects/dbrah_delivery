@@ -1,9 +1,14 @@
 package com.apps.dbrah_delivery.uis.activity_previous_order;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -12,10 +17,12 @@ import com.apps.dbrah_delivery.adapter.NotificationAdapter;
 import com.apps.dbrah_delivery.adapter.OrderAdapter;
 import com.apps.dbrah_delivery.databinding.ActivityNotificationBinding;
 import com.apps.dbrah_delivery.databinding.ActivityPreviousOrderBinding;
+import com.apps.dbrah_delivery.model.OrdersModel;
 import com.apps.dbrah_delivery.mvvm.ActivityNotificationMvvm;
 import com.apps.dbrah_delivery.mvvm.ActivityPreviousOrderMvvm;
 import com.apps.dbrah_delivery.mvvm.FragmentNewOrderMvvm;
 import com.apps.dbrah_delivery.uis.activity_base.BaseActivity;
+import com.apps.dbrah_delivery.uis.activity_order_details.OrderDetailsActivity;
 
 import java.util.ArrayList;
 
@@ -24,6 +31,8 @@ public class PreviousOrderActivity extends BaseActivity {
     private ActivityPreviousOrderBinding binding;
     private OrderAdapter orderAdapter;
     private ActivityPreviousOrderMvvm mvvm;
+    private ActivityResultLauncher<Intent> launcher;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,24 +44,37 @@ public class PreviousOrderActivity extends BaseActivity {
 
 
     private void initView() {
+          launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == Activity.RESULT_OK) {
+
+                mvvm.getPreviousOrders(getUserModel(),mvvm.getFilterBy().getValue());
+
+            }
+        });
         setUpToolbar(binding.toolbar, getString(R.string.last_orders), R.color.colorPrimary, R.color.white);
         binding.toolbar.llBack.setOnClickListener(view -> finish());
         binding.setLang(getLang());
         mvvm = ViewModelProviders.of(this).get(ActivityPreviousOrderMvvm.class);
+        mvvm.getIsLoading().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
 
-        mvvm.getOnOrderDataSuccess().observe(this, dataList -> {
-            if (orderAdapter != null && dataList != null&&dataList.size()>0) {
-                orderAdapter.updateList(dataList);
+                binding.swipeRefresh.setRefreshing(aBoolean);
+
             }
-            else{
+        });
+        mvvm.getOnOrderDataSuccess().observe(this, dataList -> {
+            if (orderAdapter != null && dataList != null && dataList.size() > 0) {
+                orderAdapter.updateList(dataList);
+            } else {
                 orderAdapter.updateList(new ArrayList<>());
                 binding.llNoData.setVisibility(View.VISIBLE);
 
             }
         });
 
-        mvvm.setFilterBy(null);
-        orderAdapter=new OrderAdapter(this,getLang(),null);
+        mvvm.setFilterBy("all");
+        orderAdapter = new OrderAdapter(this, getLang(), null);
         binding.recView.setLayoutManager(new LinearLayoutManager(this));
         binding.recView.setAdapter(orderAdapter);
 
@@ -114,7 +136,12 @@ public class PreviousOrderActivity extends BaseActivity {
             binding.flFilterDialog.setVisibility(View.GONE);
             return false;
         });
+        mvvm.getPreviousOrders(getUserModel(), mvvm.getFilterBy().getValue());
 
     }
-
+    public void navigateToDetails(OrdersModel.Data data) {
+        Intent intent = new Intent(this, OrderDetailsActivity.class);
+        intent.putExtra("order_id", data.getOrder_id());
+        launcher.launch(intent);
+    }
 }

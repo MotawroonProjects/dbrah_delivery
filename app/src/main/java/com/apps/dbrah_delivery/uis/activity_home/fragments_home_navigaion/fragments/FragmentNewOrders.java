@@ -38,7 +38,6 @@ public class FragmentNewOrders extends BaseFragment {
     private FragmentOrderBinding binding;
     private HomeActivity activity;
     private OrderAdapter orderAdapter;
-    private List<OrdersModel.Data> orderModelList;
     private FragmentNewOrderMvvm mvvm;
     private ActivityResultLauncher<Intent> launcher;
 
@@ -78,7 +77,6 @@ public class FragmentNewOrders extends BaseFragment {
 
     private void initView() {
         binding.setTitleno(getResources().getString(R.string.no_new_order));
-        orderModelList = new ArrayList<>();
 
         mvvm = ViewModelProviders.of(this).get(FragmentNewOrderMvvm.class);
 

@@ -29,6 +29,7 @@ import retrofit2.Response;
 
 public class HomeActivityMvvm extends AndroidViewModel {
     private Context context;
+    public MutableLiveData<Boolean> logout = new MutableLiveData<>();
 
     public MutableLiveData<String> firebase = new MutableLiveData<>();
 
@@ -48,33 +49,36 @@ public class HomeActivityMvvm extends AndroidViewModel {
         return onUserDataSuccess;
     }
     public void updateFirebase(Context context, UserModel userModel) {
-       /* FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener((Activity) context, task -> {
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener((Activity) context, task -> {
             if (task.isSuccessful()) {
                 String token = task.getResult().getToken();
 
-                Api.getService(Tags.base_url).updateFirebasetoken("Bearer " + userModel.getData().getToken(), Tags.api_key, token, userModel.getData().getId() + "", "android").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).unsubscribeOn(Schedulers.io()).subscribe(new SingleObserver<Response<StatusResponse>>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        disposable.add(d);
-                    }
-
-                    @Override
-                    public void onSuccess(@NonNull Response<StatusResponse> statusResponseResponse) {
-                        if (statusResponseResponse.isSuccessful()) {
-                            if (statusResponseResponse.body().getStatus() == 200) {
-                                firebase.postValue(token);
-                                Log.e("token", "updated successfully");
+                Api.getService(Tags.base_url).updateFirebasetoken( userModel.getData().getId(),token , "android")
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new SingleObserver<Response<StatusResponse>>() {
+                            @Override
+                            public void onSubscribe(@NonNull Disposable d) {
+                                disposable.add(d);
                             }
-                        }
-                    }
 
-                    @Override
-                    public void onError(@NonNull Throwable throwable) {
+                            @Override
+                            public void onSuccess(@NonNull Response<StatusResponse> statusResponseResponse) {
+                                if (statusResponseResponse.isSuccessful()) {
+                                    if (statusResponseResponse.body().getStatus() == 200) {
+                                        firebase.postValue(token);
+                                        Log.e("token", "updated successfully");
+                                    }
+                                }
+                            }
 
-                    }
-                });
+                            @Override
+                            public void onError(@NonNull Throwable throwable) {
+                                Log.e("error",throwable.toString());
+                            }
+                        });
             }
-        });*/
+        });
 
 
     }
@@ -115,6 +119,36 @@ public class HomeActivityMvvm extends AndroidViewModel {
                     @Override
                     public void onError(@NonNull Throwable e) {
 
+                    }
+                });
+    }
+    public void logout(Context context, UserModel userModel){
+        ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url).logout(userModel.getData().getId(),userModel.getData().getFirebase_token())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<StatusResponse>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<StatusResponse> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()){
+                            if (response.body().getStatus()==200){
+                                logout.postValue(true);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        dialog.dismiss();
+                        Log.e("error",e.toString());
                     }
                 });
     }
