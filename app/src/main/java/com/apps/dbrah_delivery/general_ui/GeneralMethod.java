@@ -20,9 +20,11 @@ import com.bumptech.glide.request.RequestOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -320,7 +322,27 @@ public class GeneralMethod {
             }
         }
     }
+    @BindingAdapter("createTime")
+    public static void createAtTime(TextView textView, String date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        if (date != null) {
 
+            try {
+                Date parse = dateFormat.parse(date);
+
+                SimpleDateFormat format = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
+                format.setTimeZone(TimeZone.getDefault());
+                String time = format.format(parse);
+                textView.setText(time);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        } else {
+
+        }
+
+    }
 }
 
 

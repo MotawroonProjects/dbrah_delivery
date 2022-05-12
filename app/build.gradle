@@ -76,6 +76,7 @@ dependencies {
     implementation 'com.applandeo:material-calendar-view:1.7.0'
     implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
     implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.2'
+    implementation 'org.greenrobot:eventbus:3.2.0'
 
 
 }

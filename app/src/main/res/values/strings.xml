@@ -40,7 +40,6 @@
     <string name="confirmation_code">Confirmation code</string>
     <string name="field_required">field required</string>
     <string name="inv_email">invaled email</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search">Search...</string>
     <string name="rate_app">Rate App</string>
     <string name="settings">Settings</string>
@@ -120,5 +119,7 @@
     <string name="end">"End "</string>
     <string name="accepted">Accepted</string>
     <string name="not_avail_now">Not Available Now</string>
-
+    <string name="attach_sent">تم ارسال مرفق</string>
+    <string name="type_a_message">Type Here</string>
+    <string name="chat">Chat</string>
 </resources>

@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 
 import com.apps.dbrah_delivery.databinding.ToolbarBinding;
 import com.apps.dbrah_delivery.language.Language;
+import com.apps.dbrah_delivery.model.ChatUserModel;
 import com.apps.dbrah_delivery.model.UserModel;
 import com.apps.dbrah_delivery.model.UserSettingsModel;
 import com.apps.dbrah_delivery.preferences.Preferences;
@@ -18,11 +19,10 @@ import io.paperdb.Paper;
 
 
 public class BaseActivity extends AppCompatActivity {
-
-    public static final String READ_REQ = Manifest.permission.READ_EXTERNAL_STORAGE;
-    public static final String WRITE_REQ = Manifest.permission.WRITE_EXTERNAL_STORAGE;
-    public static final String CAM_REQ = Manifest.permission.CAMERA;
-    public static final String fineLocPerm = Manifest.permission.ACCESS_FINE_LOCATION;
+    public static final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
+    public static final String WRITE_PERM = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+    public static final String CAM_PERM = Manifest.permission.CAMERA;
+    public static final String FINELOCPerm = Manifest.permission.ACCESS_FINE_LOCATION;
 
 
     @Override
@@ -83,5 +83,21 @@ public class BaseActivity extends AppCompatActivity {
         preferences.clearUserData(context);
 
     }
+    public void setRoomId(ChatUserModel order_id) {
+        Preferences preferences = Preferences.getInstance();
+        preferences.create_update_room(this, order_id);
+    }
+
+    public void clearRoomId() {
+        Preferences preferences = Preferences.getInstance();
+        preferences.clearRoomId(this);
+    }
+
+
+    public void clearUserData() {
+        Preferences preferences = Preferences.getInstance();
+        preferences.clearUserData(this);
+    }
+
 
 }

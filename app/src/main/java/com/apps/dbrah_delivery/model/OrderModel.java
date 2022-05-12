@@ -135,6 +135,8 @@ public class OrderModel implements Serializable {
         private String created_at;
         private String updated_at;
         private String rate;
+        private String latitude;
+        private String longitude;
         private NationalitiesModel.Data.Town town;
         private NationalitiesModel.Data nationality;
 
@@ -200,6 +202,14 @@ public class OrderModel implements Serializable {
 
         public NationalitiesModel.Data getNationality() {
             return nationality;
+        }
+
+        public String getLatitude() {
+            return latitude;
+        }
+
+        public String getLongitude() {
+            return longitude;
         }
     }
 

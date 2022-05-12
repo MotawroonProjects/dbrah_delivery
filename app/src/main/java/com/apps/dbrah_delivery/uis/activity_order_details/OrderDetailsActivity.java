@@ -24,9 +24,11 @@ import android.widget.Toast;
 import com.apps.dbrah_delivery.R;
 import com.apps.dbrah_delivery.adapter.ProductAdapter;
 import com.apps.dbrah_delivery.databinding.ActivityOrderDetailsBinding;
+import com.apps.dbrah_delivery.model.ChatUserModel;
 import com.apps.dbrah_delivery.model.OrderModel;
 import com.apps.dbrah_delivery.mvvm.ActivityOrderDetailsMvvm;
 import com.apps.dbrah_delivery.uis.activity_base.BaseActivity;
+import com.apps.dbrah_delivery.uis.activity_chat.ChatActivity;
 
 import java.util.Locale;
 
@@ -185,7 +187,7 @@ public class OrderDetailsActivity extends BaseActivity {
         binding.llMapUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.parseDouble(orderModel.getAddress().getLatitude()), Double.parseDouble(orderModel.getAddress().getLatitude()));
+                String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.parseDouble(orderModel.getAddress().getLatitude()), Double.parseDouble(orderModel.getAddress().getLongitude()));
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                 startActivity(intent);
             }
@@ -193,9 +195,28 @@ public class OrderDetailsActivity extends BaseActivity {
         binding.llMapProvider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.parseDouble(orderModel.getProvider().getNationality()..getLatitude()), Double.parseDouble(singleOrderDataModel.getData().getOrder().getAddress().getLatitude()));
-//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-//                startActivity(intent);
+                String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.parseDouble(orderModel.getProvider().getLatitude()), Double.parseDouble(orderModel.getProvider().getLongitude()));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(intent);
+            }
+        });
+        binding.imChatProvider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OrderDetailsActivity.this, ChatActivity.class);
+                ChatUserModel model = new ChatUserModel(orderModel.getProvider_id(), "",getUserModel().getData().getId(),orderModel.getProvider().getName(),orderModel.getProvider().getPhone(),orderModel.getProvider().getImage() , order_id);
+                intent.putExtra("data", model);
+
+                startActivity(intent);
+            }
+        });
+        binding.imChatUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OrderDetailsActivity.this, ChatActivity.class);
+                ChatUserModel model = new ChatUserModel("", orderModel.getUser_id(),getUserModel().getData().getId(),orderModel.getUser().getName(),orderModel.getUser().getPhone(),orderModel.getUser().getImage() , order_id);
+                intent.putExtra("data", model);
+                startActivity(intent);
             }
         });
     }

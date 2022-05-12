@@ -1,10 +1,12 @@
 package com.apps.dbrah_delivery.services;
 
 
+import com.apps.dbrah_delivery.model.MessagesDataModel;
 import com.apps.dbrah_delivery.model.NationalitiesModel;
 import com.apps.dbrah_delivery.model.NotificationDataModel;
 import com.apps.dbrah_delivery.model.OrdersModel;
 import com.apps.dbrah_delivery.model.PlaceGeocodeData;
+import com.apps.dbrah_delivery.model.SingleMessageModel;
 import com.apps.dbrah_delivery.model.SingleOrderDataModel;
 import com.apps.dbrah_delivery.model.StatusResponse;
 import com.apps.dbrah_delivery.model.UserModel;
@@ -73,14 +75,14 @@ public interface Service {
                                                @Field("message") String message);
 
     @FormUrlEncoded
-    @POST("api/provider/logout")
-    Single<Response<StatusResponse>> logout(@Field("provider_id") String provider_id,
+    @POST("api/representative/logout")
+    Single<Response<StatusResponse>> logout(@Field("representative_id") String representative_id,
                                             @Field("token") String token
     );
 
     @FormUrlEncoded
     @POST("api/storeToken")
-    Single<Response<StatusResponse>> updateFirebasetoken(@Field("provider_id") String provider_id,
+    Single<Response<StatusResponse>> updateFirebasetoken(@Field("representative_id") String representative_id,
                                                          @Field("token") String token,
                                                          @Field("type") String type
     );
@@ -129,4 +131,21 @@ public interface Service {
                                                              @Field("representative_id") String representative_id,
                                                              @Field("status") String status);
 
+    @GET("api/getChat")
+    Single<Response<MessagesDataModel>> getChatMessages(@Query("order_id") String order_id,
+                                                        @Query("representative_id") String representative_id,
+                                                        @Query("user_id") String user_id,
+                                                        @Query("provider_id") String provider_id);
+
+    @Multipart
+    @POST("api/storeMessage")
+    Single<Response<SingleMessageModel>> sendMessages(@Part("order_id") RequestBody order_id,
+                                                      @Part("type") RequestBody type,
+                                                      @Part("from_type") RequestBody from,
+                                                      @Part("message") RequestBody message,
+                                                      @Part("representative_id") RequestBody representative_id,
+                                                      @Part("user_id") RequestBody user_id,
+                                                      @Part("provider_id") RequestBody provider_id,
+                                                      @Part MultipartBody.Part image
+    );
 }
