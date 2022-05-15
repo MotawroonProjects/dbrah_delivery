@@ -116,7 +116,7 @@
     <string name="pick_up">Picked Up?</string>
     <string name="on_way">On The Way</string>
     <string name="finish_delivery">Successfully delivered</string>
-    <string name="end">"End "</string>
+    <string name="end">End </string>
     <string name="accepted">Accepted</string>
     <string name="not_avail_now">Not Available Now</string>
     <string name="attach_sent">an attachment sent</string>
