@@ -123,4 +123,6 @@
     <string name="attach_sent">تم ارسال مرفق</string>
     <string name="type_a_message">Type Here</string>
     <string name="chat">Chat</string>
+    <string name="new_client">New Client</string>
+    <string name="order_num">"Order Nm : "</string>
 </resources>

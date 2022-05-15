@@ -26,6 +26,7 @@ import com.apps.dbrah_delivery.model.OrderModel;
 import com.apps.dbrah_delivery.model.OrdersModel;
 import com.apps.dbrah_delivery.mvvm.FragmentNewOrderMvvm;
 import com.apps.dbrah_delivery.mvvm.FragmentNewOrderMvvm;
+import com.apps.dbrah_delivery.mvvm.GeneralMvvm;
 import com.apps.dbrah_delivery.uis.activity_base.BaseFragment;
 import com.apps.dbrah_delivery.uis.activity_home.HomeActivity;
 import com.apps.dbrah_delivery.uis.activity_order_details.OrderDetailsActivity;
@@ -39,6 +40,7 @@ public class FragmentNewOrders extends BaseFragment {
     private HomeActivity activity;
     private OrderAdapter orderAdapter;
     private FragmentNewOrderMvvm mvvm;
+    private GeneralMvvm generalMvvm;
     private ActivityResultLauncher<Intent> launcher;
 
     public static FragmentNewOrders newInstance() {
@@ -69,6 +71,7 @@ public class FragmentNewOrders extends BaseFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order, container, false);
         return binding.getRoot();
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -79,9 +82,14 @@ public class FragmentNewOrders extends BaseFragment {
         binding.setTitleno(getResources().getString(R.string.no_new_order));
 
         mvvm = ViewModelProviders.of(this).get(FragmentNewOrderMvvm.class);
-
+        generalMvvm = ViewModelProviders.of(activity).get(GeneralMvvm.class);
+        generalMvvm.getOnCurrentOrderRefreshed().observe(activity, isRefreshed -> {
+            if (isRefreshed) {
+                mvvm.getOrders(getUserModel());
+            }
+        });
         mvvm.getIsLoading().observe(activity, aBoolean -> {
-            if (aBoolean){
+            if (aBoolean) {
                 binding.llNoData.setVisibility(View.GONE);
             }
             binding.swipeRefresh.setRefreshing(aBoolean);
@@ -90,16 +98,16 @@ public class FragmentNewOrders extends BaseFragment {
             @Override
             public void onChanged(List<OrdersModel.Data> data) {
                 orderAdapter.updateList(new ArrayList<>());
-                if (data!=null && data.size()>0){
+                if (data != null && data.size() > 0) {
                     orderAdapter.updateList(data);
                     binding.llNoData.setVisibility(View.GONE);
-                }else {
+                } else {
                     binding.llNoData.setVisibility(View.VISIBLE);
                 }
             }
         });
 
-        orderAdapter = new OrderAdapter( activity,getLang(),this);
+        orderAdapter = new OrderAdapter(activity, getLang(), this);
         binding.recView.setLayoutManager(new LinearLayoutManager(activity));
         binding.recView.setAdapter(orderAdapter);
 
@@ -108,6 +116,7 @@ public class FragmentNewOrders extends BaseFragment {
         binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
 
     }
+
     public void navigateToDetails(OrdersModel.Data orderModel) {
         Log.e("dkdkkd", orderModel.getOrder_id() + "");
         Intent intent = new Intent(activity, OrderDetailsActivity.class);

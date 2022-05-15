@@ -24,7 +24,9 @@ import androidx.navigation.ui.NavigationUI;
 
 
 import com.apps.dbrah_delivery.interfaces.Listeners;
+import com.apps.dbrah_delivery.model.NotiFire;
 import com.apps.dbrah_delivery.model.UserModel;
+import com.apps.dbrah_delivery.mvvm.GeneralMvvm;
 import com.apps.dbrah_delivery.mvvm.HomeActivityMvvm;
 import com.apps.dbrah_delivery.tags.Tags;
 import com.apps.dbrah_delivery.uis.activity_app.AppActivity;
@@ -40,6 +42,10 @@ import com.apps.dbrah_delivery.uis.activity_login.LoginActivity;
 import com.apps.dbrah_delivery.uis.activity_notification.NotificationActivity;
 import com.apps.dbrah_delivery.uis.activity_previous_order.PreviousOrderActivity;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import io.paperdb.Paper;
 
 public class HomeActivity extends BaseActivity implements Listeners.VerificationListener {
@@ -50,6 +56,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
     private AppBarConfiguration appBarConfiguration;
     private ActivityResultLauncher<Intent> launcher;
     private int req = 1;
+    private GeneralMvvm generalMvvm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +78,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
             }
         });
         homeActivityMvvm = ViewModelProviders.of(this).get(HomeActivityMvvm.class);
+        generalMvvm = ViewModelProviders.of(this).get(GeneralMvvm.class);
         homeActivityMvvm.getUserData().observe(this, new Observer<UserModel>() {
             @Override
             public void onChanged(UserModel userModel) {
@@ -166,6 +174,9 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
         });
         if (getUserModel() != null) {
             homeActivityMvvm.updateFirebase(this, getUserModel());
+            if (!EventBus.getDefault().isRegistered(this)) {
+                EventBus.getDefault().register(this);
+            }
         }
         binding.llLogout.setOnClickListener(view -> {
             if (getUserModel() == null) {
@@ -244,5 +255,13 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onOrderStatusChanged(NotiFire model) {
+        if (!model.getOrder_status().isEmpty()) {
+            String status = model.getOrder_status();
+            generalMvvm.getOnCurrentOrderRefreshed().setValue(true);
+
+        }
+    }
 
 }
