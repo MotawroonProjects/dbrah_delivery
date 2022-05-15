@@ -119,7 +119,7 @@
     <string name="end">"End "</string>
     <string name="accepted">Accepted</string>
     <string name="not_avail_now">Not Available Now</string>
-    <string name="attach_sent">تم ارسال مرفق</string>
+    <string name="attach_sent">an attachment sent</string>
     <string name="type_a_message">Type Here</string>
     <string name="chat">Chat</string>
     <string name="new_client">New Client</string>
