@@ -125,4 +125,5 @@
     <string name="chat">دردشة</string>
     <string name="new_client">عميل جديد</string>
     <string name="order_num">رقم الطلب :</string>
+    <string name="new_order1">New Order</string>
 </resources>

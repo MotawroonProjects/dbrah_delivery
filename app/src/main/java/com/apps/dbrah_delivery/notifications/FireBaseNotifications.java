@@ -182,10 +182,11 @@ public class FireBaseNotifications extends FirebaseMessagingService {
 
             }
 
-        } else if (notification_type.equals("basic")) {
+        }
+        else if (notification_type.equals("basic")) {
             if (order_status.equals("preparing")) {
-                title = getString(R.string.new_order);
-                body = getString(R.string.new_order) + "-" + getString(R.string.new_client) + "\n" + getString(R.string.order_num) + " #" + order_id;
+                title = getString(R.string.new_order1);
+                body = getString(R.string.new_order1) + "-" + getString(R.string.new_client) + "\n" + getString(R.string.order_num) + " #" + order_id;
             }
 //            else if (order_status.equals("accepted")) {
 //                title = getString(R.string.your_offer_has_been_accepted);
@@ -276,7 +277,8 @@ public class FireBaseNotifications extends FirebaseMessagingService {
 
             model = new ChatUserModel("", user_id, map.get("representative_id"), user_name, user_phone, user_image, order_id);
 
-        } else {
+        }
+        else {
             providerModel = new Gson().fromJson(map.get("provider"), ProviderModel.class);
             String user_id = providerModel.getId();
             String user_name = providerModel.getName();

@@ -23,7 +23,7 @@ public class Preferences {
         return instance;
     }
     public UserModel getUserData(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences("user_delivery", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String user_data = preferences.getString("user_data", "");
         UserModel userModel = gson.fromJson(user_data, UserModel.class);
@@ -31,7 +31,7 @@ public class Preferences {
     }
 
     public void createUpdateUserData(Context context,UserModel userModel) {
-        SharedPreferences preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences("user_delivery", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String user_data = gson.toJson(userModel);
         SharedPreferences.Editor editor = preferences.edit();
@@ -41,7 +41,7 @@ public class Preferences {
     }
 
     public void clearUserData(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences("user_delivery", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
         editor.apply();
@@ -66,7 +66,7 @@ public class Preferences {
 
 
     public void create_update_room(Context context, ChatUserModel model) {
-        SharedPreferences preferences = context.getSharedPreferences("room", Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences("room_delivery", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         String data = new Gson().toJson(model);
         editor.putString("order_id", data);
@@ -76,14 +76,14 @@ public class Preferences {
     }
 
     public ChatUserModel getRoomId(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences("room", Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences("room_delivery", Context.MODE_PRIVATE);
         ChatUserModel model = new Gson().fromJson(preferences.getString("order_id",""),ChatUserModel.class);
 
         return model;
     }
 
     public void clearRoomId(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences("room", Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences("room_delivery", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
         editor.apply();
