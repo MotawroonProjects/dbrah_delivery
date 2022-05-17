@@ -4,6 +4,7 @@ import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -110,6 +111,9 @@ public class ActivityOrderDetailsMvvm extends AndroidViewModel {
                                         getOnOrderStatusSuccess().setValue(response.body().getData().getStatus());
 
 
+                                }
+                                else if(response.body().getStatus()==420){
+                                    Toast.makeText(context, context.getString(R.string.dlivery_take), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         } else {
