@@ -372,7 +372,7 @@
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginEnd="5dp"
-                                            android:visibility='@{model.status.equals("new")?View.GONE:View.VISIBLE,default=gone}'
+                                            android:visibility='@{model.status.equals("new")||model.status.equals("delivered")?View.GONE:View.VISIBLE,default=gone}'
                                             android:src="@drawable/ic_call2" />
 
                                         <ImageView
@@ -382,7 +382,7 @@
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginEnd="5dp"
-                                            android:visibility='@{model.status.equals("new")?View.GONE:View.VISIBLE,default=gone}'
+                                            android:visibility='@{model.status.equals("new")||model.status.equals("delivered")?View.GONE:View.VISIBLE,default=gone}'
                                             android:src="@drawable/ic_chat" />
 
 
@@ -503,7 +503,7 @@
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginEnd="5dp"
-                                            android:visibility='@{model.status.equals("new")?View.GONE:View.VISIBLE,default=gone}'
+                                            android:visibility='@{model.status.equals("new")||model.status.equals("delivered")?View.GONE:View.VISIBLE,default=gone}'
                                             android:src="@drawable/ic_call2" />
 
                                         <ImageView
@@ -513,7 +513,7 @@
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginEnd="5dp"
-                                            android:visibility='@{model.status.equals("new")?View.GONE:View.VISIBLE,default=gone}'
+                                            android:visibility='@{model.status.equals("new")||model.status.equals("delivered")?View.GONE:View.VISIBLE,default=gone}'
 
                                             android:src="@drawable/ic_chat" />
                                     </LinearLayout>
