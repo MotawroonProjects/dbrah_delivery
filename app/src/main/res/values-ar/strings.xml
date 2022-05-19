@@ -114,7 +114,7 @@
     <string name="km">كم</string>
     <string name="egypt">مصر</string>
     <string name="saudia">السعوديه</string>
-    <string name="pick_up">استلام من المندوب؟</string>
+    <string name="pick_up">استلام الطلب</string>
     <string name="on_way">فى الطريق</string>
     <string name="finish_delivery">تم التسليم بنجاح</string>
     <string name="end">تم الانتهاء</string>
