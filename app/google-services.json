@@ -1,116 +1,173 @@
 {
   "project_info": {
-    "project_number": "888105679809",
-    "project_id": "dbrahapp-23a09",
-    "storage_bucket": "dbrahapp-23a09.appspot.com"
+    "project_number": "245456821984",
+    "project_id": "dbrah-2c2fc",
+    "storage_bucket": "dbrah-2c2fc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:888105679809:android:806bf5061f63da8f038d40",
+        "mobilesdk_app_id": "1:245456821984:android:b88799ff5479c77f6dfa85",
+        "android_client_info": {
+          "package_name": "com.app.dbrah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "245456821984-k6ntljuossui86dp43ilboa2ocmo1v6k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.dbrah",
+            "certificate_hash": "6d39e57f3c880ad5ec12fe731d3e4a908fca8758"
+          }
+        },
+        {
+          "client_id": "245456821984-j79dpcnt3fbok7g57u3qn5lv0ffocah4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqwJOcAwhL7fNdGiwMS8q3iNBZSODGwZo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "245456821984-j79dpcnt3fbok7g57u3qn5lv0ffocah4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "245456821984-k4mitoddrrmsevieutomlciksa562hju.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.alatheertech.DBRAH"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245456821984:android:2604bc6e3c4804a06dfa85",
+        "android_client_info": {
+          "package_name": "com.app.dbrah_Provider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "245456821984-se6f3gi54m6778es4dr5nt5t5gv0hgt0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.dbrah_Provider",
+            "certificate_hash": "6d39e57f3c880ad5ec12fe731d3e4a908fca8758"
+          }
+        },
+        {
+          "client_id": "245456821984-j79dpcnt3fbok7g57u3qn5lv0ffocah4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqwJOcAwhL7fNdGiwMS8q3iNBZSODGwZo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "245456821984-j79dpcnt3fbok7g57u3qn5lv0ffocah4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "245456821984-k4mitoddrrmsevieutomlciksa562hju.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.alatheertech.DBRAH"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245456821984:android:d2388a7fb194fb6a6dfa85",
+        "android_client_info": {
+          "package_name": "com.app.dbrah_delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "245456821984-674s5r2v0ugnknqo7fmpvc791bv7k7gi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.dbrah_delivery",
+            "certificate_hash": "6d39e57f3c880ad5ec12fe731d3e4a908fca8758"
+          }
+        },
+        {
+          "client_id": "245456821984-j79dpcnt3fbok7g57u3qn5lv0ffocah4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqwJOcAwhL7fNdGiwMS8q3iNBZSODGwZo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "245456821984-j79dpcnt3fbok7g57u3qn5lv0ffocah4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "245456821984-k4mitoddrrmsevieutomlciksa562hju.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.alatheertech.DBRAH"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245456821984:android:2422718731279e426dfa85",
         "android_client_info": {
           "package_name": "com.apps.dbrah"
         }
       },
       "oauth_client": [
         {
-          "client_id": "888105679809-uqs26mc6llksv5dnf8qft5pqh754fbsu.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.apps.dbrah",
-            "certificate_hash": "6d39e57f3c880ad5ec12fe731d3e4a908fca8758"
-          }
-        },
-        {
-          "client_id": "888105679809-djubpod02feicop7dsvb4jjmlatsdrr4.apps.googleusercontent.com",
+          "client_id": "245456821984-j79dpcnt3fbok7g57u3qn5lv0ffocah4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCRC3eCnAeOaSDtxRwoftgv3AB1ShbHWCo"
+          "current_key": "AIzaSyAqwJOcAwhL7fNdGiwMS8q3iNBZSODGwZo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "888105679809-djubpod02feicop7dsvb4jjmlatsdrr4.apps.googleusercontent.com",
+              "client_id": "245456821984-j79dpcnt3fbok7g57u3qn5lv0ffocah4.apps.googleusercontent.com",
               "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:888105679809:android:9e5e8f02ac1b6f29038d40",
-        "android_client_info": {
-          "package_name": "com.apps.dbrah_delivery"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "888105679809-8777n7e9f78ul5unagaolsk33tt1jfs7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.apps.dbrah_delivery",
-            "certificate_hash": "02234e9655300f70fcb3d1f946434728fcb0fcea"
-          }
-        },
-        {
-          "client_id": "888105679809-djubpod02feicop7dsvb4jjmlatsdrr4.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCRC3eCnAeOaSDtxRwoftgv3AB1ShbHWCo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
+            },
             {
-              "client_id": "888105679809-djubpod02feicop7dsvb4jjmlatsdrr4.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:888105679809:android:ac7699f4d596b5a9038d40",
-        "android_client_info": {
-          "package_name": "com.apps.dbrah_delivery"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "888105679809-sem0jgjsl024n64ah5ipuvsauskruuk6.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.apps.dbrah_delivery",
-            "certificate_hash": "6d39e57f3c880ad5ec12fe731d3e4a908fca8758"
-          }
-        },
-        {
-          "client_id": "888105679809-djubpod02feicop7dsvb4jjmlatsdrr4.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCRC3eCnAeOaSDtxRwoftgv3AB1ShbHWCo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "888105679809-djubpod02feicop7dsvb4jjmlatsdrr4.apps.googleusercontent.com",
-              "client_type": 3
+              "client_id": "245456821984-k4mitoddrrmsevieutomlciksa562hju.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.alatheertech.DBRAH"
+              }
             }
           ]
         }

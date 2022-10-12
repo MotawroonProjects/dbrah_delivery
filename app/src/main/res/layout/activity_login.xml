@@ -11,7 +11,7 @@
 
         <variable
             name="model"
-            type="com.apps.dbrah_delivery.model.LoginModel" />
+            type="com.app.dbrah_delivery.model.LoginModel" />
     </data>
 
     <FrameLayout

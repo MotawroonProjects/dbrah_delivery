@@ -4,7 +4,7 @@
     <data>
         <variable
             name="model"
-            type="com.apps.dbrah_delivery.model.NotificationModel" />
+            type="com.app.dbrah_delivery.model.NotificationModel" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

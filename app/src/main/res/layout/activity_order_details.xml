@@ -13,7 +13,7 @@
 
         <variable
             name="model"
-            type="com.apps.dbrah_delivery.model.OrderModel" />
+            type="com.app.dbrah_delivery.model.OrderModel" />
     </data>
 
     <FrameLayout

@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.apps.dbrah_delivery.uis.activity_home.fragments_home_navigaion.FragmentHome"
+        android:name="com.app.dbrah_delivery.uis.activity_home.fragments_home_navigaion.FragmentHome"
         android:label=""
         tools:layout="@layout/fragment_home" />
 

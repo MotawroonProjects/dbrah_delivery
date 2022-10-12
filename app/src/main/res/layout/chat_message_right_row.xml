@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="com.apps.dbrah_delivery.model.MessageModel" />
+            type="com.app.dbrah_delivery.model.MessageModel" />
     </data>
 
     <RelativeLayout

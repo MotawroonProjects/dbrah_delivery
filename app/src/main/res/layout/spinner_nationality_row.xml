@@ -9,7 +9,7 @@
             type="String" />
         <variable
             name="model"
-            type="com.apps.dbrah_delivery.model.NationalitiesModel.Data" />
+            type="com.app.dbrah_delivery.model.NationalitiesModel.Data" />
     </data>
 
     <LinearLayout

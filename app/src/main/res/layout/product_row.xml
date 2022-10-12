@@ -8,7 +8,7 @@
             type="String" />
         <variable
             name="model"
-            type="com.apps.dbrah_delivery.model.OrderModel.Offers.OfferDetail" />
+            type="com.app.dbrah_delivery.model.OrderModel.Offers.OfferDetail" />
     </data>
 
     <LinearLayout
