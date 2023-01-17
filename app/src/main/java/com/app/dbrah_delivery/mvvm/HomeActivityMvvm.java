@@ -11,6 +11,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.app.dbrah_delivery.R;
+import com.app.dbrah_delivery.model.SettingDataModel;
 import com.app.dbrah_delivery.model.StatusResponse;
 import com.app.dbrah_delivery.model.UserModel;
 import com.app.dbrah_delivery.remote.Api;
@@ -29,6 +30,8 @@ import retrofit2.Response;
 
 public class HomeActivityMvvm extends AndroidViewModel {
     private Context context;
+    private MutableLiveData<SettingDataModel.Data> onDataSuccess;
+
     public MutableLiveData<Boolean> logout = new MutableLiveData<>();
 
     public MutableLiveData<String> firebase = new MutableLiveData<>();
@@ -42,6 +45,14 @@ public class HomeActivityMvvm extends AndroidViewModel {
 
 
     }
+    public MutableLiveData<SettingDataModel.Data> getOnDataSuccess() {
+        if (onDataSuccess == null) {
+            onDataSuccess = new MutableLiveData<>();
+        }
+        return onDataSuccess;
+    }
+
+
     public MutableLiveData<UserModel> getUserData() {
         if (onUserDataSuccess == null) {
             onUserDataSuccess = new MutableLiveData<>();
@@ -153,6 +164,32 @@ public class HomeActivityMvvm extends AndroidViewModel {
                 });
     }
 
+    public void getSettings(Context context) {
+        Api.getService(Tags.base_url)
+                .getSettings()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<SettingDataModel>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<SettingDataModel> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getData() != null && response.body().getStatus() == 200) {
+                                getOnDataSuccess().setValue(response.body().getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e("error", e.toString());
+                    }
+                });
+    }
 
     @Override
     protected void onCleared() {

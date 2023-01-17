@@ -25,6 +25,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.app.dbrah_delivery.interfaces.Listeners;
 import com.app.dbrah_delivery.model.NotiFire;
+import com.app.dbrah_delivery.model.SettingDataModel;
 import com.app.dbrah_delivery.model.UserModel;
 import com.app.dbrah_delivery.mvvm.GeneralMvvm;
 import com.app.dbrah_delivery.mvvm.HomeActivityMvvm;
@@ -57,6 +58,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
     private ActivityResultLauncher<Intent> launcher;
     private int req = 1;
     private GeneralMvvm generalMvvm;
+    private SettingDataModel.Data setting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +136,10 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
             }
         });
 
-
+        homeActivityMvvm.getOnDataSuccess().observe(this, model -> {
+            setting = model;
+        });
+        homeActivityMvvm.getSettings(this);
         homeActivityMvvm.firebase.observe(this, token -> {
             if (getUserModel() != null) {
                 UserModel userModel = getUserModel();
@@ -161,9 +166,9 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
             launcher.launch(intent);
         });
 
-        binding.llTerms.setOnClickListener(view -> navigateToAppActivity("terms", Tags.base_url + "webView?type=terms"));
+        binding.llTerms.setOnClickListener(view -> navigateToAppActivity("terms", setting.getTerms_en()));
 
-        binding.llPrivacy.setOnClickListener(view -> navigateToAppActivity("privacy", Tags.base_url + "webView?type=privacy"));
+        binding.llPrivacy.setOnClickListener(view -> navigateToAppActivity("privacy", setting.getPrivacy_en()));
 
         binding.tvLang.setOnClickListener(view -> {
             if (getLang().equals("en")) {

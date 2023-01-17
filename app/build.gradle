@@ -5,12 +5,12 @@ plugins {
 
 android {
 
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.app.dbrah_delivery"
         minSdk 19
-        targetSdk 31
+        targetSdk 33
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -24,10 +24,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+
     buildFeatures {
 
         dataBinding true
@@ -77,6 +74,7 @@ dependencies {
     implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
     implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.2'
     implementation 'org.greenrobot:eventbus:3.2.0'
+    implementation "androidx.multidex:multidex:2.0.1"
 
 
 }

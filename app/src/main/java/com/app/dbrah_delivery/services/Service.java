@@ -6,6 +6,7 @@ import com.app.dbrah_delivery.model.NationalitiesModel;
 import com.app.dbrah_delivery.model.NotificationDataModel;
 import com.app.dbrah_delivery.model.OrdersModel;
 import com.app.dbrah_delivery.model.PlaceGeocodeData;
+import com.app.dbrah_delivery.model.SettingDataModel;
 import com.app.dbrah_delivery.model.SingleMessageModel;
 import com.app.dbrah_delivery.model.SingleOrderDataModel;
 import com.app.dbrah_delivery.model.StatusResponse;
@@ -148,4 +149,6 @@ public interface Service {
                                                       @Part("provider_id") RequestBody provider_id,
                                                       @Part MultipartBody.Part image
     );
+    @GET("api/setting")
+    Single<Response<SettingDataModel>> getSettings();
 }

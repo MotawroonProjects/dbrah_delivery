@@ -26,7 +26,7 @@ public class AppActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(this, R.layout.activity_app);
+        binding= DataBindingUtil.setContentView(this,R.layout.activity_app);
         getDataFromIntent();
         initView();
     }
@@ -41,48 +41,22 @@ public class AppActivity extends BaseActivity {
     private void initView() {
         binding.setLang(getLang());
 
+        if (type.equals("terms")) {
+            setUpToolbar(binding.toolbar, getString(R.string.terms_and_conditions), R.color.white, R.color.black);
+        } else{
+            setUpToolbar(binding.toolbar, getString(R.string.privacy_policy), R.color.white, R.color.black);
+        }
+        binding.toolbar.llBack.setOnClickListener(view -> finish());
         setUpWebView();
     }
 
     private void setUpWebView() {
-        binding.webView.getSettings().setJavaScriptEnabled(true);
-        binding.webView.getSettings().setPluginState(WebSettings.PluginState.ON);
-        binding.webView.getSettings().setBuiltInZoomControls(false);
-        binding.webView.loadUrl(url);
-        binding.webView.setWebViewClient(new WebViewClient() {
-                                             @Override
-                                             public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                                                 super.onPageStarted(view, url, favicon);
-                                             }
-
-                                             @Override
-                                             public void onPageFinished(WebView view, String url) {
-                                                 binding.progBar.setVisibility(View.GONE);
-                                                 binding.webView.setVisibility(View.VISIBLE);
-
-
-                                             }
-
-                                             @Override
-                                             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                                                 super.onReceivedError(view, request, error);
-                                                 binding.webView.setVisibility(View.INVISIBLE);
-                                             }
-
-                                             @Override
-                                             public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
-                                                 super.onReceivedHttpError(view, request, errorResponse);
-                                                 binding.webView.setVisibility(View.INVISIBLE);
-                                             }
-                                         }
-
-        );
+        binding.setData(url);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        binding.webView.onPause();
     }
 
     @Override
@@ -93,7 +67,6 @@ public class AppActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        binding.webView.onResume();
     }
 
 
