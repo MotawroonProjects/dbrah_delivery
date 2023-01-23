@@ -202,6 +202,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
     private void logout() {
         clearUserModel(this);
         binding.setModel(null);
+        setUserModel(null);
         navigateToLoginActivity();
     }
 

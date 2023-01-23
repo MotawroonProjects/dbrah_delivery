@@ -92,6 +92,7 @@ public class LoginActivity extends BaseActivity {
             }
         });
         model.setPhone_code("+966");
+        model.setCode("SA");
         sortCountries();
         binding.btnLogin.setOnClickListener(v -> {
             createVerificationCodeDialog();
@@ -134,6 +135,7 @@ public class LoginActivity extends BaseActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 CountryModel model = (CountryModel) parent.getAdapter().getItem(position);
                 LoginActivity.this.model.setPhone_code(model.getDialCode());
+                LoginActivity.this.model.setCode(model.getCode());
                 binding.setModel(LoginActivity.this.model);
             }
 
