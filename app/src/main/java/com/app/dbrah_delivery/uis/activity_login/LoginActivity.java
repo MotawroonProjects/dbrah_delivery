@@ -98,14 +98,16 @@ public class LoginActivity extends BaseActivity {
             createVerificationCodeDialog();
         });
 
-        mvvm.getTime().observe(this, time -> {
+        mvvm.timereturn.observe(this, time -> {
             if (dailogVerificationCodeBinding != null) {
                 dailogVerificationCodeBinding.tvResend.setText(time);
 
             }
         });
-
-        mvvm.canResend().observe(this, canResend -> {
+        mvvm.smscode.observe(this, smsCode -> {
+            dailogVerificationCodeBinding.edtCode.setText(smsCode);
+        });
+        mvvm.canresnd.observe(this, canResend -> {
             if (dailogVerificationCodeBinding != null) {
                 dailogVerificationCodeBinding.tvResend.setEnabled(canResend);
                 if (canResend) {
@@ -115,9 +117,9 @@ public class LoginActivity extends BaseActivity {
             }
 
         });
-        binding.btnLogin.setOnClickListener(v -> {
-            mvvm.login(this, model.getPhone_code(), model.getPhone());
-        });
+//        binding.btnLogin.setOnClickListener(v -> {
+//            mvvm.login(this, model.getPhone_code(), model.getPhone());
+//        });
         mvvm.getUserData().observe(this, new Observer<UserModel>() {
             @Override
             public void onChanged(UserModel userModel) {
@@ -161,6 +163,8 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void createVerificationCodeDialog() {
+        mvvm.sendSmsCode(getLang(), model.getPhone_code(), model.getPhone(), this);
+
         androidx.appcompat.app.AlertDialog builder = new androidx.appcompat.app.AlertDialog.Builder(this)
                 .create();
         builder.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
@@ -186,11 +190,12 @@ public class LoginActivity extends BaseActivity {
 
             }
         });
-        dailogVerificationCodeBinding.tvResend.setOnClickListener(v -> mvvm.reSendSmsCode(model));
+        dailogVerificationCodeBinding.tvResend.setOnClickListener(v ->mvvm.sendSmsCode(getLang(), model.getPhone_code(), model.getPhone(), this));
         builder.show();
 
         dailogVerificationCodeBinding.btnVerify.setOnClickListener(v -> {
-            navigateToSignUpActivity();
+            mvvm.checkValidCode(dailogVerificationCodeBinding.edtCode.getText().toString(),this);
+
         });
         builder.setOnCancelListener(dialog -> mvvm.stopTimer());
 
