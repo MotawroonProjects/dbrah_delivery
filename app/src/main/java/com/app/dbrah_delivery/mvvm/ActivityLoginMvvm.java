@@ -7,19 +7,18 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 
 import com.app.dbrah_delivery.R;
 import com.app.dbrah_delivery.model.CountryModel;
-import com.app.dbrah_delivery.model.LoginModel;
 import com.app.dbrah_delivery.model.UserModel;
 import com.app.dbrah_delivery.remote.Api;
 import com.app.dbrah_delivery.share.Common;
 import com.app.dbrah_delivery.tags.Tags;
 import com.app.dbrah_delivery.uis.activity_login.LoginActivity;
-import com.app.dbrah_delivery.uis.activity_verification_code.VerificationCodeActivity;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -94,7 +93,7 @@ public class ActivityLoginMvvm extends AndroidViewModel {
         return coListMutableLiveData;
     }
 
-    public void sendSmsCode(String lang, String phone_code, String phone, LoginActivity activity) {
+    public void sendSmsCode(String lang, String phone_code, String phone, LoginActivity activity, AlertDialog builder) {
 
         startTimer();
         this.phone_code = phone_code;
@@ -107,7 +106,7 @@ public class ActivityLoginMvvm extends AndroidViewModel {
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
                 smsCode = phoneAuthCredential.getSmsCode();
                 smscode.postValue(smsCode);
-                checkValidCode(smsCode, activity);
+                checkValidCode(smsCode, activity, builder);
             }
 
             @Override
@@ -180,7 +179,7 @@ public class ActivityLoginMvvm extends AndroidViewModel {
     }
 
 
-    public void checkValidCode(String code, LoginActivity activity) {
+    public void checkValidCode(String code, LoginActivity activity, AlertDialog builder) {
         //login(activity);
      dialog = Common.createProgressDialog(activity, context.getResources().getString(R.string.wait));
         dialog.setCancelable(false);
@@ -189,6 +188,7 @@ public class ActivityLoginMvvm extends AndroidViewModel {
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
             mAuth.signInWithCredential(credential)
                     .addOnSuccessListener(authResult -> {
+                        builder.dismiss();
                          login(activity,phone_code,phone);
 //                        if(getUserData().getValue()!=null){
 //                            getUserData().setValue(getUserData().getValue());

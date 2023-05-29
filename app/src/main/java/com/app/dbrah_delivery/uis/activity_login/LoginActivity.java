@@ -1,11 +1,9 @@
 package com.app.dbrah_delivery.uis.activity_login;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -20,7 +18,6 @@ import com.app.dbrah_delivery.R;
 import com.app.dbrah_delivery.adapter.CountryAdapter;
 import com.app.dbrah_delivery.databinding.ActivityLoginBinding;
 import com.app.dbrah_delivery.databinding.DailogVerificationCodeBinding;
-import com.app.dbrah_delivery.databinding.DialogCountriesBinding;
 import com.app.dbrah_delivery.model.CountryModel;
 import com.app.dbrah_delivery.model.LoginModel;
 import com.app.dbrah_delivery.model.UserModel;
@@ -28,7 +25,6 @@ import com.app.dbrah_delivery.mvvm.ActivityLoginMvvm;
 import com.app.dbrah_delivery.uis.activity_base.BaseActivity;
 import com.app.dbrah_delivery.uis.activity_home.HomeActivity;
 import com.app.dbrah_delivery.uis.activity_sign_up.SignUpActivity;
-import com.app.dbrah_delivery.uis.activity_verification_code.VerificationCodeActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -163,7 +159,6 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void createVerificationCodeDialog() {
-        mvvm.sendSmsCode(getLang(), model.getPhone_code(), model.getPhone(), this);
 
         androidx.appcompat.app.AlertDialog builder = new androidx.appcompat.app.AlertDialog.Builder(this)
                 .create();
@@ -173,6 +168,8 @@ public class LoginActivity extends BaseActivity {
         builder.setView(dailogVerificationCodeBinding.getRoot());
         builder.setCancelable(true);
         builder.setCanceledOnTouchOutside(false);
+        mvvm.sendSmsCode(getLang(), model.getPhone_code(), model.getPhone(), this,builder);
+
         dailogVerificationCodeBinding.edtCode.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -190,13 +187,14 @@ public class LoginActivity extends BaseActivity {
 
             }
         });
-        dailogVerificationCodeBinding.tvResend.setOnClickListener(v ->mvvm.sendSmsCode(getLang(), model.getPhone_code(), model.getPhone(), this));
-        builder.show();
+        dailogVerificationCodeBinding.tvResend.setOnClickListener(v ->mvvm.sendSmsCode(getLang(), model.getPhone_code(), model.getPhone(), this, builder));
 
         dailogVerificationCodeBinding.btnVerify.setOnClickListener(v -> {
-            mvvm.checkValidCode(dailogVerificationCodeBinding.edtCode.getText().toString(),this);
+            mvvm.checkValidCode(dailogVerificationCodeBinding.edtCode.getText().toString(),this,builder);
 
         });
+        builder.show();
+
         builder.setOnCancelListener(dialog -> mvvm.stopTimer());
 
     }

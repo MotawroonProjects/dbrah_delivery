@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: com.googlecode.libphonenumber:libphonenumber:8.12.3">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/modules-2/files-2.1/com.googlecode.libphonenumber/libphonenumber/8.12.3/ce9014a917e3d8c365e6814b33c891310360d696/libphonenumber-8.12.3.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.libphonenumber/libphonenumber/8.12.3/ce9014a917e3d8c365e6814b33c891310360d696/libphonenumber-8.12.3.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/modules-2/files-2.1/com.googlecode.libphonenumber/libphonenumber/8.12.3/336a7e29df57a7e430d5c7ee9a2047465d7ad417/libphonenumber-8.12.3-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.libphonenumber/libphonenumber/8.12.3/336a7e29df57a7e430d5c7ee9a2047465d7ad417/libphonenumber-8.12.3-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/modules-2/files-2.1/com.googlecode.libphonenumber/libphonenumber/8.12.3/a533bd4ff67ceee4bba3a3a060e519a40f3fe4b4/libphonenumber-8.12.3-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.libphonenumber/libphonenumber/8.12.3/a533bd4ff67ceee4bba3a3a060e519a40f3fe4b4/libphonenumber-8.12.3-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
