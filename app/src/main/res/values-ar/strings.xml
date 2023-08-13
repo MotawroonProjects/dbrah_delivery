@@ -126,5 +126,7 @@
     <string name="new_client">عميل جديد</string>
     <string name="order_num">رقم الطلب :</string>
     <string name="new_order1">طلب جديد</string>
+    <string name="provider">مورد</string>
+    <string name="client">عميل</string>
     <string name="dlivery_take">يوجد مندوب استلم الطلب</string>
 </resources>

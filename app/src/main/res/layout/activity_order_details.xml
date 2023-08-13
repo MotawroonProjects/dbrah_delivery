@@ -312,7 +312,13 @@
                             android:orientation="vertical"
                             android:padding="16dp"
                             android:visibility='@{model.status.equals("picked_up")?View.GONE:View.VISIBLE,default=gone}'>
-
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/almaraibold"
+                                android:text="@string/provider"
+                                android:textColor="@color/black2"
+                                android:textSize="16sp" />
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -459,7 +465,13 @@
                             android:orientation="vertical"
                             android:padding="16dp"
                             android:visibility='@{model.status.equals("accepted")?View.GONE:View.VISIBLE,default=gone}'>
-
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/almaraibold"
+                                android:text="@string/client"
+                                android:textColor="@color/black2"
+                                android:textSize="16sp" />
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
