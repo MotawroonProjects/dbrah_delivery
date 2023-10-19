@@ -187,16 +187,19 @@ public class OrderDetailsActivity extends BaseActivity {
         binding.llMapUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.parseDouble(orderModel.getAddress().getLatitude()), Double.parseDouble(orderModel.getAddress().getLongitude()));
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                String geoUri = "http://maps.google.com/maps?q=loc:" + orderModel.getAddress().getLatitude() + "," + orderModel.getAddress().getLongitude() + " (" + orderModel.getAddress().getAddress() + ")";
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
                 startActivity(intent);
             }
         });
         binding.llMapProvider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.parseDouble(orderModel.getProvider().getLatitude()), Double.parseDouble(orderModel.getProvider().getLongitude()));
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                String geoUri = "http://maps.google.com/maps?q=loc:" + orderModel.getProvider().getLatitude() + "," + orderModel.getProvider().getLongitude() + " (" +"" + ")";
+
+              //  String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.parseDouble(orderModel.getProvider().getLatitude()), Double.parseDouble(orderModel.getProvider().getLongitude()));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
                 startActivity(intent);
             }
         });

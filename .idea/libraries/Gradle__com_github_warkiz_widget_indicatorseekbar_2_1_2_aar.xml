@@ -1,15 +1,15 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.warkiz.widget:indicatorseekbar:2.1.2@aar">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../emad/Sdk/caches/transforms-3/cd06b9d66db7994636a6e4bc9b61bff2/transformed/jetified-indicatorseekbar-2.1.2/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../../../emad/Sdk/caches/transforms-3/cd06b9d66db7994636a6e4bc9b61bff2/transformed/jetified-indicatorseekbar-2.1.2/res" />
-      <root url="file://$PROJECT_DIR$/../../../emad/Sdk/caches/transforms-3/cd06b9d66db7994636a6e4bc9b61bff2/transformed/jetified-indicatorseekbar-2.1.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4bcf8aa96abb3be7ec0d6995b676a03e/transformed/jetified-indicatorseekbar-2.1.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4bcf8aa96abb3be7ec0d6995b676a03e/transformed/jetified-indicatorseekbar-2.1.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4bcf8aa96abb3be7ec0d6995b676a03e/transformed/jetified-indicatorseekbar-2.1.2/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../../../emad/Sdk/caches/modules-2/files-2.1/com.github.warkiz.widget/indicatorseekbar/2.1.2/bac252f326124222e7dc6e67b22185dd22098d6b/indicatorseekbar-2.1.2-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.warkiz.widget/indicatorseekbar/2.1.2/bac252f326124222e7dc6e67b22185dd22098d6b/indicatorseekbar-2.1.2-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../../emad/Sdk/caches/modules-2/files-2.1/com.github.warkiz.widget/indicatorseekbar/2.1.2/3853d19069899ac0411e3e41f132cd59c858f404/indicatorseekbar-2.1.2-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.warkiz.widget/indicatorseekbar/2.1.2/3853d19069899ac0411e3e41f132cd59c858f404/indicatorseekbar-2.1.2-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
